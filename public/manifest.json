@@ -1,0 +1,37 @@
+{
+  "name": "Sumud -- the story of Palestine",
+  "short_name": "Sumud",
+  "description": "The story of Palestine and its people, before 1947 and after: history, culture, and steadfastness.",
+  "start_url": "/",
+  "display": "browser",
+  "background_color": "#faf6ef",
+  "theme_color": "#faf6ef",
+  "lang": "en-GB",
+  "dir": "ltr",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/favicon.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any"
+    },
+    {
+      "src": "/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ]
+}

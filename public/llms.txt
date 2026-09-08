@@ -1,0 +1,21 @@
+# Sumud
+
+> Sumud tells the story of Palestine and its people, before 1947 and after: its history, culture, and steadfastness (sumud). It is an independent, non-commercial project drawing on mainstream historical scholarship, United Nations records, and human rights reporting.
+
+## History
+
+- [History overview](https://sumud.timothybrits.co.za/history/): A seven-chapter narrative from Ottoman Palestine to the present.
+- [Ottoman Palestine](https://sumud.timothybrits.co.za/history/ottoman-palestine/): Palestine as an Ottoman province, until 1917.
+- [The British Mandate](https://sumud.timothybrits.co.za/history/british-mandate/): 1917-1947, the Balfour Declaration and growing conflict.
+- [Partition and the Nakba](https://sumud.timothybrits.co.za/history/nakba/): 1947-1949, partition, war, and mass displacement.
+- [Exile and Military Rule](https://sumud.timothybrits.co.za/history/occupation-and-exile/): 1949-1967, refugee life and the founding of the PLO.
+- [Occupation and the Intifada](https://sumud.timothybrits.co.za/history/occupation-and-settlement/): 1967-1993, occupation, settlement, and uprising.
+- [Oslo, and its Unravelling](https://sumud.timothybrits.co.za/history/oslo-to-blockade/): 1993-2007, the Oslo Accords through the Gaza blockade.
+- [Siege, War and the Present](https://sumud.timothybrits.co.za/history/gaza-and-the-present/): 2007 to today.
+
+## Culture and further reading
+
+- [Culture & Sumud](https://sumud.timothybrits.co.za/culture/): Land, food, craft, language and literature, and the idea of sumud itself.
+- [Sources](https://sumud.timothybrits.co.za/sources/): The books, archives and organisations this project draws on.
+- [Take Action](https://sumud.timothybrits.co.za/take-action/): Humanitarian and human rights organisations working on the ground.
+- [About](https://sumud.timothybrits.co.za/about/): What this project is, and how to flag a correction.
