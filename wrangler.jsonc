@@ -1,0 +1,37 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "sumud",
+  "main": "dist/_worker.js",
+  "compatibility_date": "2026-09-08",
+  "compatibility_flags": ["nodejs_compat"],
+
+  // Static output from `pnpm build`. Requests that match a file here are served
+  // directly by Cloudflare's edge and never reach the Worker script below --
+  // the Worker only runs for the small number of routes that need it.
+  "assets": {
+    "directory": "dist",
+    "binding": "ASSETS",
+    "not_found_handling": "404-page",
+  },
+
+  // The production custom domain. The `timothybrits.co.za` zone must already
+  // be active on this Cloudflare account -- `wrangler deploy` provisions the
+  // DNS record and route automatically.
+  "routes": [{ "pattern": "sumud.timothybrits.co.za", "custom_domain": true }],
+
+  // Workers Logs: structured request/console logging in the dashboard, with
+  // 100% sampling since this is a low-traffic content site.
+  "observability": {
+    "enabled": true,
+    "logs": {
+      "enabled": true,
+      "invocation_logs": true,
+      "head_sampling_rate": 1,
+    },
+  },
+
+  // Used by `wrangler dev`/Workers Builds to know how to (re)build the site.
+  "build": {
+    "command": "pnpm run build",
+  },
+}
