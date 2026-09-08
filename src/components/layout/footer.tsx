@@ -45,6 +45,7 @@ export const Footer = component$(() => {
                 >
                   Source on GitHub
                   <ExternalLink size={13} class={styles.externalIcon} />
+                  <span class="visually-hidden"> (opens in a new tab)</span>
                 </a>
               </li>
               <li>

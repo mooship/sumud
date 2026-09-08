@@ -53,6 +53,7 @@ export default component$(() => {
             rel="noopener noreferrer"
           >
             open an issue on GitHub
+            <span class="visually-hidden"> (opens in a new tab)</span>
           </a>
           . Corrections are welcome and will be reviewed and, where warranted,
           applied promptly.
