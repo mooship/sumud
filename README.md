@@ -152,7 +152,28 @@ simply fail at the deploy step.
 
 Skip-to-content link, visible focus rings, a real heading hierarchy, `prefers-reduced-motion`
 support, and a dark theme driven purely by `prefers-color-scheme` (no JS, no flash of wrong
-theme). Colour choices were picked for contrast, not just palette.
+theme). Colour choices are checked against WCAG AA contrast, not just picked by eye -- see
+`src/styles/theme.css.ts`.
+
+## Mobile & notch support
+
+`viewport-fit=cover` + `apple-mobile-web-app-status-bar-style: black-translucent` let the page
+draw edge-to-edge on iOS, so content uses `env(safe-area-inset-*)` (via `max()` in
+`Container`, and directly in the header/body) to stay clear of the notch, Dynamic Island and
+home indicator rather than sitting flush against them. All interactive targets (nav links, the
+mobile menu button, buttons) are sized to at least 44×44px per the WCAG/iOS/Material touch
+target guidelines.
+
+## Design system notes
+
+- **Decorative motif**: `OrnamentDivider` (`src/components/ui/ornament-divider.tsx`) is a
+  repeating diamond pattern in the spirit of Palestinian tatreez cross-stitch, used as a section
+  divider instead of a plain rule. Reuse it rather than inventing another divider style.
+- **Icon badges**: feature cards and section groups put their icon in a coloured circle
+  (`cardIconBadge` / `groupIconBadge` patterns) rather than a bare icon -- keep this consistent
+  when adding new card grids.
+- **Paper grain**: `body` has a barely-there SVG noise texture (see `global.css.ts`) rather than
+  a flat fill, echoing the "parchment" palette. Don't stack more texture on top of it.
 
 ## Licence
 

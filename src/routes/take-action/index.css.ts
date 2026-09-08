@@ -32,10 +32,29 @@ export const group = style({
   borderTop: `1px solid ${vars.color.sandLine}`,
 });
 
+export const groupTitleRow = style({
+  display: "flex",
+  alignItems: "center",
+  gap: vars.space[2],
+  marginBottom: vars.space[1],
+});
+
+export const groupIconBadge = style({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "2.5rem",
+  height: "2.5rem",
+  flexShrink: 0,
+  borderRadius: vars.radius.pill,
+  backgroundColor: vars.color.terracottaLight,
+  color: vars.color.terracotta,
+});
+
 export const groupTitle = style({
   fontFamily: vars.font.serif,
   fontSize: vars.fontSize.lg,
-  marginBottom: vars.space[1],
+  margin: 0,
 });
 
 export const groupIntro = style({

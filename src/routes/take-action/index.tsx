@@ -1,9 +1,15 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
-import { ExternalLink } from "~/components/ui/icons";
+import {
+  ExternalLink,
+  HeartHandshake,
+  ShieldAlert,
+} from "~/components/ui/icons";
 import { ORG_GROUPS } from "~/content/organisations";
 import * as styles from "./index.css";
+
+const GROUP_ICONS = [HeartHandshake, ShieldAlert];
 
 export default component$(() => {
   return (
@@ -21,29 +27,37 @@ export default component$(() => {
         </p>
       </header>
 
-      {ORG_GROUPS.map((group) => (
-        <section key={group.title} class={styles.group}>
-          <h2 class={styles.groupTitle}>{group.title}</h2>
-          <p class={styles.groupIntro}>{group.intro}</p>
-          <div class={styles.grid}>
-            {group.orgs.map((org) => (
-              <a
-                key={org.name}
-                href={org.url}
-                class={styles.card}
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <p class={styles.cardName}>
-                  {org.name}
-                  <ExternalLink size={14} class={styles.cardIcon} />
-                </p>
-                <p class={styles.cardDescription}>{org.description}</p>
-              </a>
-            ))}
-          </div>
-        </section>
-      ))}
+      {ORG_GROUPS.map((group, i) => {
+        const GroupIcon = GROUP_ICONS[i % GROUP_ICONS.length];
+        return (
+          <section key={group.title} class={styles.group}>
+            <div class={styles.groupTitleRow}>
+              <span class={styles.groupIconBadge}>
+                <GroupIcon size={20} />
+              </span>
+              <h2 class={styles.groupTitle}>{group.title}</h2>
+            </div>
+            <p class={styles.groupIntro}>{group.intro}</p>
+            <div class={styles.grid}>
+              {group.orgs.map((org) => (
+                <a
+                  key={org.name}
+                  href={org.url}
+                  class={styles.card}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <p class={styles.cardName}>
+                    {org.name}
+                    <ExternalLink size={14} class={styles.cardIcon} />
+                  </p>
+                  <p class={styles.cardDescription}>{org.description}</p>
+                </a>
+              ))}
+            </div>
+          </section>
+        );
+      })}
     </Container>
   );
 });

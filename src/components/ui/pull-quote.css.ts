@@ -2,7 +2,7 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
 
 export const figure = style({
-  margin: `${vars.space[7]} 0`,
+  margin: `${vars.space[4]} 0`,
   maxWidth: "38ch",
   marginInline: "auto",
   textAlign: "center",

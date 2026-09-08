@@ -55,6 +55,9 @@ importers:
       lucide-static:
         specifier: ^1.43.0
         version: 1.43.0
+      png-to-ico:
+        specifier: ^3.0.2
+        version: 3.0.2
       prettier:
         specifier: ^3.6.2
         version: 3.9.6
@@ -1902,6 +1905,12 @@ packages:
     resolution:
       {
         integrity: sha512-EANqOCF9QFyra+4pfxUcX9STKJpCLjMbObVzljIJomAWSnuSIEAvyzEU53GaajbXJEgdh0iEcPL+DGvpUd4k1Q==,
+      }
+
+  "@types/node@25.9.5":
+    resolution:
+      {
+        integrity: sha512-OScDchr2fwuUmWdf4kZ9h7PcJiYDVInhJizG/biAq3cAvqwYktuy/TYGGdZNMtNTFUP7rnb0NU4TUdm82kt4Rg==,
       }
 
   "@types/unist@2.0.11":
@@ -3910,6 +3919,12 @@ packages:
         integrity: sha512-VgjWUsnnT6n+NUk6eZq77zeFdpW2LWDzP6zFGrCbHXiYNul5Dzqk2HHQ5uFH2DNW5Xbp8+jVzaeNt94ssEEl4w==,
       }
 
+  minimist@1.2.8:
+    resolution:
+      {
+        integrity: sha512-2yyAR8qBkN3YuheJanUpWC5U3bb5osDywNB8RzDVlDwDHbocAJveqqj1u8+SVD7jkWT4yvsHCpWqqWqAxb0zCA==,
+      }
+
   mlly@1.8.2:
     resolution:
       {
@@ -4075,6 +4090,21 @@ packages:
       {
         integrity: sha512-/Jm5M4RvtBFVkKWRu2BLUTNP8/M2a+UwuAX+ae4770q1qVGtfjG+WTCupoZixokjmHiry8uI+dlY8KXYV5HVVQ==,
       }
+
+  png-to-ico@3.0.2:
+    resolution:
+      {
+        integrity: sha512-36vvp3/YF7LPYkUEOj08/WgB1wI63qW391YfOhOWckgOtGkarr9+EhPBimcCmRP7fJaG4EaXQhTTaQ8qqdj8aA==,
+      }
+    engines: { node: ">=20" }
+    hasBin: true
+
+  pngjs@7.0.0:
+    resolution:
+      {
+        integrity: sha512-LKWqWJRhstyYo9pGvgor/ivk2w94eSjE3RGVuzLGlr3NmD8bf7RcYGze1mNdEHRP6TRP6rMuDHk5t44hnTRyow==,
+      }
+    engines: { node: ">=14.19.0" }
 
   possible-typed-array-names@1.1.0:
     resolution:
@@ -4602,6 +4632,12 @@ packages:
     resolution:
       {
         integrity: sha512-iwDZqg0QAGrg9Rav5H4n0M64c3mkR59cJ6wQp+7C4nI0gsmExaedaYLNO44eT4AtBBwjbTiGPMlt2Md0T9H9JQ==,
+      }
+
+  undici-types@7.24.6:
+    resolution:
+      {
+        integrity: sha512-WRNW+sJgj5OBN4/0JpHFqtqzhpbnV0GuB+OozA9gCL7a993SmU+1JBZCzLNxYsbMfIeDL+lTsphD5jN5N+n0zg==,
       }
 
   undici@7.29.0:
@@ -5897,6 +5933,10 @@ snapshots:
   "@types/node@22.20.1":
     dependencies:
       undici-types: 6.21.0
+
+  "@types/node@25.9.5":
+    dependencies:
+      undici-types: 7.24.6
 
   "@types/unist@2.0.11": {}
 
@@ -7482,6 +7522,8 @@ snapshots:
     dependencies:
       brace-expansion: 1.1.18
 
+  minimist@1.2.8: {}
+
   mlly@1.8.2:
     dependencies:
       acorn: 8.18.0
@@ -7580,6 +7622,14 @@ snapshots:
       confbox: 0.1.8
       mlly: 1.8.2
       pathe: 2.0.3
+
+  png-to-ico@3.0.2:
+    dependencies:
+      "@types/node": 25.9.5
+      minimist: 1.2.8
+      pngjs: 7.0.0
+
+  pngjs@7.0.0: {}
 
   possible-typed-array-names@1.1.0: {}
 
@@ -8043,6 +8093,8 @@ snapshots:
       which-boxed-primitive: 1.1.1
 
   undici-types@6.21.0: {}
+
+  undici-types@7.24.6: {}
 
   undici@7.29.0: {}
 

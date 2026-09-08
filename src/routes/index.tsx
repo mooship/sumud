@@ -3,6 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { ButtonLink } from "~/components/ui/button-link";
 import { PullQuote } from "~/components/ui/pull-quote";
+import { OrnamentDivider } from "~/components/ui/ornament-divider";
 import {
   ArrowRight,
   ScrollText,
@@ -28,6 +29,44 @@ export default component$(() => {
         }}
       />
       <section class={styles.hero}>
+        <svg
+          class={styles.heroMark}
+          viewBox="0 0 32 32"
+          role="presentation"
+          aria-hidden="true"
+        >
+          <path
+            d="M16 27c-1-6.5 1.5-11.5 6-15"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.8"
+          />
+          <ellipse
+            cx="19.5"
+            cy="9.5"
+            rx="3.6"
+            ry="2"
+            transform="rotate(-40 19.5 9.5)"
+            fill="currentColor"
+          />
+          <ellipse
+            cx="15.2"
+            cy="14.6"
+            rx="3.8"
+            ry="2.1"
+            transform="rotate(-35 15.2 14.6)"
+            fill="currentColor"
+          />
+          <ellipse
+            cx="12"
+            cy="20.4"
+            rx="3.6"
+            ry="2"
+            transform="rotate(-25 12 20.4)"
+            fill="currentColor"
+          />
+          <circle cx="16" cy="27.4" r="1.6" fill="currentColor" />
+        </svg>
         <Container width="wide">
           <span class={styles.heroWord} lang="ar" dir="rtl">
             صمود
@@ -48,6 +87,7 @@ export default component$(() => {
             </ButtonLink>
           </div>
         </Container>
+        <OrnamentDivider tone="olive" class={styles.heroDivider} />
       </section>
 
       <section class={styles.section}>
@@ -96,7 +136,9 @@ export default component$(() => {
         <Container width="wide">
           <div class={styles.cardGrid}>
             <a href="/history/" class={styles.card}>
-              <ScrollText size={28} class={styles.cardIcon} />
+              <span class={styles.cardIconBadge}>
+                <ScrollText size={22} />
+              </span>
               <h3 class={styles.cardTitle}>History</h3>
               <p class={styles.cardBody}>
                 From Ottoman Palestine to the present day: seven chapters
@@ -108,7 +150,9 @@ export default component$(() => {
             </a>
 
             <a href="/culture/" class={styles.card}>
-              <Users size={28} class={styles.cardIcon} />
+              <span class={styles.cardIconBadge}>
+                <Users size={22} />
+              </span>
               <h3 class={styles.cardTitle}>Culture & Sumud</h3>
               <p class={styles.cardBody}>
                 Olive groves, embroidery, poetry and cuisine -- and the idea of
@@ -121,7 +165,9 @@ export default component$(() => {
             </a>
 
             <a href="/take-action/" class={styles.card}>
-              <HeartHandshake size={28} class={styles.cardIcon} />
+              <span class={styles.cardIconBadge}>
+                <HeartHandshake size={22} />
+              </span>
               <h3 class={styles.cardTitle}>Take Action</h3>
               <p class={styles.cardBody}>
                 Reputable humanitarian and human rights organisations working on
@@ -137,6 +183,7 @@ export default component$(() => {
 
       <section class={styles.section}>
         <Container width="content">
+          <OrnamentDivider tone="sand" class={styles.centeredDivider} />
           <PullQuote
             quote="We have on this land that which makes life worth living."
             cite="Mahmoud Darwish, 'On This Land'"

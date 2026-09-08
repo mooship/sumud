@@ -3,7 +3,7 @@ import { vars } from "~/styles/theme.css";
 
 export const footer = style({
   borderTop: `1px solid ${vars.color.sandLine}`,
-  marginTop: vars.space[9],
+  marginTop: vars.space[6],
   paddingBlock: vars.space[6],
   color: vars.color.inkMuted,
   fontSize: vars.fontSize.sm,
