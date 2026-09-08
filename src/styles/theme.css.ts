@@ -11,7 +11,7 @@ export const vars = createGlobalTheme(":root", {
     bgRaised: "#ffffff",
     ink: "#241f1c",
     inkMuted: "#5b5348",
-    inkFaint: "#8a8172",
+    inkFaint: "#6b6353",
     olive: "#4b5d3a",
     oliveDark: "#34432a",
     oliveLight: "#e4e9db",
