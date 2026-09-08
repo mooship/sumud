@@ -47,16 +47,6 @@ export const link = style({
   },
 });
 
-export const bottom = style({
-  display: "flex",
-  flexWrap: "wrap",
-  justifyContent: "space-between",
-  gap: vars.space[2],
-  marginTop: vars.space[6],
-  paddingTop: vars.space[4],
-  borderTop: `1px solid ${vars.color.sandLine}`,
-});
-
 export const externalIcon = style({
   display: "inline-block",
   verticalAlign: "-0.15em",
