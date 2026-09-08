@@ -4,6 +4,7 @@
   "description": "Sumud -- the story of Palestine, before 1947 and after.",
   "private": true,
   "type": "module",
+  "packageManager": "pnpm@10.33.0",
   "engines": {
     "node": "^22.12.0 || >=24.0.0"
   },
