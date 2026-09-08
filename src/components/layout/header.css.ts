@@ -24,6 +24,9 @@ export const header = style({
   zIndex: vars.zIndex.header,
   backgroundColor: vars.color.bg,
   borderBottom: `1px solid ${vars.color.sandLine}`,
+  // iOS notch/status-bar clearance -- only non-zero when the page opts into
+  // drawing under it via viewport-fit=cover (see root.tsx).
+  paddingTop: "env(safe-area-inset-top, 0px)",
 });
 
 export const bar = style({
@@ -82,10 +85,15 @@ export const navLink = style({
 
 export const menuButton = style({
   display: "none",
+  alignItems: "center",
+  justifyContent: "center",
+  minWidth: "2.75rem",
+  minHeight: "2.75rem",
+  marginInlineEnd: `calc(${vars.space[1]} * -1)`,
   background: "none",
   border: "none",
+  borderRadius: vars.radius.md,
   cursor: "pointer",
-  padding: vars.space[1],
   color: vars.color.ink,
   "@media": {
     "screen and (max-width: 48rem)": {
@@ -113,8 +121,10 @@ export const mobileNav = style({
 });
 
 export const mobileNavLink = style({
+  display: "flex",
+  alignItems: "center",
+  minHeight: "2.75rem",
   fontSize: vars.fontSize.base,
   textDecoration: "none",
   color: vars.color.ink,
-  padding: `${vars.space[1]} 0`,
 });

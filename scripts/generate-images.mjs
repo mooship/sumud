@@ -1,10 +1,11 @@
 #!/usr/bin/env node
 /**
- * Generates the PWA/manifest icon PNGs and the social share (OG) image from
- * hand-authored SVG. Run: node scripts/generate-images.mjs
+ * Generates the PWA/manifest icon PNGs, favicon.ico, and the social share
+ * (OG) image from hand-authored SVG. Run: node scripts/generate-images.mjs
  * Re-run after editing public/favicon.svg or the OG markup below.
  */
 import sharp from "sharp";
+import pngToIco from "png-to-ico";
 import { readFile, writeFile } from "node:fs/promises";
 import { fileURLToPath } from "node:url";
 import path from "node:path";
@@ -19,32 +20,49 @@ const TERRACOTTA = "#a9432f";
 const INK = "#241f1c";
 const INK_MUTED = "#5b5348";
 
+async function renderIcon(svgBuffer, size, { maskable = false } = {}) {
+  // Maskable icons need generous padding: Android's adaptive-icon mask can
+  // crop up to ~20% off each edge, so keep the mark inside a safe ~66% zone.
+  const markScale = maskable ? 0.42 : 0.68;
+  return sharp({
+    create: { width: size, height: size, channels: 4, background: BG },
+  })
+    .composite([
+      {
+        input: await sharp(svgBuffer)
+          .resize(Math.round(size * markScale), Math.round(size * markScale))
+          .toBuffer(),
+        gravity: "center",
+      },
+    ])
+    .png()
+    .toBuffer();
+}
+
 async function generateAppIcons() {
   const svg = await readFile(path.join(publicDir, "favicon.svg"), "utf-8");
   const svgBuffer = Buffer.from(svg);
 
   for (const size of [180, 192, 512]) {
     const name = size === 180 ? "apple-touch-icon.png" : `icon-${size}.png`;
-    await sharp({
-      create: {
-        width: size,
-        height: size,
-        channels: 4,
-        background: BG,
-      },
-    })
-      .composite([
-        {
-          input: await sharp(svgBuffer)
-            .resize(Math.round(size * 0.68), Math.round(size * 0.68))
-            .toBuffer(),
-          gravity: "center",
-        },
-      ])
-      .png()
-      .toFile(path.join(publicDir, name));
+    const buffer = await renderIcon(svgBuffer, size);
+    await writeFile(path.join(publicDir, name), buffer);
     console.log(`Wrote public/${name}`);
   }
+
+  const maskable512 = await renderIcon(svgBuffer, 512, { maskable: true });
+  await writeFile(path.join(publicDir, "icon-maskable-512.png"), maskable512);
+  console.log("Wrote public/icon-maskable-512.png");
+
+  // favicon.ico: bundle a few small raster sizes for browsers/crawlers that
+  // still fetch /favicon.ico by convention rather than following <link>.
+  const icoSizes = [16, 32, 48];
+  const icoBuffers = await Promise.all(
+    icoSizes.map((size) => renderIcon(svgBuffer, size)),
+  );
+  const ico = await pngToIco(icoBuffers);
+  await writeFile(path.join(publicDir, "favicon.ico"), ico);
+  console.log("Wrote public/favicon.ico");
 }
 
 function ogSvg() {

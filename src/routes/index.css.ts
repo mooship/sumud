@@ -2,11 +2,31 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
 
 export const hero = style({
-  paddingBlock: vars.space[8],
-  borderBottom: `1px solid ${vars.color.sandLine}`,
+  position: "relative",
+  paddingBlockStart: vars.space[8],
+  paddingBlockEnd: vars.space[6],
+  overflow: "hidden",
+});
+
+export const heroMark = style({
+  position: "absolute",
+  top: "50%",
+  right: "-4rem",
+  width: "26rem",
+  height: "26rem",
+  color: vars.color.olive,
+  opacity: 0.07,
+  transform: "translateY(-50%) rotate(8deg)",
+  pointerEvents: "none",
+  "@media": {
+    "screen and (max-width: 56rem)": {
+      display: "none",
+    },
+  },
 });
 
 export const heroWord = style({
+  position: "relative",
   display: "block",
   fontFamily: vars.font.serif,
   color: vars.color.terracotta,
@@ -15,11 +35,13 @@ export const heroWord = style({
 });
 
 export const heroTitle = style({
+  position: "relative",
   fontSize: vars.fontSize.xl4,
   marginBottom: vars.space[3],
 });
 
 export const heroLede = style({
+  position: "relative",
   fontSize: vars.fontSize.md,
   color: vars.color.inkMuted,
   maxWidth: "42ch",
@@ -27,14 +49,30 @@ export const heroLede = style({
 });
 
 export const heroActions = style({
+  position: "relative",
   display: "flex",
   flexWrap: "wrap",
   gap: vars.space[2],
   marginTop: vars.space[5],
 });
 
+export const heroDivider = style({
+  position: "relative",
+  display: "block",
+  marginInline: "auto",
+  marginTop: vars.space[6],
+  maxWidth: "16rem",
+});
+
+export const centeredDivider = style({
+  display: "block",
+  marginInline: "auto",
+  marginBottom: vars.space[6],
+  maxWidth: "12rem",
+});
+
 export const section = style({
-  paddingBlock: vars.space[8],
+  paddingBlock: vars.space[7],
 });
 
 export const sectionAlt = style([
@@ -86,17 +124,28 @@ export const card = style({
   borderRadius: vars.radius.lg,
   textDecoration: "none",
   color: "inherit",
-  transition: "border-color 0.15s ease, transform 0.15s ease",
+  boxShadow: vars.shadow.sm,
+  transition:
+    "border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease",
   selectors: {
     "&:hover": {
       borderColor: vars.color.olive,
-      transform: "translateY(-2px)",
+      transform: "translateY(-3px)",
+      boxShadow: vars.shadow.md,
     },
   },
 });
 
-export const cardIcon = style({
-  color: vars.color.olive,
+export const cardIconBadge = style({
+  display: "inline-flex",
+  alignItems: "center",
+  justifyContent: "center",
+  width: "3rem",
+  height: "3rem",
+  borderRadius: vars.radius.pill,
+  backgroundColor: vars.color.oliveLight,
+  color: vars.color.oliveDark,
+  marginBottom: vars.space[1],
 });
 
 export const cardTitle = style({
@@ -132,6 +181,12 @@ export const timelineItem = style({
   flex: "1 1 12rem",
   paddingLeft: vars.space[3],
   borderLeft: `2px solid ${vars.color.olive}`,
+  transition: "border-color 0.15s ease",
+  selectors: {
+    "&:hover": {
+      borderColor: vars.color.terracotta,
+    },
+  },
 });
 
 export const timelineYear = style({

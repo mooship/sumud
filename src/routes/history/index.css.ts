@@ -28,9 +28,28 @@ export const lede = style({
 });
 
 export const list = style({
+  position: "relative",
   display: "flex",
   flexDirection: "column",
   paddingBottom: vars.space[8],
+  selectors: {
+    "&::before": {
+      content: "",
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: "9.75rem",
+      width: "2px",
+      backgroundColor: vars.color.sandLine,
+    },
+  },
+  "@media": {
+    "screen and (max-width: 36rem)": {
+      selectors: {
+        "&::before": { display: "none" },
+      },
+    },
+  },
 });
 
 export const itemPeriod = style({
@@ -39,7 +58,27 @@ export const itemPeriod = style({
   fontSize: vars.fontSize.base,
 });
 
+export const itemDot = style({
+  position: "absolute",
+  // Aligned to sit level with the chapter title, not the row's vertical
+  // centre -- rows vary in height with summary length, the title doesn't.
+  top: `calc(${vars.space[5]} + 0.7em)`,
+  left: "9.75rem",
+  width: "0.6rem",
+  height: "0.6rem",
+  borderRadius: vars.radius.pill,
+  backgroundColor: vars.color.terracotta,
+  border: `2px solid ${vars.color.bg}`,
+  transform: "translate(-50%, -50%)",
+  "@media": {
+    "screen and (max-width: 36rem)": {
+      display: "none",
+    },
+  },
+});
+
 export const item = style({
+  position: "relative",
   display: "grid",
   gridTemplateColumns: "9rem 1fr",
   gap: vars.space[4],

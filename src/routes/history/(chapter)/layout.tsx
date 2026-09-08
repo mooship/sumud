@@ -37,6 +37,32 @@ export default component$(() => {
           },
         }}
       />
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "BreadcrumbList",
+          itemListElement: [
+            {
+              "@type": "ListItem",
+              position: 1,
+              name: "Sumud",
+              item: "https://sumud.timothybrits.co.za/",
+            },
+            {
+              "@type": "ListItem",
+              position: 2,
+              name: "History",
+              item: "https://sumud.timothybrits.co.za/history/",
+            },
+            {
+              "@type": "ListItem",
+              position: 3,
+              name: head.title,
+              item: loc.url.toString(),
+            },
+          ],
+        }}
+      />
 
       <header class={styles.header}>
         <Link href="/history/" class={styles.backLink}>

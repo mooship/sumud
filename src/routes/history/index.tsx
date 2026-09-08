@@ -26,6 +26,7 @@ export default component$(() => {
             href={`/history/${chapter.slug}/`}
             class={styles.item}
           >
+            <span class={styles.itemDot} />
             <span class={styles.itemPeriod}>{chapter.period}</span>
             <div>
               <h2 class={styles.itemTitle}>{chapter.title}</h2>

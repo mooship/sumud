@@ -4,7 +4,9 @@ import { vars } from "~/styles/theme.css";
 const base = style({
   display: "inline-flex",
   alignItems: "center",
+  justifyContent: "center",
   gap: vars.space[1],
+  minHeight: "2.75rem",
   fontSize: vars.fontSize.sm,
   fontWeight: 600,
   textDecoration: "none",
@@ -13,7 +15,7 @@ const base = style({
   paddingInline: vars.space[4],
   border: "1px solid transparent",
   transition:
-    "background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease",
+    "background-color 0.15s ease, color 0.15s ease, border-color 0.15s ease, transform 0.15s ease",
   cursor: "pointer",
 });
 
