@@ -50,6 +50,7 @@ export default component$(() => {
                   <p class={styles.cardName}>
                     {org.name}
                     <ExternalLink size={14} class={styles.cardIcon} />
+                    <span class="visually-hidden"> (opens in a new tab)</span>
                   </p>
                   <p class={styles.cardDescription}>{org.description}</p>
                 </a>
