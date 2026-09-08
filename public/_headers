@@ -18,7 +18,7 @@
   Cache-Control: public, max-age=31536000, immutable
 
 # Self-hosted webfonts -- versioned by npm package version, effectively immutable.
-*.woff2
+/assets/*.woff2
   Cache-Control: public, max-age=31536000, immutable
 
 /favicon.svg
