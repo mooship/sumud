@@ -51,7 +51,7 @@ export const Header = component$(() => {
           <nav
             id="mobile-nav"
             class={styles.mobileNav}
-            data-open={open.value}
+            data-open={open.value ? "true" : "false"}
             aria-label="Primary"
           >
             {NAV_ITEMS.map((item) => (
