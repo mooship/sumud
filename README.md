@@ -5,8 +5,9 @@ steadfastness the site is named for.
 
 **[sumud.timothybrits.co.za](https://sumud.timothybrits.co.za)**
 
-Sumud is an independent, non-commercial project. It has no ads and no trackers. See
-[`/about/`](https://sumud.timothybrits.co.za/about/) for what it is and
+Sumud is an independent, non-commercial project. It has no ads and no third-party trackers --
+just cookieless Cloudflare Web Analytics (see [`/privacy/`](https://sumud.timothybrits.co.za/privacy/)).
+See [`/about/`](https://sumud.timothybrits.co.za/about/) for what it is and
 [`/sources/`](https://sumud.timothybrits.co.za/sources/) for how it was researched.
 
 ## Stack
@@ -98,11 +99,19 @@ name to the `ICONS` map in that script, then run `pnpm icons`.
 
 ## Deployment
 
-The site deploys to Cloudflare Workers (static assets + a small Worker for the 404 page and any
+The site runs on Cloudflare Workers (static assets + a small Worker for the 404 page and any
 non-prerendered route) at `sumud.timothybrits.co.za`, configured in
 [`wrangler.jsonc`](wrangler.jsonc). Every page is statically generated at build time
 (`ssg.include: ["/*"]`); the Worker itself only runs for what the static asset layer can't
 serve.
+
+**Production deploys are automatic**: the Workers project is Git-connected, and Cloudflare
+Workers Builds builds and deploys it on every push to `main` using the `build.command` in
+`wrangler.jsonc` -- no GitHub Actions deploy job or repository secret involved.
+[`.github/workflows/ci.yml`](.github/workflows/ci.yml) separately runs lint/typecheck/test/build
+on every push and PR and gates merges, but doesn't deploy anything itself.
+
+For a one-off manual deploy (e.g. testing a change before it's on `main`), run it locally:
 
 ```bash
 pnpm build
@@ -111,16 +120,6 @@ npx wrangler deploy
 
 `wrangler deploy` provisions the custom domain route automatically -- the `timothybrits.co.za`
 zone just needs to already be active on the Cloudflare account, which it is.
-
-**CI/CD**: [`.github/workflows/ci.yml`](.github/workflows/ci.yml) runs lint/typecheck/test/build
-on every push and PR. [`.github/workflows/deploy.yml`](.github/workflows/deploy.yml) deploys on
-push to `main`, and needs two repository secrets to actually run:
-
-- `CLOUDFLARE_API_TOKEN` -- a token with Workers Scripts:Edit permission
-- `CLOUDFLARE_ACCOUNT_ID`
-
-Until those are added, the CI workflow still runs (and gates merges); the deploy workflow will
-simply fail at the deploy step.
 
 ### Cloudflare configuration
 
@@ -133,8 +132,11 @@ simply fail at the deploy step.
   anything the Worker renders itself (the 404 page).
 - **Observability**: `[observability]` enables Workers Logs at 100% sampling -- fine for a
   low-traffic content site; turn `head_sampling_rate` down if that changes.
-- **Build cache**: CI uses `actions/setup-node`'s built-in pnpm store cache
-  (`cache: pnpm` in `ci.yml`/`deploy.yml`), so dependency installs are fast on repeat runs.
+- **Build cache**: CI uses `actions/setup-node`'s built-in pnpm store cache (`cache: pnpm` in
+  `ci.yml`); Cloudflare Workers Builds caches dependencies between deploys on its own side.
+- **Analytics**: Cloudflare Web Analytics is enabled at the zone level (dashboard toggle, no
+  script on the page) -- it's cookieless and doesn't fingerprint visitors. See
+  [`/privacy/`](https://sumud.timothybrits.co.za/privacy/) for what that means in practice.
 
 ## SEO & "LLM" readiness
 

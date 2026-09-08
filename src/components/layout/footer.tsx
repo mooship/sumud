@@ -6,8 +6,6 @@ import { NAV_ITEMS } from "~/content/nav";
 import * as styles from "./footer.css";
 
 export const Footer = component$(() => {
-  const year = new Date().getFullYear();
-
   return (
     <footer class={styles.footer}>
       <Container width="wide">
@@ -54,16 +52,13 @@ export const Footer = component$(() => {
                   Sourcing & corrections
                 </Link>
               </li>
+              <li>
+                <Link href="/privacy/" class={styles.link}>
+                  Privacy
+                </Link>
+              </li>
             </ul>
           </div>
-        </div>
-
-        <div class={styles.bottom}>
-          <p>
-            © {year} Sumud. Historical content is offered for education under
-            fair use.
-          </p>
-          <p>Built with Qwik, hosted on Cloudflare.</p>
         </div>
       </Container>
     </footer>
