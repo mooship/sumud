@@ -21,6 +21,7 @@
     "fmt": "prettier --write .",
     "fmt.check": "prettier --check .",
     "test": "vitest run",
+    "test.coverage": "vitest run --coverage",
     "test.watch": "vitest",
     "typecheck": "tsc --noEmit",
     "icons": "node scripts/generate-icons.mjs",
@@ -37,12 +38,15 @@
     "@types/node": "^22.19.0",
     "@vanilla-extract/css": "^1.21.2",
     "@vanilla-extract/vite-plugin": "^5.2.6",
+    "@vitest/coverage-istanbul": "^5.0.0",
     "clsx": "^2.1.1",
-    "eslint": "^9.32.0",
+    "eslint": "^10.10.0",
     "eslint-plugin-qwik": "^1.20.0",
+    "eslint-plugin-unicorn": "^74.0.0",
     "fontaine": "^0.8.1",
     "globals": "^16.4.0",
     "happy-dom": "^20.14.0",
+    "lefthook": "^2.1.12",
     "lucide-static": "^1.43.0",
     "png-to-ico": "^3.0.2",
     "prettier": "^3.6.2",
@@ -57,6 +61,7 @@
   "pnpm": {
     "onlyBuiltDependencies": [
       "esbuild",
+      "lefthook",
       "sharp",
       "workerd"
     ]
