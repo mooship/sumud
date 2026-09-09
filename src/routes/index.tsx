@@ -118,7 +118,7 @@ export default component$(() => {
           <p class={styles.eyebrow}>The history, in brief</p>
           <h2 class={styles.sectionTitle}>Seven chapters, one thread</h2>
           <div class={styles.timelineStrip}>
-            {HISTORY_CHAPTERS.map((chapter, index) => (
+            {HISTORY_CHAPTERS.map((chapter) => (
               <a
                 key={chapter.slug}
                 href={`/history/${chapter.slug}/`}
@@ -126,7 +126,7 @@ export default component$(() => {
               >
                 <span
                   class={
-                    index === HISTORY_CHAPTERS.length - 1
+                    chapter.current
                       ? styles.timelineDotCurrent
                       : styles.timelineDot
                   }

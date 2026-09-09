@@ -170,6 +170,11 @@ export const cardLink = style({
   color: vars.color.terracotta,
 });
 
+// Rail/dot sit at the period column's width plus half the row gap, so the
+// dots line up with the vertical rail regardless of title length.
+const TIMELINE_RAIL = "9.75rem";
+const TIMELINE_MOBILE_BREAKPOINT = "screen and (max-width: 36rem)";
+
 export const timelineStrip = style({
   position: "relative",
   display: "flex",
@@ -181,13 +186,13 @@ export const timelineStrip = style({
       position: "absolute",
       top: 0,
       bottom: 0,
-      left: "9.75rem",
+      left: TIMELINE_RAIL,
       width: "2px",
       backgroundColor: vars.color.sandLine,
     },
   },
   "@media": {
-    "screen and (max-width: 36rem)": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
       selectors: {
         "&::before": { display: "none" },
       },
@@ -211,7 +216,7 @@ export const timelineItem = style({
     },
   },
   "@media": {
-    "screen and (max-width: 36rem)": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
       gridTemplateColumns: "1fr",
       gap: vars.space[0.5],
     },
@@ -221,7 +226,7 @@ export const timelineItem = style({
 export const timelineDot = style({
   position: "absolute",
   top: "50%",
-  left: "9.75rem",
+  left: TIMELINE_RAIL,
   width: "0.65rem",
   height: "0.65rem",
   borderRadius: vars.radius.pill,
@@ -235,7 +240,7 @@ export const timelineDot = style({
     },
   },
   "@media": {
-    "screen and (max-width: 36rem)": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
       display: "none",
     },
   },
