@@ -170,24 +170,89 @@ export const cardLink = style({
   color: vars.color.terracotta,
 });
 
-export const timelineStrip = style({
-  display: "flex",
-  flexWrap: "wrap",
-  gap: vars.space[3],
-  marginTop: vars.space[6],
-});
+// Rail/dot sit at the period column's width plus half the row gap, so the
+// dots line up with the vertical rail regardless of title length.
+const TIMELINE_RAIL = "9.75rem";
+const TIMELINE_MOBILE_BREAKPOINT = "screen and (max-width: 36rem)";
 
-export const timelineItem = style({
-  flex: "1 1 12rem",
-  paddingLeft: vars.space[3],
-  borderLeft: `2px solid ${vars.color.olive}`,
-  transition: "border-color 0.15s ease",
+export const timelineStrip = style({
+  position: "relative",
+  display: "flex",
+  flexDirection: "column",
+  marginTop: vars.space[6],
   selectors: {
-    "&:hover": {
-      borderColor: vars.color.terracotta,
+    "&::before": {
+      content: "",
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: TIMELINE_RAIL,
+      width: "2px",
+      backgroundColor: vars.color.sandLine,
+    },
+  },
+  "@media": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
+      selectors: {
+        "&::before": { display: "none" },
+      },
     },
   },
 });
+
+export const timelineItem = style({
+  position: "relative",
+  display: "grid",
+  gridTemplateColumns: "9rem 1fr",
+  alignItems: "baseline",
+  gap: vars.space[4],
+  paddingBlock: vars.space[3],
+  borderTop: `1px solid ${vars.color.sandLine}`,
+  textDecoration: "none",
+  color: "inherit",
+  selectors: {
+    "&:last-child": {
+      borderBottom: `1px solid ${vars.color.sandLine}`,
+    },
+  },
+  "@media": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
+      gridTemplateColumns: "1fr",
+      gap: vars.space[0.5],
+    },
+  },
+});
+
+export const timelineDot = style({
+  position: "absolute",
+  top: "50%",
+  left: TIMELINE_RAIL,
+  width: "0.65rem",
+  height: "0.65rem",
+  borderRadius: vars.radius.pill,
+  backgroundColor: vars.color.olive,
+  border: `2px solid ${vars.color.bgAlt}`,
+  transform: "translate(-50%, -50%)",
+  transition: "background-color 0.15s ease",
+  selectors: {
+    [`${timelineItem}:hover &`]: {
+      backgroundColor: vars.color.terracotta,
+    },
+  },
+  "@media": {
+    [TIMELINE_MOBILE_BREAKPOINT]: {
+      display: "none",
+    },
+  },
+});
+
+export const timelineDotCurrent = style([
+  timelineDot,
+  {
+    backgroundColor: vars.color.terracotta,
+    boxShadow: `0 0 0 4px ${vars.color.terracottaLight}`,
+  },
+]);
 
 export const timelineYear = style({
   display: "block",
@@ -197,6 +262,14 @@ export const timelineYear = style({
 });
 
 export const timelineLabel = style({
-  fontSize: vars.fontSize.sm,
-  color: vars.color.inkMuted,
+  display: "block",
+  fontFamily: vars.font.serif,
+  fontSize: vars.fontSize.md,
+  fontWeight: 500,
+  transition: "color 0.15s ease",
+  selectors: {
+    [`${timelineItem}:hover &`]: {
+      color: vars.color.terracotta,
+    },
+  },
 });
