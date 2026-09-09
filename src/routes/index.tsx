@@ -114,16 +114,23 @@ export default component$(() => {
       </section>
 
       <section class={styles.sectionAlt}>
-        <Container width="wide">
+        <Container width="content">
           <p class={styles.eyebrow}>The history, in brief</p>
           <h2 class={styles.sectionTitle}>Seven chapters, one thread</h2>
           <div class={styles.timelineStrip}>
-            {HISTORY_CHAPTERS.map((chapter) => (
+            {HISTORY_CHAPTERS.map((chapter, index) => (
               <a
                 key={chapter.slug}
                 href={`/history/${chapter.slug}/`}
                 class={styles.timelineItem}
               >
+                <span
+                  class={
+                    index === HISTORY_CHAPTERS.length - 1
+                      ? styles.timelineDotCurrent
+                      : styles.timelineDot
+                  }
+                />
                 <span class={styles.timelineYear}>{chapter.period}</span>
                 <span class={styles.timelineLabel}>{chapter.title}</span>
               </a>

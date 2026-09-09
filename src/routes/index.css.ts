@@ -171,23 +171,83 @@ export const cardLink = style({
 });
 
 export const timelineStrip = style({
+  position: "relative",
   display: "flex",
-  flexWrap: "wrap",
-  gap: vars.space[3],
+  flexDirection: "column",
   marginTop: vars.space[6],
-});
-
-export const timelineItem = style({
-  flex: "1 1 12rem",
-  paddingLeft: vars.space[3],
-  borderLeft: `2px solid ${vars.color.olive}`,
-  transition: "border-color 0.15s ease",
   selectors: {
-    "&:hover": {
-      borderColor: vars.color.terracotta,
+    "&::before": {
+      content: "",
+      position: "absolute",
+      top: 0,
+      bottom: 0,
+      left: "9.75rem",
+      width: "2px",
+      backgroundColor: vars.color.sandLine,
+    },
+  },
+  "@media": {
+    "screen and (max-width: 36rem)": {
+      selectors: {
+        "&::before": { display: "none" },
+      },
     },
   },
 });
+
+export const timelineItem = style({
+  position: "relative",
+  display: "grid",
+  gridTemplateColumns: "9rem 1fr",
+  alignItems: "baseline",
+  gap: vars.space[4],
+  paddingBlock: vars.space[3],
+  borderTop: `1px solid ${vars.color.sandLine}`,
+  textDecoration: "none",
+  color: "inherit",
+  selectors: {
+    "&:last-child": {
+      borderBottom: `1px solid ${vars.color.sandLine}`,
+    },
+  },
+  "@media": {
+    "screen and (max-width: 36rem)": {
+      gridTemplateColumns: "1fr",
+      gap: vars.space[0.5],
+    },
+  },
+});
+
+export const timelineDot = style({
+  position: "absolute",
+  top: "50%",
+  left: "9.75rem",
+  width: "0.65rem",
+  height: "0.65rem",
+  borderRadius: vars.radius.pill,
+  backgroundColor: vars.color.olive,
+  border: `2px solid ${vars.color.bgAlt}`,
+  transform: "translate(-50%, -50%)",
+  transition: "background-color 0.15s ease",
+  selectors: {
+    [`${timelineItem}:hover &`]: {
+      backgroundColor: vars.color.terracotta,
+    },
+  },
+  "@media": {
+    "screen and (max-width: 36rem)": {
+      display: "none",
+    },
+  },
+});
+
+export const timelineDotCurrent = style([
+  timelineDot,
+  {
+    backgroundColor: vars.color.terracotta,
+    boxShadow: `0 0 0 4px ${vars.color.terracottaLight}`,
+  },
+]);
 
 export const timelineYear = style({
   display: "block",
@@ -197,6 +257,14 @@ export const timelineYear = style({
 });
 
 export const timelineLabel = style({
-  fontSize: vars.fontSize.sm,
-  color: vars.color.inkMuted,
+  display: "block",
+  fontFamily: vars.font.serif,
+  fontSize: vars.fontSize.md,
+  fontWeight: 500,
+  transition: "color 0.15s ease",
+  selectors: {
+    [`${timelineItem}:hover &`]: {
+      color: vars.color.terracotta,
+    },
+  },
 });
