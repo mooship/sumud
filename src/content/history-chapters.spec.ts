@@ -34,6 +34,12 @@ describe("HISTORY_CHAPTERS", () => {
     }
   });
 
+  it("marks exactly one chapter as the current, still-unfolding one", () => {
+    const current = HISTORY_CHAPTERS.filter((c) => c.current);
+    expect(current).toHaveLength(1);
+    expect(current[0]?.slug).toBe("gaza-and-the-present");
+  });
+
   it("is ordered chronologically by the start year in each period", () => {
     const startYears = HISTORY_CHAPTERS.map((c) => {
       const match = c.period.match(/\d{4}/);

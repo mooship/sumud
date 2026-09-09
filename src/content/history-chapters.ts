@@ -3,6 +3,11 @@ export interface HistoryChapter {
   period: string;
   title: string;
   summary: string;
+  /**
+   * Marks the one chapter that carries the story to today (still unfolding,
+   * not yet closed).
+   */
+  current?: boolean;
 }
 
 export const HISTORY_CHAPTERS: HistoryChapter[] = [
@@ -54,5 +59,6 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
     title: "Siege, War and the Present",
     summary:
       "Gaza has lived under blockade for close to two decades and endured repeated wars. Since October 2023 it has faced the most destructive of them. This chapter carries the story to today.",
+    current: true,
   },
 ];
