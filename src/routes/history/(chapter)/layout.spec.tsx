@@ -17,15 +17,17 @@ const HeadSeeder = component$<{
 }>(({ title, description, period }) => {
   const head = useDocumentHead();
   useTask$(() => {
-    Object.assign(head, {
-      ...(title !== undefined && { title }),
-      ...(description !== undefined && {
+    Object.assign(
+      head,
+      title !== undefined && { title },
+      description !== undefined && {
         meta: [{ key: "d", name: "description", content: description }],
-      }),
-      ...(period !== undefined && { frontmatter: { period } }),
-    });
+      },
+      period !== undefined && { frontmatter: { period } },
+    );
   });
-  return null;
+  // eslint-disable-next-line unicorn/no-useless-undefined -- component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
+  return undefined;
 });
 
 describe("history/(chapter)/layout", () => {
@@ -56,7 +58,7 @@ describe("history/(chapter)/layout", () => {
       </QwikCityMockProvider>,
     );
     const nav = screen.querySelector('nav[aria-label="Chapter navigation"]');
-    const hrefs = Array.from(nav?.querySelectorAll("a") ?? []).map((a) =>
+    const hrefs = Array.from(nav?.querySelectorAll("a") ?? [], (a) =>
       a.getAttribute("href"),
     );
     expect(hrefs).toEqual([
@@ -135,7 +137,8 @@ describe("history/(chapter)/layout", () => {
     );
     const scripts = Array.from(
       screen.querySelectorAll('script[type="application/ld+json"]'),
-    ).map((s) => JSON.parse(s.innerHTML));
+      (s) => JSON.parse(s.innerHTML),
+    );
     expect(scripts).toHaveLength(2);
     expect(scripts[0]).toMatchObject({
       "@type": "Article",

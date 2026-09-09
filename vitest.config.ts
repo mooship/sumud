@@ -40,12 +40,12 @@ export default defineConfig({
         "src/root.tsx",
         "src/routes/layout.tsx",
       ],
-      // branches/lines are a genuine 100%. statements/functions sit fractionally below
-      // it (296/297 and 141/142) for one known, narrow gap: header.tsx's mobile nav Link
-      // closes the menu via an onClick$ that a simulated click can't reach here -- Link's
-      // own click-preload handler runs first and calls `new URL(elm.href)`, which throws
-      // because this minimal test DOM's anchors don't resolve `.href` to an absolute URL
-      // the way a real browser does, so our handler never gets a chance to run.
+      // branches/lines are a genuine 100%. statements/functions sit fractionally below it
+      // for one known, narrow gap: header.tsx's mobile nav Link closes the menu via an
+      // onClick$ that a simulated click can't reach here -- Link's own click-preload
+      // handler runs first and calls `new URL(elm.href)`, which throws because this
+      // minimal test DOM's anchors don't resolve `.href` to an absolute URL the way a
+      // real browser does, so our handler never gets a chance to run.
       thresholds: {
         statements: 99,
         branches: 100,

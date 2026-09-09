@@ -17,7 +17,8 @@ describe("routes/sources index", () => {
         <SourcesIndex />
       </QwikCityMockProvider>,
     );
-    const titles = Array.from(screen.querySelectorAll("h2")).map(
+    const titles = Array.from(
+      screen.querySelectorAll("h2"),
       (h2) => h2.textContent,
     );
     for (const section of SOURCE_SECTIONS) {

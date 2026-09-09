@@ -11,9 +11,8 @@ describe("Header", () => {
         <Header />
       </QwikCityMockProvider>,
     );
-    const links = Array.from(
-      screen.querySelectorAll('nav[aria-label="Primary"] a'),
-    );
+    const nav = screen.querySelector('nav[aria-label="Primary"]');
+    const links = Array.from(nav?.querySelectorAll("a") ?? []);
     const current = links.find(
       (link) => link.getAttribute("href") === "/history/",
     );

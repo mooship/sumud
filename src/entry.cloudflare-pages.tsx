@@ -4,7 +4,7 @@ import {
 } from "@builder.io/qwik-city/middleware/cloudflare-pages";
 import qwikCityPlan from "@qwik-city-plan";
 import render from "./entry.ssr";
-import { applySecurityHeaders } from "./securityHeaders";
+import { applySecurityHeaders } from "./security-headers";
 
 const qwikCityFetch = createQwikCity({ render, qwikCityPlan });
 

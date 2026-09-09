@@ -17,13 +17,14 @@ describe("routes/take-action index", () => {
         <TakeActionIndex />
       </QwikCityMockProvider>,
     );
-    const titles = Array.from(screen.querySelectorAll("h2")).map(
+    const titles = Array.from(
+      screen.querySelectorAll("h2"),
       (h2) => h2.textContent,
     );
     for (const group of ORG_GROUPS) {
       expect(titles).toContain(group.title);
     }
-    const hrefs = Array.from(screen.querySelectorAll("a")).map((a) =>
+    const hrefs = Array.from(screen.querySelectorAll("a"), (a) =>
       a.getAttribute("href"),
     );
     const allOrgs = ORG_GROUPS.flatMap((g) => g.orgs);

@@ -24,19 +24,19 @@ const HeadSeeder = component$<{
 }>(({ title, meta, links, styles, scripts }) => {
   const head = useDocumentHead();
   useTask$(() => {
-    Object.assign(head, {
-      ...(title !== undefined && { title }),
-      ...(meta && { meta: meta.map((m, i) => ({ key: `m${i}`, ...m })) }),
-      ...(links && { links: links.map((l, i) => ({ key: `l${i}`, ...l })) }),
-      ...(styles && {
-        styles: styles.map((s, i) => ({ key: `s${i}`, ...s })),
-      }),
-      ...(scripts && {
+    Object.assign(
+      head,
+      title !== undefined && { title },
+      meta && { meta: meta.map((m, i) => ({ key: `m${i}`, ...m })) },
+      links && { links: links.map((l, i) => ({ key: `l${i}`, ...l })) },
+      styles && { styles: styles.map((s, i) => ({ key: `s${i}`, ...s })) },
+      scripts && {
         scripts: scripts.map((s, i) => ({ key: `sc${i}`, ...s })),
-      }),
-    });
+      },
+    );
   });
-  return null;
+  // eslint-disable-next-line unicorn/no-useless-undefined -- component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
+  return undefined;
 });
 
 describe("resolveHeadTitle", () => {

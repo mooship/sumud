@@ -37,7 +37,7 @@ export const RouterHead = component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
 
-  const canonical = new URL(loc.url.pathname, SITE_URL).toString();
+  const canonical = new URL(loc.url.pathname, SITE_URL).href;
   const title = resolveHeadTitle(head.title);
   const description = resolveHeadDescription(head.meta);
   const ogImage = `${SITE_URL}/og-image.png`;

@@ -35,7 +35,7 @@ describe("routes/index (homepage)", () => {
         <HomeIndex />
       </QwikCityMockProvider>,
     );
-    const hrefs = Array.from(screen.querySelectorAll("a")).map((a) =>
+    const hrefs = Array.from(screen.querySelectorAll("a"), (a) =>
       a.getAttribute("href"),
     );
     expect(hrefs).toContain("/history/");

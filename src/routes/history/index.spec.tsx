@@ -17,7 +17,7 @@ describe("routes/history index", () => {
         <HistoryIndex />
       </QwikCityMockProvider>,
     );
-    const hrefs = Array.from(screen.querySelectorAll("a")).map((a) =>
+    const hrefs = Array.from(screen.querySelectorAll("a"), (a) =>
       a.getAttribute("href"),
     );
     for (const chapter of HISTORY_CHAPTERS) {
