@@ -53,12 +53,12 @@ this wrong and a page either 404s in nav, or silently never appears anywhere but
 - **Pick the right shared shell for a new long-form page.** A standalone MDX page outside the
   history sequence (About, Culture, Privacy) wraps its content in `<ArticleShell eyebrow="...">`
   (`src/components/layout/article-shell.tsx`) for the title header and `Prose` styling. A new
-  _history chapter_ instead goes inside `src/routes/history/(chapter)/`, which gets period badge,
-  prev/next nav and Article + BreadcrumbList JSON-LD for free from that pathless layout, and also
-  needs an entry added to `HISTORY_CHAPTERS` in `src/content/history-chapters.ts` (slug order
-  there drives the prev/next links). A page with bespoke layout needs (like Take Action,
-  Sources, Further Reading, or the homepage) is just a plain `index.tsx` built from `Container`
-  and hand-written `index.css.ts`, following whichever of those is closest in shape.
+  _history chapter_ instead goes inside `src/routes/history/(chapter)/` and needs an entry added
+  to `HISTORY_CHAPTERS` in `src/content/history-chapters.ts` (slug order there drives the
+  prev/next links) -- see "Pathless layout groups" below for what that shell gives it for free.
+  A page with bespoke layout needs (like Take Action, Sources, Further Reading, or the homepage)
+  is just a plain `index.tsx` built from `Container` and hand-written `index.css.ts`, following
+  whichever of those is closest in shape.
 - **Structured content data gets a sibling spec file.** Every `src/content/*.ts` list
   (`organisations.ts`, `sources.ts`, `books.ts`, `history-chapters.ts`, `nav.ts`) has a matching
   `*.spec.ts` asserting the boring-but-important invariants: no duplicate names/titles, every
