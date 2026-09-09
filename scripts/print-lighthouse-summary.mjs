@@ -48,27 +48,33 @@ function groupByUrl(reports) {
   return byUrl;
 }
 
+function buildTable(ids, urlReports, valueFor) {
+  const lines = [`| Run | ${ids.join(" | ")} |`];
+  lines.push(`| --- | ${ids.map(() => "---").join(" | ")} |`);
+  for (const [index, report] of urlReports.entries()) {
+    const values = ids.map((id) => valueFor(report, id));
+    lines.push(`| ${index + 1} | ${values.join(" | ")} |`);
+  }
+  return lines;
+}
+
 function buildSummary(reports) {
   const lines = ["## Lighthouse report", ""];
   for (const [url, urlReports] of groupByUrl(reports)) {
     lines.push(`### ${url}`, "");
-    lines.push(`| Run | ${CATEGORY_IDS.join(" | ")} |`);
-    lines.push(`| --- | ${CATEGORY_IDS.map(() => "---").join(" | ")} |`);
-    for (const [index, report] of urlReports.entries()) {
-      const scores = CATEGORY_IDS.map((id) =>
+    lines.push(
+      ...buildTable(CATEGORY_IDS, urlReports, (report, id) =>
         formatScore(report.categories[id]?.score),
-      );
-      lines.push(`| ${index + 1} | ${scores.join(" | ")} |`);
-    }
+      ),
+    );
     lines.push("");
-    lines.push(`| Run | ${AUDIT_IDS.join(" | ")} |`);
-    lines.push(`| --- | ${AUDIT_IDS.map(() => "---").join(" | ")} |`);
-    for (const [index, report] of urlReports.entries()) {
-      const values = AUDIT_IDS.map(
-        (id) => report.audits[id]?.displayValue ?? "—",
-      );
-      lines.push(`| ${index + 1} | ${values.join(" | ")} |`);
-    }
+    lines.push(
+      ...buildTable(
+        AUDIT_IDS,
+        urlReports,
+        (report, id) => report.audits[id]?.displayValue ?? "—",
+      ),
+    );
     lines.push("");
   }
   return lines.join("\n");

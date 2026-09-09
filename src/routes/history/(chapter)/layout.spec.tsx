@@ -1,34 +1,8 @@
 import { describe, expect, it } from "vitest";
-import { component$, useTask$ } from "@builder.io/qwik";
 import { createDOM } from "@builder.io/qwik/testing";
-import { QwikCityMockProvider, useDocumentHead } from "@builder.io/qwik-city";
+import { QwikCityMockProvider } from "@builder.io/qwik-city";
+import { HeadSeeder } from "~/testing/head-seeder";
 import ChapterLayout from "./layout";
-
-/**
- * Seeds the shared `DocumentHeadContext` store `QwikCityMockProvider`
- * creates. The mutation runs inside `useTask$` rather than directly in the
- * render body -- Qwik's dev mode flags synchronous store writes during
- * render as an error, since they're meant to happen in a task.
- */
-const HeadSeeder = component$<{
-  title?: string;
-  description?: string;
-  period?: string;
-}>(({ title, description, period }) => {
-  const head = useDocumentHead();
-  useTask$(() => {
-    Object.assign(
-      head,
-      title !== undefined && { title },
-      description !== undefined && {
-        meta: [{ key: "d", name: "description", content: description }],
-      },
-      period !== undefined && { frontmatter: { period } },
-    );
-  });
-  // eslint-disable-next-line unicorn/no-useless-undefined -- component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
-  return undefined;
-});
 
 describe("history/(chapter)/layout", () => {
   it("shows no previous link on the first chapter, and a next link", async () => {
@@ -101,7 +75,7 @@ describe("history/(chapter)/layout", () => {
     const { screen, render } = await createDOM();
     await render(
       <QwikCityMockProvider url="http://localhost/history/nakba/">
-        <HeadSeeder title="Nakba" period="1947 – 1949" />
+        <HeadSeeder title="Nakba" frontmatter={{ period: "1947 – 1949" }} />
         <ChapterLayout>
           <p>Body</p>
         </ChapterLayout>
@@ -129,7 +103,12 @@ describe("history/(chapter)/layout", () => {
     const { screen, render } = await createDOM();
     await render(
       <QwikCityMockProvider url="http://localhost/history/nakba/">
-        <HeadSeeder title="Nakba" description="What happened in 1948" />
+        <HeadSeeder
+          title="Nakba"
+          meta={[
+            { key: "d", name: "description", content: "What happened in 1948" },
+          ]}
+        />
         <ChapterLayout>
           <p>Body</p>
         </ChapterLayout>

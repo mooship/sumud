@@ -1,43 +1,12 @@
 import { describe, expect, it } from "vitest";
-import { component$, useTask$ } from "@builder.io/qwik";
 import { createDOM } from "@builder.io/qwik/testing";
-import { QwikCityMockProvider, useDocumentHead } from "@builder.io/qwik-city";
+import { QwikCityMockProvider } from "@builder.io/qwik-city";
+import { HeadSeeder } from "~/testing/head-seeder";
 import {
   RouterHead,
   resolveHeadDescription,
   resolveHeadTitle,
 } from "./router-head";
-
-/**
- * Seeds the shared `DocumentHeadContext` store that `QwikCityMockProvider`
- * creates, so a sibling component can read a populated head instead of the
- * provider's empty default. The mutation runs inside `useTask$` rather than
- * directly in the render body -- Qwik's dev mode flags synchronous store
- * writes during render as an error, since they're meant to happen in a task.
- */
-const HeadSeeder = component$<{
-  title?: string;
-  meta?: { name?: string; property?: string; content?: string }[];
-  links?: { rel?: string; href?: string }[];
-  styles?: { style: string; props?: Record<string, unknown> }[];
-  scripts?: { script: string; props?: Record<string, unknown> }[];
-}>(({ title, meta, links, styles, scripts }) => {
-  const head = useDocumentHead();
-  useTask$(() => {
-    Object.assign(
-      head,
-      title !== undefined && { title },
-      meta && { meta: meta.map((m, i) => ({ key: `m${i}`, ...m })) },
-      links && { links: links.map((l, i) => ({ key: `l${i}`, ...l })) },
-      styles && { styles: styles.map((s, i) => ({ key: `s${i}`, ...s })) },
-      scripts && {
-        scripts: scripts.map((s, i) => ({ key: `sc${i}`, ...s })),
-      },
-    );
-  });
-  // eslint-disable-next-line unicorn/no-useless-undefined -- component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
-  return undefined;
-});
 
 describe("resolveHeadTitle", () => {
   it("appends the site name to a page title", () => {
@@ -91,7 +60,7 @@ describe("RouterHead", () => {
       <QwikCityMockProvider url="https://sumud.timothybrits.co.za/history/nakba/">
         <HeadSeeder
           title="Nakba"
-          meta={[{ name: "description", content: "About the Nakba" }]}
+          meta={[{ key: "d", name: "description", content: "About the Nakba" }]}
         />
         <RouterHead />
       </QwikCityMockProvider>,
@@ -107,10 +76,10 @@ describe("RouterHead", () => {
     await render(
       <QwikCityMockProvider>
         <HeadSeeder
-          meta={[{ property: "og:extra", content: "extra-meta" }]}
-          links={[{ rel: "alternate", href: "/feed.xml" }]}
-          styles={[{ style: "body { color: red; }" }]}
-          scripts={[{ script: "console.log('hi')" }]}
+          meta={[{ key: "m", property: "og:extra", content: "extra-meta" }]}
+          links={[{ key: "l", rel: "alternate", href: "/feed.xml" }]}
+          styles={[{ key: "s", style: "body { color: red; }" }]}
+          scripts={[{ key: "sc", script: "console.log('hi')" }]}
         />
         <RouterHead />
       </QwikCityMockProvider>,
@@ -138,12 +107,14 @@ describe("RouterHead", () => {
         <HeadSeeder
           styles={[
             {
+              key: "s",
               style: "ignored",
               props: { dangerouslySetInnerHTML: "explicit-style" },
             },
           ]}
           scripts={[
             {
+              key: "sc",
               script: "ignored",
               props: { dangerouslySetInnerHTML: "explicit-script" },
             },

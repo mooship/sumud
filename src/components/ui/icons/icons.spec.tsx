@@ -14,6 +14,7 @@ import { Quote } from "./quote";
 import { ScrollText } from "./scroll-text";
 import { ShieldAlert } from "./shield-alert";
 import { Users } from "./users";
+import { X } from "./x";
 
 const ICONS = [
   ["ArrowRight", ArrowRight],
@@ -30,6 +31,7 @@ const ICONS = [
   ["ScrollText", ScrollText],
   ["ShieldAlert", ShieldAlert],
   ["Users", Users],
+  ["X", X],
 ] as const;
 
 describe.each(ICONS)("%s icon", (_name, Icon) => {

@@ -16,13 +16,13 @@ const { dependencies = {}, devDependencies = {} } = pkg as any as {
   devDependencies: PkgDep;
   [key: string]: unknown;
 };
+// eslint-disable-next-line unicorn/no-top-level-side-effects -- a one-time module-load guard; the check doesn't depend on `mode`/`command`, so running it from inside defineConfig would repeat it on every internal config resolution instead of once per process.
+errorOnDuplicatesPkgDeps(devDependencies, dependencies);
 
 /**
  * Note that Vite normally starts from `index.html` but the qwikCity plugin makes start at `src/entry.ssr.tsx` instead.
  */
 export default defineConfig(({ mode }): UserConfig => {
-  errorOnDuplicatesPkgDeps(devDependencies, dependencies);
-
   return {
     plugins: [
       qwikCity({
