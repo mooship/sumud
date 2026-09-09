@@ -1,10 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
 import { fileURLToPath } from "node:url";
-import { dirname, resolve } from "node:path";
+import path from "node:path";
 import { HISTORY_CHAPTERS } from "./history-chapters";
 
-const here = dirname(fileURLToPath(import.meta.url));
+const here = path.dirname(fileURLToPath(import.meta.url));
 
 describe("HISTORY_CHAPTERS", () => {
   it("has a unique, non-empty slug for every chapter", () => {
@@ -23,13 +23,13 @@ describe("HISTORY_CHAPTERS", () => {
 
   it("has an .mdx route file on disk for every chapter slug", () => {
     for (const chapter of HISTORY_CHAPTERS) {
-      const path = resolve(
+      const mdxPath = path.resolve(
         here,
         `../routes/history/(chapter)/${chapter.slug}/index.mdx`,
       );
       expect(
-        existsSync(path),
-        `missing route file for "${chapter.slug}": ${path}`,
+        existsSync(mdxPath),
+        `missing route file for "${chapter.slug}": ${mdxPath}`,
       ).toBe(true);
     }
   });

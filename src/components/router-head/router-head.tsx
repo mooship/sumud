@@ -1,10 +1,32 @@
 import { component$ } from "@builder.io/qwik";
-import { useDocumentHead, useLocation } from "@builder.io/qwik-city";
+import {
+  useDocumentHead,
+  useLocation,
+  type DocumentMeta,
+} from "@builder.io/qwik-city";
 
 const SITE_NAME = "Sumud";
 const SITE_URL = "https://sumud.timothybrits.co.za";
 const DEFAULT_DESCRIPTION =
   "Sumud tells the story of Palestine and its people, before 1947 and after -- their history, culture, and steadfastness.";
+
+/** Appends the site name to a page's own title, falling back to just the site name on the
+ *  homepage (which sets no title of its own). */
+export function resolveHeadTitle(
+  pageTitle: string | undefined,
+  siteName: string = SITE_NAME,
+): string {
+  return pageTitle ? `${pageTitle} · ${siteName}` : siteName;
+}
+
+/** Pulls the page's own `<meta name="description">` content out of `head.meta`, falling back to
+ *  the site-wide default for any route that doesn't set one. */
+export function resolveHeadDescription(
+  meta: readonly DocumentMeta[],
+  fallback: string = DEFAULT_DESCRIPTION,
+): string {
+  return meta.find((m) => m.name === "description")?.content ?? fallback;
+}
 
 /**
  * Renders everything inside <head>. Page routes set title/meta/links via
@@ -15,11 +37,9 @@ export const RouterHead = component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
 
-  const canonical = new URL(loc.url.pathname, SITE_URL).toString();
-  const title = head.title ? `${head.title} · ${SITE_NAME}` : SITE_NAME;
-  const description =
-    head.meta.find((m) => m.name === "description")?.content ??
-    DEFAULT_DESCRIPTION;
+  const canonical = new URL(loc.url.pathname, SITE_URL).href;
+  const title = resolveHeadTitle(head.title);
+  const description = resolveHeadDescription(head.meta);
   const ogImage = `${SITE_URL}/og-image.png`;
 
   return (

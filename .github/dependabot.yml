@@ -1,0 +1,45 @@
+version: 2
+updates:
+  # Security/crypto-relevant deps get a faster, separate weekly PR: the
+  # Cloudflare deploy tool, the framework, and the build tool.
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "weekly"
+      day: "saturday"
+      time: "09:00"
+      timezone: "Africa/Johannesburg"
+    groups:
+      npm-critical:
+        patterns:
+          - "*"
+    allow:
+      - dependency-name: "wrangler"
+      - dependency-name: "vite"
+      - dependency-name: "@builder.io/qwik"
+      - dependency-name: "@builder.io/qwik-city"
+  - package-ecosystem: "npm"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "Africa/Johannesburg"
+    groups:
+      npm:
+        patterns:
+          - "*"
+    ignore:
+      - dependency-name: "wrangler"
+      - dependency-name: "vite"
+      - dependency-name: "@builder.io/qwik"
+      - dependency-name: "@builder.io/qwik-city"
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+      time: "09:00"
+      timezone: "Africa/Johannesburg"
+    groups:
+      github-actions:
+        patterns:
+          - "*"

@@ -1,0 +1,61 @@
+name: Lighthouse CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: lighthouse-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  lighthouse:
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - uses: actions/checkout@v7.0.1
+
+      - uses: pnpm/action-setup@v4
+
+      - uses: actions/setup-node@v7
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Build
+        run: pnpm run build
+
+      # lighthouserc.json's startServerCommand/startServerReadyPattern start
+      # and wait for the preview server itself (lhci autorun), so there's no
+      # separate boot step here. Scores run against a real, un-mocked
+      # `wrangler dev` preview, reflecting what a real visitor experiences.
+      # `performance` is asserted at 0.85 with "warn" (not "error") to absorb
+      # CI-runner network/CPU variance without making this check flaky; the
+      # other categories don't depend on that variance and are asserted
+      # strictly.
+      - name: Run Lighthouse CI
+        id: lighthouse
+        uses: treosh/lighthouse-ci-action@v12
+        with:
+          configPath: ./lighthouserc.json
+          uploadArtifacts: true
+          temporaryPublicStorage: true
+
+      # The action's own job log only prints assertions that fail or warn --
+      # a fully-passing category shows nothing at all. Print every category
+      # score and a few key performance audits regardless of pass/fail, both
+      # to the log and to the run's job summary, so scores are visible
+      # without downloading the report artifact. Runs even if the assert
+      # step above failed (an error-level assertion), since the scores are
+      # exactly what's needed to diagnose that failure.
+      - name: Print Lighthouse report
+        if: always()
+        run: node scripts/print-lighthouse-summary.mjs "${{ steps.lighthouse.outputs.resultsPath }}"

@@ -73,9 +73,24 @@ plumbing.
 ## Commands
 
 ```bash
-pnpm check     # lint + typecheck + test + build -- run this before considering anything done
-pnpm icons     # after adding an icon name to scripts/generate-icons.mjs
+pnpm check          # lint + typecheck + test + build -- run this before considering anything done
+pnpm test.coverage  # vitest run --coverage (istanbul provider -- see below); CI-enforced, not pre-commit
+pnpm icons          # after adding an icon name to scripts/generate-icons.mjs
 ```
+
+Coverage uses the `istanbul` provider, not the default `v8` one: `v8`'s coverage remapping can't
+correctly attribute code inside a `component$()`/`$()` closure back to its source line once
+Qwik's optimizer has rewritten it (everything reports 0%, even when a passing test genuinely
+renders and exercises it), while `istanbul` instruments the source directly and doesn't have this
+problem. Thresholds in `vitest.config.ts` are 100% for branches/lines and 99% for
+statements/functions -- the one known gap is `header.tsx`'s mobile-nav-close `onClick$`, which a
+simulated click can't reach (`Link`'s own click-preload handler runs first and throws on this
+minimal test DOM's unresolved `elm.href`, so ours never fires). `coverage.exclude` in
+`vitest.config.ts` also carries the framework entry files (`entry.dev.tsx`, `entry.preview.tsx`,
+`entry.ssr.tsx`, `entry.cloudflare-pages.tsx`, `root.tsx`, `routes/layout.tsx`): Qwik City loads
+these through its own internal module resolution rather than a plain import, so even a directly
+rendered, passing unit test (confirmed for `routes/layout.tsx`) still reports 0% -- they're only
+reachable end-to-end, via a real dev/preview server request.
 
 There is no separate "format" CI check currently wired up beyond `pnpm fmt.check`; run `pnpm fmt`
 before committing if you've hand-edited anything Prettier would reflow.

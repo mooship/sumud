@@ -12,11 +12,11 @@ export default component$(() => {
   const loc = useLocation();
   const period = (head.frontmatter as { period?: string } | undefined)?.period;
 
-  const slug = loc.url.pathname.split("/").filter(Boolean).at(-1);
+  const slug = loc.url.pathname.split("/").findLast(Boolean);
   const index = HISTORY_CHAPTERS.findIndex((c) => c.slug === slug);
-  const prev = index > 0 ? HISTORY_CHAPTERS[index - 1] : undefined;
+  const prev = HISTORY_CHAPTERS[index - 1];
   const next =
-    index >= 0 && index < HISTORY_CHAPTERS.length - 1
+    index !== -1 && index < HISTORY_CHAPTERS.length - 1
       ? HISTORY_CHAPTERS[index + 1]
       : undefined;
 
@@ -28,7 +28,7 @@ export default component$(() => {
           "@type": "Article",
           headline: head.title,
           description: head.meta.find((m) => m.name === "description")?.content,
-          url: loc.url.toString(),
+          url: loc.url.href,
           inLanguage: "en-GB",
           isPartOf: {
             "@type": "WebSite",
@@ -58,7 +58,7 @@ export default component$(() => {
               "@type": "ListItem",
               position: 3,
               name: head.title,
-              item: loc.url.toString(),
+              item: loc.url.href,
             },
           ],
         }}
