@@ -24,7 +24,8 @@ export default component$(() => {
           This is not an academic work with a footnote for every sentence. It is
           a synthesis, and synthesis involves judgement. The list below is not
           exhaustive, but it represents the kinds of sources drawn on throughout
-          the site.
+          the site. For a longer list of books, including memoir, fiction and
+          poetry, see <a href="/further-reading/">further reading</a>.
         </p>
       </header>
 
