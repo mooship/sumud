@@ -1,9 +1,15 @@
+import { parseIsoDateUTC } from "~/lib/format-date";
 import { HISTORY_CHAPTERS } from "./history-chapters";
+import { NAV_ITEMS } from "./nav";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "./site";
 
-export const SITE_NAME = "Sumud";
-export const SITE_URL = "https://sumud.timothybrits.co.za";
-export const SITE_DESCRIPTION =
-  "Sumud tells the story of Palestine and its people, before 1947 and after: history, culture, and steadfastness.";
+/**
+ * How long an edge cache may serve a feed before checking for a newer build.
+ */
+export const FEED_CACHE_CONTROL = {
+  staleWhileRevalidate: 60 * 60 * 24 * 7,
+  maxAge: 60 * 60,
+};
 
 export interface FeedItem {
   title: string;
@@ -16,37 +22,31 @@ export interface FeedItem {
   date?: string;
 }
 
-const STANDALONE_PAGES: FeedItem[] = [
-  {
-    title: "Culture & Sumud",
-    description:
-      "The idea of sumud, and the land, food, craft, language and literature through which Palestinians have kept a national identity alive.",
-    path: "/culture/",
-  },
-  {
-    title: "Take Action",
-    description:
-      "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
-    path: "/take-action/",
-  },
-  {
-    title: "Further Reading",
-    description:
-      "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
-    path: "/further-reading/",
-  },
-  {
-    title: "Sources",
-    description: "The kinds of sources this project draws on, and why.",
-    path: "/sources/",
-  },
-  {
-    title: "About Sumud",
-    description:
-      "What this project is, why it exists, how it was researched, and how to flag a correction.",
-    path: "/about/",
-  },
-];
+/**
+ * Feed-only descriptions for the standalone content pages. Path and title come from
+ * {@link NAV_ITEMS} instead of being retyped here, so the two can't drift out of sync;
+ * `/history/` (covered chapter-by-chapter below) and `/search/` (a utility, not content)
+ * are deliberately left out.
+ */
+const STANDALONE_PAGE_DESCRIPTIONS: Record<string, string> = {
+  "/culture/":
+    "The idea of sumud, and the land, food, craft, language and literature through which Palestinians have kept a national identity alive.",
+  "/take-action/":
+    "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
+  "/further-reading/":
+    "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
+  "/sources/": "The kinds of sources this project draws on, and why.",
+  "/about/":
+    "What this project is, why it exists, how it was researched, and how to flag a correction.",
+};
+
+const STANDALONE_PAGES: FeedItem[] = NAV_ITEMS.filter((item) =>
+  Object.hasOwn(STANDALONE_PAGE_DESCRIPTIONS, item.href),
+).map((item) => ({
+  title: item.label,
+  description: STANDALONE_PAGE_DESCRIPTIONS[item.href],
+  path: item.href,
+}));
 
 /**
  * Every history chapter plus the standalone content pages, in the same order
@@ -76,7 +76,7 @@ export function escapeXml(value: string): string {
 }
 
 function itemDate(item: FeedItem, generatedAt: Date): Date {
-  return item.date ? new Date(`${item.date}T00:00:00Z`) : generatedAt;
+  return item.date ? parseIsoDateUTC(item.date) : generatedAt;
 }
 
 export function buildRssFeed(items: FeedItem[], generatedAt: Date): string {

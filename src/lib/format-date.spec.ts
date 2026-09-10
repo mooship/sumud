@@ -1,5 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { formatDate } from "./format-date";
+import { formatDate, parseIsoDateUTC } from "./format-date";
+
+describe("parseIsoDateUTC", () => {
+  it("parses an ISO date as UTC midnight, not the local timezone", () => {
+    expect(parseIsoDateUTC("2026-09-10").toISOString()).toBe(
+      "2026-09-10T00:00:00.000Z",
+    );
+  });
+});
 
 describe("formatDate", () => {
   it("formats an ISO date as a British long date", () => {

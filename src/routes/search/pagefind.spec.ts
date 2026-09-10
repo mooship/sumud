@@ -50,4 +50,19 @@ describe("loadPagefindUI", () => {
     const script = doc.querySelector("script");
     expect(() => dispatchLoad(window, script)).not.toThrow();
   });
+
+  it("reuses the already-injected script on a later call instead of re-injecting it", () => {
+    const { window, doc } = createTestDoc();
+    const PagefindUI = vi.fn();
+    (window as unknown as PagefindWindow).PagefindUI = PagefindUI;
+
+    loadPagefindUI(doc);
+    dispatchLoad(window, doc.querySelector("script"));
+    expect(PagefindUI).toHaveBeenCalledTimes(1);
+
+    loadPagefindUI(doc);
+
+    expect(doc.querySelectorAll("script")).toHaveLength(1);
+    expect(PagefindUI).toHaveBeenCalledTimes(2);
+  });
 });

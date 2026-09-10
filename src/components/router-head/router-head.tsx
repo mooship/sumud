@@ -4,11 +4,7 @@ import {
   useLocation,
   type DocumentMeta,
 } from "@builder.io/qwik-city";
-
-const SITE_NAME = "Sumud";
-const SITE_URL = "https://sumud.timothybrits.co.za";
-const DEFAULT_DESCRIPTION =
-  "Sumud tells the story of Palestine and its people, before 1947 and after -- their history, culture, and steadfastness.";
+import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "~/content/site";
 
 /** Appends the site name to a page's own title, falling back to just the site name on the
  *  homepage (which sets no title of its own). */
@@ -23,7 +19,7 @@ export function resolveHeadTitle(
  *  the site-wide default for any route that doesn't set one. */
 export function resolveHeadDescription(
   meta: readonly DocumentMeta[],
-  fallback: string = DEFAULT_DESCRIPTION,
+  fallback: string = SITE_DESCRIPTION,
 ): string {
   return meta.find((m) => m.name === "description")?.content ?? fallback;
 }

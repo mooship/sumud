@@ -1,13 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { HISTORY_CHAPTERS } from "./history-chapters";
+import { NAV_ITEMS } from "./nav";
 import {
   buildAtomFeed,
   buildRssFeed,
   escapeXml,
   getFeedItems,
-  SITE_URL,
   type FeedItem,
 } from "./feed";
+import { SITE_URL } from "./site";
 
 describe("getFeedItems", () => {
   it("includes every history chapter and every standalone page with a unique path", () => {
@@ -26,6 +27,27 @@ describe("getFeedItems", () => {
     ]) {
       expect(paths).toContain(page);
     }
+  });
+
+  it("takes each standalone page's title straight from NAV_ITEMS, not a separate copy", () => {
+    const items = getFeedItems();
+    for (const page of [
+      "/culture/",
+      "/take-action/",
+      "/further-reading/",
+      "/sources/",
+      "/about/",
+    ]) {
+      const navItem = NAV_ITEMS.find((n) => n.href === page);
+      const feedItem = items.find((i) => i.path === page);
+      expect(feedItem?.title).toBe(navItem?.label);
+    }
+  });
+
+  it("excludes /history/ and /search/, which aren't feed-able content pages", () => {
+    const paths = getFeedItems().map((i) => i.path);
+    expect(paths).not.toContain("/history/");
+    expect(paths).not.toContain("/search/");
   });
 
   it("carries the verified date onto the current chapter's item and no others", () => {

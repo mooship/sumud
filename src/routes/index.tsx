@@ -11,6 +11,7 @@ import {
   HeartHandshake,
 } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { SITE_URL } from "~/content/site";
 import { JsonLd } from "~/components/seo/json-ld";
 import * as styles from "./index.css";
 
@@ -30,8 +31,7 @@ export default component$(() => {
             "@type": "SearchAction",
             target: {
               "@type": "EntryPoint",
-              urlTemplate:
-                "https://sumud.timothybrits.co.za/search/?q={search_term_string}",
+              urlTemplate: SITE_URL + "/search/?q={search_term_string}",
             },
             "query-input": "required name=search_term_string",
           },
