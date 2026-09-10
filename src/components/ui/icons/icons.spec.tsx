@@ -11,7 +11,9 @@ import { Landmark } from "./landmark";
 import { Map } from "./map";
 import { Menu } from "./menu";
 import { Quote } from "./quote";
+import { Rss } from "./rss";
 import { ScrollText } from "./scroll-text";
+import { Search } from "./search";
 import { ShieldAlert } from "./shield-alert";
 import { Users } from "./users";
 import { X } from "./x";
@@ -28,7 +30,9 @@ const ICONS = [
   ["Map", Map],
   ["Menu", Menu],
   ["Quote", Quote],
+  ["Rss", Rss],
   ["ScrollText", ScrollText],
+  ["Search", Search],
   ["ShieldAlert", ShieldAlert],
   ["Users", Users],
   ["X", X],

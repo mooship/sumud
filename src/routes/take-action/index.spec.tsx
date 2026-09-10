@@ -33,6 +33,26 @@ describe("routes/take-action index", () => {
     }
   });
 
+  it("renders an ItemList JSON-LD block listing every organisation", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider>
+        <TakeActionIndex />
+      </QwikCityMockProvider>,
+    );
+    const jsonLd = JSON.parse(
+      screen.querySelector('script[type="application/ld+json"]')?.innerHTML ??
+        "{}",
+    );
+    expect(jsonLd["@type"]).toBe("ItemList");
+    const allOrgs = ORG_GROUPS.flatMap((g) => g.orgs);
+    expect(jsonLd.itemListElement).toHaveLength(allOrgs.length);
+    expect(jsonLd.itemListElement[0].item).toMatchObject({
+      "@type": "Organization",
+      name: allOrgs[0]?.name,
+    });
+  });
+
   it("sets a page title and description", () => {
     expect(documentHead.title).toBe("Take Action");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);

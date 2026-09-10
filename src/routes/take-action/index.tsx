@@ -1,6 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { JsonLd } from "~/components/seo/json-ld";
 import {
   ExternalLink,
   HeartHandshake,
@@ -12,8 +13,27 @@ import * as styles from "./index.css";
 const GROUP_ICONS = [HeartHandshake, ShieldAlert];
 
 export default component$(() => {
+  const allOrgs = ORG_GROUPS.flatMap((g) => g.orgs);
+
   return (
     <Container width="content">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Take Action -- Sumud",
+          itemListElement: allOrgs.map((org, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Organization",
+              name: org.name,
+              url: org.url,
+              description: org.description,
+            },
+          })),
+        }}
+      />
       <header class={styles.header}>
         <p class={styles.eyebrow}>Take Action</p>
         <h1 class={styles.title}>Beyond reading</h1>

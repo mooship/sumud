@@ -23,6 +23,10 @@ describe("routes/index (homepage)", () => {
         "{}",
     );
     expect(jsonLd["@type"]).toBe("WebSite");
+    expect(jsonLd.potentialAction).toMatchObject({
+      "@type": "SearchAction",
+      "query-input": "required name=search_term_string",
+    });
     expect(screen.querySelector("blockquote")?.textContent).toContain(
       "We have on this land",
     );

@@ -9,10 +9,11 @@
     "node": "^22.12.0 || >=24.0.0"
   },
   "scripts": {
-    "build": "pnpm run build.client && pnpm run build.server && pnpm run build.types",
+    "build": "pnpm run build.client && pnpm run build.server && pnpm run build.types && pnpm run search.index",
     "build.client": "vite build",
     "build.server": "vite build -c adapters/cloudflare-pages/vite.config.ts",
     "build.types": "tsc --incremental --noEmit",
+    "search.index": "pagefind --site dist",
     "dev": "vite --mode ssr",
     "preview": "pnpm run build && wrangler dev",
     "deploy": "pnpm run build && wrangler deploy",
@@ -48,6 +49,7 @@
     "happy-dom": "^20.14.0",
     "lefthook": "^2.1.12",
     "lucide-static": "^1.43.0",
+    "pagefind": "^1.5.2",
     "png-to-ico": "^3.0.2",
     "prettier": "^3.6.2",
     "sharp": "^0.34.5",

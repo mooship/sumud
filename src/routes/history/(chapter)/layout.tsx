@@ -5,6 +5,7 @@ import { Prose } from "~/components/ui/prose";
 import { JsonLd } from "~/components/seo/json-ld";
 import { ArrowRight } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { formatDate } from "~/lib/format-date";
 import * as styles from "./layout.css";
 
 export default component$(() => {
@@ -14,6 +15,7 @@ export default component$(() => {
 
   const slug = loc.url.pathname.split("/").findLast(Boolean);
   const index = HISTORY_CHAPTERS.findIndex((c) => c.slug === slug);
+  const chapter = HISTORY_CHAPTERS[index];
   const prev = HISTORY_CHAPTERS[index - 1];
   const next =
     index !== -1 && index < HISTORY_CHAPTERS.length - 1
@@ -35,6 +37,7 @@ export default component$(() => {
             name: "Sumud",
             url: "https://sumud.timothybrits.co.za",
           },
+          ...(chapter?.verified && { dateModified: chapter.verified }),
         }}
       />
       <JsonLd
@@ -70,6 +73,11 @@ export default component$(() => {
         </Link>
         {period && <span class={styles.period}>{period}</span>}
         <h1 class={styles.title}>{head.title}</h1>
+        {chapter?.verified && (
+          <p class={styles.verified}>
+            Facts and figures last verified {formatDate(chapter.verified)}
+          </p>
+        )}
       </header>
 
       <Prose>

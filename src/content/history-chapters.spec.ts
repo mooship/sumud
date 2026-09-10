@@ -40,6 +40,21 @@ describe("HISTORY_CHAPTERS", () => {
     expect(current[0]?.slug).toBe("gaza-and-the-present");
   });
 
+  it("gives the current chapter a valid, non-future verified date", () => {
+    const current = HISTORY_CHAPTERS.find((c) => c.current);
+    expect(current?.verified).toMatch(/^\d{4}-\d{2}-\d{2}$/);
+    const verifiedDate = new Date(`${current?.verified}T00:00:00Z`);
+    expect(verifiedDate.getTime()).not.toBeNaN();
+    expect(verifiedDate.getTime()).toBeLessThanOrEqual(Date.now());
+  });
+
+  it("leaves settled historical chapters without a verified date", () => {
+    const settled = HISTORY_CHAPTERS.filter((c) => !c.current);
+    for (const chapter of settled) {
+      expect(chapter.verified).toBeUndefined();
+    }
+  });
+
   it("is ordered chronologically by the start year in each period", () => {
     const startYears = HISTORY_CHAPTERS.map((c) => {
       const match = c.period.match(/\d{4}/);
