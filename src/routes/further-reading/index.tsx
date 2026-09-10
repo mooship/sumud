@@ -1,6 +1,7 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { JsonLd } from "~/components/seo/json-ld";
 import { Landmark, ScrollText, BookOpen, Quote } from "~/components/ui/icons";
 import { BOOK_CATEGORIES } from "~/content/books";
 import * as styles from "./index.css";
@@ -8,8 +9,28 @@ import * as styles from "./index.css";
 const CATEGORY_ICONS = [Landmark, ScrollText, BookOpen, Quote];
 
 export default component$(() => {
+  const allBooks = BOOK_CATEGORIES.flatMap((c) => c.books);
+
   return (
     <Container width="content">
+      <JsonLd
+        data={{
+          "@context": "https://schema.org",
+          "@type": "ItemList",
+          name: "Further Reading -- Sumud",
+          itemListElement: allBooks.map((book, i) => ({
+            "@type": "ListItem",
+            position: i + 1,
+            item: {
+              "@type": "Book",
+              name: book.title,
+              author: { "@type": "Person", name: book.author },
+              datePublished: String(book.year),
+              description: book.description,
+            },
+          })),
+        }}
+      />
       <header class={styles.header}>
         <p class={styles.eyebrow}>Further Reading</p>
         <h1 class={styles.title}>Books about Palestine</h1>

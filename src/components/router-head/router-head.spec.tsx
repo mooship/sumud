@@ -54,6 +54,35 @@ describe("RouterHead", () => {
     ).toContain("Sumud tells the story of Palestine");
   });
 
+  it("links out to the RSS and Atom feeds and sets og:image dimensions", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="https://sumud.timothybrits.co.za/about/">
+        <RouterHead />
+      </QwikCityMockProvider>,
+    );
+    expect(
+      screen
+        .querySelector('link[type="application/rss+xml"]')
+        ?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/rss.xml");
+    expect(
+      screen
+        .querySelector('link[type="application/atom+xml"]')
+        ?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/atom.xml");
+    expect(
+      screen
+        .querySelector('meta[property="og:image:width"]')
+        ?.getAttribute("content"),
+    ).toBe("1200");
+    expect(
+      screen
+        .querySelector('meta[property="og:image:height"]')
+        ?.getAttribute("content"),
+    ).toBe("630");
+  });
+
   it("uses the page's own title and description when the route sets a head", async () => {
     const { screen, render } = await createDOM();
     await render(
@@ -90,7 +119,9 @@ describe("RouterHead", () => {
         ?.getAttribute("content"),
     ).toBe("extra-meta");
     expect(
-      screen.querySelector('link[rel="alternate"]')?.getAttribute("href"),
+      screen
+        .querySelector('link[rel="alternate"][href="/feed.xml"]')
+        ?.getAttribute("href"),
     ).toBe("/feed.xml");
     expect(screen.querySelector("style")?.innerHTML).toBe(
       "body { color: red; }",

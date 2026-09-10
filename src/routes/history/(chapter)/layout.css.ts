@@ -38,6 +38,13 @@ export const title = style({
   margin: 0,
 });
 
+export const verified = style({
+  fontSize: vars.fontSize.xs,
+  color: vars.color.inkFaint,
+  marginTop: vars.space[2],
+  marginBottom: 0,
+});
+
 export const chapterNav = style({
   display: "flex",
   justifyContent: "space-between",

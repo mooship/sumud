@@ -11,6 +11,7 @@ import {
   HeartHandshake,
 } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { SITE_URL } from "~/content/site";
 import { JsonLd } from "~/components/seo/json-ld";
 import * as styles from "./index.css";
 
@@ -26,6 +27,14 @@ export default component$(() => {
           description:
             "The story of Palestine and its people, before 1947 and after: history, culture, and steadfastness.",
           inLanguage: "en-GB",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate: SITE_URL + "/search/?q={search_term_string}",
+            },
+            "query-input": "required name=search_term_string",
+          },
         }}
       />
       <section class={styles.hero}>
