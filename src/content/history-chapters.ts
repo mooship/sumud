@@ -8,6 +8,12 @@ export interface HistoryChapter {
    * not yet closed).
    */
   current?: boolean;
+  /**
+   * ISO date (YYYY-MM-DD) this chapter's facts and figures were last checked
+   * against its sources. Only meaningful for {@link current} chapters --
+   * settled historical chapters don't need a freshness marker.
+   */
+  verified?: string;
 }
 
 export const HISTORY_CHAPTERS: HistoryChapter[] = [
@@ -60,5 +66,6 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
     summary:
       "Gaza has lived under blockade for close to two decades and endured repeated wars. Since October 2023 it has faced the most destructive of them. This chapter carries the story to today.",
     current: true,
+    verified: "2026-09-10",
   },
 ];

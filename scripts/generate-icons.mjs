@@ -24,6 +24,8 @@ const ICONS = {
   Flag: "flag",
   ScrollText: "scroll-text",
   ShieldAlert: "shield-alert",
+  Search: "search",
+  Rss: "rss",
 };
 
 const rootDir = fileURLToPath(new URL("..", import.meta.url));

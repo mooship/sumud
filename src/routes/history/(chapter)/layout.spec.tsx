@@ -85,6 +85,34 @@ describe("history/(chapter)/layout", () => {
     expect(header?.querySelector("span")?.textContent).toBe("1947 – 1949");
   });
 
+  it("shows a verified-date line on the current chapter", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/history/gaza-and-the-present/">
+        <HeadSeeder title="Siege, War and the Present" />
+        <ChapterLayout>
+          <p>Body</p>
+        </ChapterLayout>
+      </QwikCityMockProvider>,
+    );
+    const header = screen.querySelector("header");
+    expect(header?.textContent).toContain("last verified 10 September 2026");
+  });
+
+  it("omits the verified-date line on a settled historical chapter", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/history/nakba/">
+        <HeadSeeder title="Nakba" />
+        <ChapterLayout>
+          <p>Body</p>
+        </ChapterLayout>
+      </QwikCityMockProvider>,
+    );
+    const header = screen.querySelector("header");
+    expect(header?.textContent).not.toContain("last verified");
+  });
+
   it("omits the period badge when the frontmatter has none", async () => {
     const { screen, render } = await createDOM();
     await render(
@@ -124,7 +152,25 @@ describe("history/(chapter)/layout", () => {
       headline: "Nakba",
       description: "What happened in 1948",
     });
+    expect(scripts[0]).not.toHaveProperty("dateModified");
     expect(scripts[1]).toMatchObject({ "@type": "BreadcrumbList" });
+  });
+
+  it("includes dateModified in the Article JSON-LD for the current chapter", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/history/gaza-and-the-present/">
+        <HeadSeeder title="Siege, War and the Present" />
+        <ChapterLayout>
+          <p>Body</p>
+        </ChapterLayout>
+      </QwikCityMockProvider>,
+    );
+    const script = screen.querySelector('script[type="application/ld+json"]');
+    expect(JSON.parse(script?.innerHTML ?? "{}")).toMatchObject({
+      "@type": "Article",
+      dateModified: "2026-09-10",
+    });
   });
 
   it("renders the slotted content inside Prose", async () => {

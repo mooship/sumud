@@ -32,6 +32,27 @@ describe("routes/further-reading index", () => {
     }
   });
 
+  it("renders an ItemList JSON-LD block listing every book", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider>
+        <FurtherReadingIndex />
+      </QwikCityMockProvider>,
+    );
+    const jsonLd = JSON.parse(
+      screen.querySelector('script[type="application/ld+json"]')?.innerHTML ??
+        "{}",
+    );
+    expect(jsonLd["@type"]).toBe("ItemList");
+    const allBooks = BOOK_CATEGORIES.flatMap((c) => c.books);
+    expect(jsonLd.itemListElement).toHaveLength(allBooks.length);
+    expect(jsonLd.itemListElement[0].item).toMatchObject({
+      "@type": "Book",
+      name: allBooks[0]?.title,
+      author: { "@type": "Person", name: allBooks[0]?.author },
+    });
+  });
+
   it("sets a page title and description", () => {
     expect(documentHead.title).toBe("Further Reading");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);

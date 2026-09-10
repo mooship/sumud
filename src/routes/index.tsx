@@ -26,6 +26,15 @@ export default component$(() => {
           description:
             "The story of Palestine and its people, before 1947 and after: history, culture, and steadfastness.",
           inLanguage: "en-GB",
+          potentialAction: {
+            "@type": "SearchAction",
+            target: {
+              "@type": "EntryPoint",
+              urlTemplate:
+                "https://sumud.timothybrits.co.za/search/?q={search_term_string}",
+            },
+            "query-input": "required name=search_term_string",
+          },
         }}
       />
       <section class={styles.hero}>

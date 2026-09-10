@@ -46,6 +46,18 @@ export const RouterHead = component$(() => {
     <>
       <title>{title}</title>
       <link rel="canonical" href={canonical} />
+      <link
+        rel="alternate"
+        type="application/rss+xml"
+        title={`${SITE_NAME} (RSS)`}
+        href={`${SITE_URL}/rss.xml`}
+      />
+      <link
+        rel="alternate"
+        type="application/atom+xml"
+        title={`${SITE_NAME} (Atom)`}
+        href={`${SITE_URL}/atom.xml`}
+      />
       <meta name="description" content={description} />
       <meta property="og:site_name" content={SITE_NAME} />
       <meta property="og:type" content="website" />
@@ -53,6 +65,9 @@ export const RouterHead = component$(() => {
       <meta property="og:description" content={description} />
       <meta property="og:url" content={canonical} />
       <meta property="og:image" content={ogImage} />
+      <meta property="og:image:type" content="image/png" />
+      <meta property="og:image:width" content="1200" />
+      <meta property="og:image:height" content="630" />
       <meta property="og:locale" content="en_GB" />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />

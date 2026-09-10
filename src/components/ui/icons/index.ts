@@ -16,3 +16,5 @@ export { Landmark } from "./landmark";
 export { Flag } from "./flag";
 export { ScrollText } from "./scroll-text";
 export { ShieldAlert } from "./shield-alert";
+export { Search } from "./search";
+export { Rss } from "./rss";
