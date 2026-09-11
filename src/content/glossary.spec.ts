@@ -21,6 +21,14 @@ describe("GLOSSARY_CATEGORIES", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
+  it("has a unique, kebab-case id for every term", () => {
+    const ids = allTerms.map((t) => t.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) {
+      expect(id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+    }
+  });
+
   it("does not repeat a category title", () => {
     const titles = GLOSSARY_CATEGORIES.map((c) => c.title);
     expect(new Set(titles).size).toBe(titles.length);

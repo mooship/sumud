@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
+import { anchorTarget } from "~/styles/anchor-target.css";
 
 export const header = style({
   paddingBlockStart: vars.space[7],
@@ -44,17 +45,13 @@ export const entryList = style({
   gap: vars.space[4],
 });
 
-export const entry = style({
-  paddingLeft: vars.space[3],
-  borderLeft: `2px solid ${vars.color.sandLine}`,
-  // Clears the sticky header when a citation link jumps straight to an entry.
-  scrollMarginTop: `calc(${vars.layout.headerHeight} + ${vars.space[3]})`,
-  selectors: {
-    "&:target": {
-      borderLeftColor: vars.color.terracotta,
-    },
+export const entry = style([
+  anchorTarget,
+  {
+    paddingLeft: vars.space[3],
+    borderLeft: `2px solid ${vars.color.sandLine}`,
   },
-});
+]);
 
 export const entryName = style({
   fontWeight: 600,
