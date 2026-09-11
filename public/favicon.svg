@@ -1,7 +1,9 @@
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 32 32" width="32" height="32" role="img" aria-label="Sumud olive branch mark">
-  <path d="M16 27c-1-6.5 1.5-11.5 6-15" fill="none" stroke="#4b5d3a" stroke-width="1.8" stroke-linecap="round" />
-  <ellipse cx="19.5" cy="9.5" rx="3.6" ry="2" transform="rotate(-40 19.5 9.5)" fill="#4b5d3a" />
-  <ellipse cx="15.2" cy="14.6" rx="3.8" ry="2.1" transform="rotate(-35 15.2 14.6)" fill="#6f8a55" />
-  <ellipse cx="12" cy="20.4" rx="3.6" ry="2" transform="rotate(-25 12 20.4)" fill="#4b5d3a" />
-  <circle cx="16" cy="27.4" r="1.6" fill="#a9432f" />
+  <path d="M5 23c5-11 13-17 23-14" fill="none" stroke="#4b5d3a" stroke-width="1.3" stroke-linecap="round" />
+  <path d="M5.8 21.4c0.4 1.5 0.5 2.9 0.4 3.9" fill="none" stroke="#4b5d3a" stroke-width="1" stroke-linecap="round" />
+  <circle cx="6.3" cy="25.6" r="1.3" fill="#a9432f" />
+  <ellipse cx="5.1" cy="16.9" rx="3.2" ry="1.3" transform="rotate(-58 5.1 16.9)" fill="#4b5d3a" />
+  <ellipse cx="14.2" cy="14.6" rx="3.2" ry="1.3" transform="rotate(-41 14.2 14.6)" fill="#6f8a55" />
+  <ellipse cx="16.5" cy="6.7" rx="3.2" ry="1.3" transform="rotate(-21 16.5 6.7)" fill="#4b5d3a" />
+  <ellipse cx="23.5" cy="11" rx="2.8" ry="1.2" transform="rotate(2 23.5 11)" fill="#6f8a55" />
 </svg>
