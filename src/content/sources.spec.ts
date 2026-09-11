@@ -22,6 +22,14 @@ describe("SOURCE_SECTIONS", () => {
     expect(new Set(names).size).toBe(names.length);
   });
 
+  it("has a unique, kebab-case id for every entry", () => {
+    const ids = allEntries.map((entry) => entry.id);
+    expect(new Set(ids).size).toBe(ids.length);
+    for (const id of ids) {
+      expect(id).toMatch(/^[a-z0-9]+(-[a-z0-9]+)*$/);
+    }
+  });
+
   it("does not repeat a section title", () => {
     const titles = SOURCE_SECTIONS.map((section) => section.title);
     expect(new Set(titles).size).toBe(titles.length);
