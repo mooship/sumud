@@ -47,6 +47,13 @@ export const entryList = style({
 export const entry = style({
   paddingLeft: vars.space[3],
   borderLeft: `2px solid ${vars.color.sandLine}`,
+  // Clears the sticky header when a citation link jumps straight to an entry.
+  scrollMarginTop: `calc(${vars.layout.headerHeight} + ${vars.space[3]})`,
+  selectors: {
+    "&:target": {
+      borderLeftColor: vars.color.terracotta,
+    },
+  },
 });
 
 export const entryName = style({
