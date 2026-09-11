@@ -76,11 +76,13 @@ function ogSvg() {
   <rect width="${width}" height="${height}" fill="${BG}" />
   <rect x="0" y="0" width="14" height="${height}" fill="${TERRACOTTA}" />
   <g transform="translate(${markX} ${markY}) scale(${markScale})">
-    <path d="M16 27c-1-6.5 1.5-11.5 6-15" fill="none" stroke="${OLIVE}" stroke-width="1.8" stroke-linecap="round" />
-    <ellipse cx="19.5" cy="9.5" rx="3.6" ry="2" transform="rotate(-40 19.5 9.5)" fill="${OLIVE}" />
-    <ellipse cx="15.2" cy="14.6" rx="3.8" ry="2.1" transform="rotate(-35 15.2 14.6)" fill="${OLIVE_MID}" />
-    <ellipse cx="12" cy="20.4" rx="3.6" ry="2" transform="rotate(-25 12 20.4)" fill="${OLIVE}" />
-    <circle cx="16" cy="27.4" r="1.6" fill="${TERRACOTTA}" />
+    <path d="M5 23c5-11 13-17 23-14" fill="none" stroke="${OLIVE}" stroke-width="1.3" stroke-linecap="round" />
+    <path d="M5.8 21.4c0.4 1.5 0.5 2.9 0.4 3.9" fill="none" stroke="${OLIVE}" stroke-width="1" stroke-linecap="round" />
+    <circle cx="6.3" cy="25.6" r="1.3" fill="${TERRACOTTA}" />
+    <ellipse cx="5.1" cy="16.9" rx="3.2" ry="1.3" transform="rotate(-58 5.1 16.9)" fill="${OLIVE}" />
+    <ellipse cx="14.2" cy="14.6" rx="3.2" ry="1.3" transform="rotate(-41 14.2 14.6)" fill="${OLIVE_MID}" />
+    <ellipse cx="16.5" cy="6.7" rx="3.2" ry="1.3" transform="rotate(-21 16.5 6.7)" fill="${OLIVE}" />
+    <ellipse cx="23.5" cy="11" rx="2.8" ry="1.2" transform="rotate(2 23.5 11)" fill="${OLIVE_MID}" />
   </g>
   <text x="110" y="430" font-family="DejaVu Serif, Georgia, serif" font-size="108" font-weight="700" fill="${INK}">Sumud</text>
   <text x="115" y="480" font-family="Liberation Sans, Arial, sans-serif" font-size="30" fill="${INK_MUTED}">The story of Palestine, before 1947 and after</text>
