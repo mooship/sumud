@@ -1,5 +1,6 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
+import { anchorTarget } from "~/styles/anchor-target.css";
 
 export const header = style({
   paddingBlockStart: vars.space[7],
@@ -52,10 +53,13 @@ export const entryList = style({
   margin: 0,
 });
 
-export const entry = style({
-  paddingLeft: vars.space[3],
-  borderLeft: `2px solid ${vars.color.sandLine}`,
-});
+export const entry = style([
+  anchorTarget,
+  {
+    paddingLeft: vars.space[3],
+    borderLeft: `2px solid ${vars.color.sandLine}`,
+  },
+]);
 
 export const term = style({
   fontWeight: 600,

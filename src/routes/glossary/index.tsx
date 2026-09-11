@@ -39,7 +39,7 @@ export default component$(() => {
           <p class={styles.sectionIntro}>{category.intro}</p>
           <dl class={styles.entryList}>
             {category.terms.map((term) => (
-              <div key={term.term} class={styles.entry}>
+              <div key={term.id} id={term.id} class={styles.entry}>
                 <dt class={styles.term}>
                   {term.term}
                   {term.arabic && (
