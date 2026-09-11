@@ -34,7 +34,7 @@ export default component$(() => {
           <h2 class={styles.sectionTitle}>{section.title}</h2>
           <div class={styles.entryList}>
             {section.entries.map((entry) => (
-              <div key={entry.name} class={styles.entry}>
+              <div key={entry.id} id={entry.id} class={styles.entry}>
                 <p class={styles.entryName}>{entry.name}</p>
                 <p class={styles.entryMeta}>{entry.meta}</p>
               </div>
