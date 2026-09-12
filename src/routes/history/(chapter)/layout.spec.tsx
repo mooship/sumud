@@ -96,7 +96,7 @@ describe("history/(chapter)/layout", () => {
       </QwikCityMockProvider>,
     );
     const header = screen.querySelector("header");
-    expect(header?.textContent).toContain("last verified 10 September 2026");
+    expect(header?.textContent).toContain("last verified 12 September 2026");
   });
 
   it("omits the verified-date line on a settled historical chapter", async () => {
@@ -169,7 +169,7 @@ describe("history/(chapter)/layout", () => {
     const script = screen.querySelector('script[type="application/ld+json"]');
     expect(JSON.parse(script?.innerHTML ?? "{}")).toMatchObject({
       "@type": "Article",
-      dateModified: "2026-09-10",
+      dateModified: "2026-09-12",
     });
   });
 
