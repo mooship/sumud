@@ -66,6 +66,6 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
     summary:
       "Gaza has lived under blockade for close to two decades and endured repeated wars. Since October 2023 it has faced the most destructive of them. This chapter carries the story to today.",
     current: true,
-    verified: "2026-09-10",
+    verified: "2026-09-12",
   },
 ];
