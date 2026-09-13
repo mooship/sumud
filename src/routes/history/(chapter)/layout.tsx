@@ -97,7 +97,7 @@ export default component$(() => {
           <Link
             href={`/history/${next.slug}/`}
             class={styles.chapterNavLink}
-            style={{ textAlign: "right" }}
+            style={{ textAlign: "end" }}
           >
             <span class={styles.chapterNavLabel}>Next</span>
             {next.title} <ArrowRight size={14} />

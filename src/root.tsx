@@ -1,14 +1,17 @@
-import { component$, isDev } from "@builder.io/qwik";
+import { component$, getLocale, isDev } from "@builder.io/qwik";
 import {
   QwikCityProvider,
   RouterOutlet,
   ServiceWorkerRegister,
 } from "@builder.io/qwik-city";
 import { RouterHead } from "./components/router-head/router-head";
+import { DEFAULT_LOCALE, LOCALE_HTML_ATTRS, type Locale } from "./lib/locale";
 import "./styles/fonts";
 import "./styles/global.css";
 
 export default component$(() => {
+  const { lang, dir } = LOCALE_HTML_ATTRS[getLocale(DEFAULT_LOCALE) as Locale];
+
   return (
     <QwikCityProvider>
       <head>
@@ -42,7 +45,7 @@ export default component$(() => {
         />
         <RouterHead />
       </head>
-      <body lang="en-GB">
+      <body lang={lang} dir={dir}>
         <RouterOutlet />
       </body>
     </QwikCityProvider>

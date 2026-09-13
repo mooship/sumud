@@ -47,7 +47,7 @@ globalStyle(`${prose} blockquote`, {
   fontStyle: "italic",
   lineHeight: vars.lineHeight.snug,
   color: vars.color.oliveDark,
-  borderLeft: `3px solid ${vars.color.olive}`,
+  borderInlineStart: `3px solid ${vars.color.olive}`,
   margin: `${vars.space[6]} 0`,
   padding: `${vars.space[1]} 0 ${vars.space[1]} ${vars.space[4]}`,
 });

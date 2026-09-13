@@ -56,7 +56,7 @@ globalStyle("p", {
 });
 
 globalStyle("ul, ol", {
-  paddingLeft: "1.25em",
+  paddingInlineStart: "1.25em",
 });
 
 globalStyle("a", {

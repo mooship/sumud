@@ -70,8 +70,8 @@ export const list = style({
 });
 
 export const book = style({
-  paddingLeft: vars.space[3],
-  borderLeft: `2px solid ${vars.color.sandLine}`,
+  paddingInlineStart: vars.space[3],
+  borderInlineStart: `2px solid ${vars.color.sandLine}`,
 });
 
 export const bookTitle = style({
