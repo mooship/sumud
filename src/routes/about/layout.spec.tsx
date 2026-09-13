@@ -16,4 +16,16 @@ describe("about/layout", () => {
     expect(screen.querySelector("span")?.textContent).toBe("About");
     expect(screen.querySelector("p")?.textContent).toBe("About body");
   });
+
+  it("switches to the Arabic eyebrow under /ar/", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/ar/about/">
+        <AboutLayout>
+          <p>About body</p>
+        </AboutLayout>
+      </QwikCityMockProvider>,
+    );
+    expect(screen.querySelector("span")?.textContent).toBe("عن الموقع");
+  });
 });

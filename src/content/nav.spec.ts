@@ -14,6 +14,12 @@ describe("NAV_ITEMS", () => {
     }
   });
 
+  it("has a non-empty Arabic label for every nav item", () => {
+    for (const item of NAV_ITEMS) {
+      expect(item.labelAr.length).toBeGreaterThan(0);
+    }
+  });
+
   it("has a matching route directory for every nav item", () => {
     for (const item of NAV_ITEMS) {
       const dir = item.href.replaceAll(/^\/|\/$/g, "");

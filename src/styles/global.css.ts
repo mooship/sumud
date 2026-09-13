@@ -56,7 +56,7 @@ globalStyle("p", {
 });
 
 globalStyle("ul, ol", {
-  paddingLeft: "1.25em",
+  paddingInlineStart: "1.25em",
 });
 
 globalStyle("a", {
@@ -76,6 +76,12 @@ globalStyle(":focus-visible", {
 globalStyle("::selection", {
   backgroundColor: vars.color.oliveLight,
   color: vars.color.oliveDark,
+});
+
+// Flips a directional icon (an arrow pointing "forward") so it still points the reading
+// direction's forward under Arabic. Apply directly to the icon, not a wrapping element.
+globalStyle('[dir="rtl"] .rtl-mirror', {
+  transform: "scaleX(-1)",
 });
 
 globalStyle(".visually-hidden", {

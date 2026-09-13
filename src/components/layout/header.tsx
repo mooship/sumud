@@ -2,29 +2,37 @@ import { component$, useSignal } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { Menu, X } from "~/components/ui/icons";
 import { Container } from "~/components/ui/container";
-import { NAV_ITEMS } from "~/content/nav";
+import { UI_STRINGS, localizedNavItems } from "~/content/i18n";
+import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
+import { LanguageBanner } from "./language-banner";
+import { LanguageSwitcher } from "./language-switcher";
 import * as styles from "./header.css";
 
 export const Header = component$(() => {
   const loc = useLocation();
   const open = useSignal(false);
   const pathname = loc.url.pathname;
+  const locale = getLocaleFromPathname(pathname);
+  const strings = UI_STRINGS[locale];
+  const navItems = localizedNavItems(locale);
+  const homeHref = localizedPathname("/", locale);
 
   return (
     <>
+      <LanguageBanner />
       <a href="#main-content" class={styles.skipLink}>
-        Skip to content
+        {strings.skipToContent}
       </a>
       <header class={styles.header}>
         <Container width="wide">
           <div class={styles.bar}>
-            <Link href="/" class={styles.brand}>
+            <Link href={homeHref} class={styles.brand}>
               <span class={styles.brandMark}>سمود</span>
               <span>Sumud</span>
             </Link>
 
-            <nav class={styles.nav} aria-label="Primary">
-              {NAV_ITEMS.map((item) => (
+            <nav class={styles.nav} aria-label={strings.primaryNav}>
+              {navItems.map((item) => (
                 <Link
                   key={item.href}
                   href={item.href}
@@ -34,6 +42,7 @@ export const Header = component$(() => {
                   {item.label}
                 </Link>
               ))}
+              <LanguageSwitcher />
             </nav>
 
             <button
@@ -41,7 +50,7 @@ export const Header = component$(() => {
               class={styles.menuButton}
               aria-expanded={open.value}
               aria-controls="mobile-nav"
-              aria-label={open.value ? "Close menu" : "Open menu"}
+              aria-label={open.value ? strings.closeMenu : strings.openMenu}
               onClick$={() => (open.value = !open.value)}
             >
               {open.value ? <X /> : <Menu />}
@@ -52,9 +61,9 @@ export const Header = component$(() => {
             id="mobile-nav"
             class={styles.mobileNav}
             data-open={open.value ? "true" : "false"}
-            aria-label="Primary"
+            aria-label={strings.primaryNav}
           >
-            {NAV_ITEMS.map((item) => (
+            {navItems.map((item) => (
               <Link
                 key={item.href}
                 href={item.href}
@@ -65,6 +74,7 @@ export const Header = component$(() => {
                 {item.label}
               </Link>
             ))}
+            <LanguageSwitcher />
           </nav>
         </Container>
       </header>

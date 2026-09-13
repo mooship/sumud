@@ -1,29 +1,32 @@
 import { component$ } from "@builder.io/qwik";
-import { Link } from "@builder.io/qwik-city";
+import { Link, useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { ExternalLink } from "~/components/ui/icons";
-import { NAV_ITEMS } from "~/content/nav";
+import { UI_STRINGS, localizedNavItems } from "~/content/i18n";
+import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./footer.css";
 
 export const Footer = component$(() => {
+  const loc = useLocation();
+  const locale = getLocaleFromPathname(loc.url.pathname);
+  const strings = UI_STRINGS[locale];
+  const navItems = localizedNavItems(locale);
+  const sourcesHref = localizedPathname("/sources/", locale);
+  const privacyHref = localizedPathname("/privacy/", locale);
+
   return (
     <footer class={styles.footer}>
       <Container width="wide">
         <div class={styles.grid}>
           <div>
             <p class={styles.heading}>Sumud · صمود</p>
-            <p>
-              An independent, non-commercial project telling the story of
-              Palestine and its people -- before 1947 and after. Sumud means
-              steadfastness: staying rooted in the land and the story, whatever
-              comes.
-            </p>
+            <p>{strings.footerTagline}</p>
           </div>
 
           <div>
-            <p class={styles.heading}>Read</p>
+            <p class={styles.heading}>{strings.footerReadHeading}</p>
             <ul class={styles.list}>
-              {NAV_ITEMS.map((item) => (
+              {navItems.map((item) => (
                 <li key={item.href}>
                   <Link href={item.href} class={styles.link}>
                     {item.label}
@@ -34,7 +37,7 @@ export const Footer = component$(() => {
           </div>
 
           <div>
-            <p class={styles.heading}>Project</p>
+            <p class={styles.heading}>{strings.footerProjectHeading}</p>
             <ul class={styles.list}>
               <li>
                 <a
@@ -43,19 +46,19 @@ export const Footer = component$(() => {
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  Source on GitHub
+                  {strings.sourceOnGithub}
                   <ExternalLink size={13} class={styles.externalIcon} />
-                  <span class="visually-hidden"> (opens in a new tab)</span>
+                  <span class="visually-hidden">{strings.opensNewTab}</span>
                 </a>
               </li>
               <li>
-                <Link href="/sources/" class={styles.link}>
-                  Sourcing & corrections
+                <Link href={sourcesHref} class={styles.link}>
+                  {strings.sourcingAndCorrections}
                 </Link>
               </li>
               <li>
-                <Link href="/privacy/" class={styles.link}>
-                  Privacy
+                <Link href={privacyHref} class={styles.link}>
+                  {strings.privacy}
                 </Link>
               </li>
             </ul>

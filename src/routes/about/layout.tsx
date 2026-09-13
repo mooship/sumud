@@ -1,9 +1,16 @@
 import { component$, Slot } from "@builder.io/qwik";
+import { useLocation } from "@builder.io/qwik-city";
 import { ArticleShell } from "~/components/layout/article-shell";
+import { getLocaleFromPathname } from "~/lib/locale";
+
+const EYEBROW = { en: "About", ar: "عن الموقع" };
 
 export default component$(() => {
+  const loc = useLocation();
+  const locale = getLocaleFromPathname(loc.url.pathname);
+
   return (
-    <ArticleShell eyebrow="About">
+    <ArticleShell eyebrow={EYEBROW[locale]}>
       <Slot />
     </ArticleShell>
   );

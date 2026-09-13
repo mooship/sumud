@@ -54,6 +54,49 @@ describe("RouterHead", () => {
     ).toContain("Sumud tells the story of Palestine");
   });
 
+  it("emits hreflang alternates and en_GB og:locale for an English page", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="https://sumud.timothybrits.co.za/history/nakba/">
+        <RouterHead />
+      </QwikCityMockProvider>,
+    );
+    expect(
+      screen.querySelector('link[hreflang="en"]')?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/history/nakba/");
+    expect(
+      screen.querySelector('link[hreflang="ar"]')?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/ar/history/nakba/");
+    expect(
+      screen.querySelector('link[hreflang="x-default"]')?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/history/nakba/");
+    expect(
+      screen
+        .querySelector('meta[property="og:locale"]')
+        ?.getAttribute("content"),
+    ).toBe("en_GB");
+  });
+
+  it("emits ar_AR og:locale and correct hreflang alternates for an Arabic page", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="https://sumud.timothybrits.co.za/ar/history/nakba/">
+        <RouterHead />
+      </QwikCityMockProvider>,
+    );
+    expect(
+      screen.querySelector('link[hreflang="en"]')?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/history/nakba/");
+    expect(
+      screen.querySelector('link[hreflang="ar"]')?.getAttribute("href"),
+    ).toBe("https://sumud.timothybrits.co.za/ar/history/nakba/");
+    expect(
+      screen
+        .querySelector('meta[property="og:locale"]')
+        ?.getAttribute("content"),
+    ).toBe("ar_AR");
+  });
+
   it("links out to the RSS and Atom feeds and sets og:image dimensions", async () => {
     const { screen, render } = await createDOM();
     await render(

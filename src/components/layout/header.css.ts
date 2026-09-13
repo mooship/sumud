@@ -3,7 +3,7 @@ import { vars } from "~/styles/theme.css";
 
 export const skipLink = style({
   position: "absolute",
-  left: vars.space[3],
+  insetInlineStart: vars.space[3],
   top: "-3rem",
   zIndex: vars.zIndex.skipLink,
   background: vars.color.ink,

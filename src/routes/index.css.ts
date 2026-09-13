@@ -11,7 +11,7 @@ export const hero = style({
 export const heroMark = style({
   position: "absolute",
   top: "50%",
-  right: "-4rem",
+  insetInlineEnd: "-4rem",
   width: "26rem",
   height: "26rem",
   color: vars.color.olive,
@@ -186,7 +186,7 @@ export const timelineStrip = style({
       position: "absolute",
       top: 0,
       bottom: 0,
-      left: TIMELINE_RAIL,
+      insetInlineStart: TIMELINE_RAIL,
       width: "2px",
       backgroundColor: vars.color.sandLine,
     },
@@ -226,7 +226,7 @@ export const timelineItem = style({
 export const timelineDot = style({
   position: "absolute",
   top: "50%",
-  left: TIMELINE_RAIL,
+  insetInlineStart: TIMELINE_RAIL,
   width: "0.65rem",
   height: "0.65rem",
   borderRadius: vars.radius.pill,

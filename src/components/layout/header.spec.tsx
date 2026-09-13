@@ -23,6 +23,22 @@ describe("Header", () => {
     expect(other?.getAttribute("aria-current")).toBeFalsy();
   });
 
+  it("switches to Arabic nav labels, hrefs and the Arabic homepage link under /ar/", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/ar/history/">
+        <Header />
+      </QwikCityMockProvider>,
+    );
+    const nav = screen.querySelector('nav[aria-label="التنقل الرئيسي"]');
+    const links = Array.from(nav?.querySelectorAll("a") ?? []);
+    expect(
+      links.some((link) => link.getAttribute("href") === "/ar/history/"),
+    ).toBe(true);
+    const homeLink = screen.querySelector('a[href="/ar/"]');
+    expect(homeLink).toBeTruthy();
+  });
+
   it("toggles the mobile menu button between open and closed states", async () => {
     const { screen, render, userEvent } = await createDOM();
     await render(

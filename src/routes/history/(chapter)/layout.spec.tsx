@@ -173,6 +173,40 @@ describe("history/(chapter)/layout", () => {
     });
   });
 
+  it("switches to Arabic hrefs, titles and JSON-LD under /ar/", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/ar/history/nakba/">
+        <HeadSeeder title="التقسيم والنكبة" />
+        <ChapterLayout>
+          <p>Body</p>
+        </ChapterLayout>
+      </QwikCityMockProvider>,
+    );
+    const backLink = screen.querySelector(
+      'a[href="/ar/history/"]',
+    ) as HTMLAnchorElement | null;
+    expect(backLink?.textContent).toBe("كل الفصول");
+
+    const nav = screen.querySelector('nav[aria-label="Chapter navigation"]');
+    const hrefs = Array.from(nav?.querySelectorAll("a") ?? [], (a) =>
+      a.getAttribute("href"),
+    );
+    expect(hrefs).toEqual([
+      "/ar/history/british-mandate/",
+      "/ar/history/occupation-and-exile/",
+    ]);
+    expect(nav?.textContent).toContain("الانتداب البريطاني");
+    expect(nav?.textContent).toContain("المنفى والحكم العسكري");
+
+    const scripts = Array.from(
+      screen.querySelectorAll('script[type="application/ld+json"]'),
+      (s) => JSON.parse(s.innerHTML),
+    );
+    expect(scripts[0]).toMatchObject({ inLanguage: "ar" });
+    expect(scripts[1].itemListElement[1]).toMatchObject({ name: "التاريخ" });
+  });
+
   it("renders the slotted content inside Prose", async () => {
     const { screen, render } = await createDOM();
     await render(
