@@ -47,6 +47,7 @@ export const RouterHead = component$(() => {
     .href;
   const arHref = new URL(localizedPathname(loc.url.pathname, "ar"), SITE_URL)
     .href;
+  const hrefsByLocale = { en: enHref, ar: arHref };
 
   return (
     <>
@@ -57,10 +58,7 @@ export const RouterHead = component$(() => {
       <link
         rel="alternate"
         hreflang="x-default"
-        href={
-          new URL(localizedPathname(loc.url.pathname, DEFAULT_LOCALE), SITE_URL)
-            .href
-        }
+        href={hrefsByLocale[DEFAULT_LOCALE]}
       />
       <link
         rel="alternate"

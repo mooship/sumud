@@ -12,12 +12,17 @@ import {
   HeartHandshake,
 } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { localizedHead } from "~/content/i18n";
 import {
   SITE_DESCRIPTION,
   SITE_DESCRIPTION_AR,
   SITE_URL,
 } from "~/content/site";
-import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
+import {
+  LOCALE_HTML_ATTRS,
+  getLocaleFromPathname,
+  localizedPathname,
+} from "~/lib/locale";
 import { JsonLd } from "~/components/seo/json-ld";
 import * as styles from "./index.css";
 
@@ -51,6 +56,8 @@ const COPY = {
     actionCardLink: "See how to help",
     quote: "We have on this land that which makes life worth living.",
     quoteCite: "Mahmoud Darwish, 'On This Land'",
+    headTitle: "Sumud -- the story of Palestine",
+    headDescription: SITE_DESCRIPTION,
   },
   ar: {
     heroLede:
@@ -81,6 +88,8 @@ const COPY = {
     actionCardLink: "تعرّف كيف تساعد",
     quote: "على هذه الأرض ما يستحق الحياة",
     quoteCite: "محمود درويش، «على هذه الأرض»",
+    headTitle: "صمود -- قصة فلسطين",
+    headDescription: SITE_DESCRIPTION_AR,
   },
 };
 
@@ -99,7 +108,7 @@ export default component$(() => {
           name: "Sumud",
           url: `${SITE_URL}${path("/")}`,
           description: locale === "ar" ? SITE_DESCRIPTION_AR : SITE_DESCRIPTION,
-          inLanguage: locale === "ar" ? "ar" : "en-GB",
+          inLanguage: LOCALE_HTML_ATTRS[locale].lang,
           potentialAction: {
             "@type": "SearchAction",
             target: {
@@ -264,15 +273,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "صمود -- قصة فلسطين",
-        meta: [{ name: "description", content: SITE_DESCRIPTION_AR }],
-      }
-    : {
-        title: "Sumud -- the story of Palestine",
-        meta: [{ name: "description", content: SITE_DESCRIPTION }],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

@@ -3,6 +3,7 @@ import { useLocation } from "@builder.io/qwik-city";
 import { LANGUAGE_OFFER } from "~/content/i18n";
 import {
   LOCALE_BANNER_DISMISSED_KEY,
+  LOCALE_HTML_ATTRS,
   LOCALE_STORAGE_KEY,
   getLocaleFromPathname,
   localizedPathname,
@@ -42,7 +43,7 @@ export const LanguageBanner = component$(() => {
           class={styles.banner}
           role="note"
           lang={target}
-          dir={target === "ar" ? "rtl" : "ltr"}
+          dir={LOCALE_HTML_ATTRS[target].dir}
         >
           <p class={styles.text}>{LANGUAGE_OFFER[target].bannerText}</p>
           <div class={styles.actions}>

@@ -2,6 +2,7 @@ import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
 import { loadPagefindUI, SEARCH_MOUNT_ID } from "./pagefind";
 import * as styles from "./index.css";
@@ -11,11 +12,17 @@ const COPY = {
     eyebrow: "Search",
     title: "Search Sumud",
     lede: "Search across the history, culture and further reading on this site.",
+    headTitle: "Search",
+    headDescription:
+      "Search the history, culture and further reading on Sumud.",
   },
   ar: {
     eyebrow: "بحث",
     title: "البحث في صمود",
     lede: "ابحث في التاريخ والثقافة والقراءات الإضافية على هذا الموقع.",
+    headTitle: "بحث",
+    headDescription:
+      "ابحث في التاريخ والثقافة والقراءات الإضافية على موقع صمود.",
   },
 };
 
@@ -45,27 +52,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "بحث",
-        meta: [
-          {
-            name: "description",
-            content:
-              "ابحث في التاريخ والثقافة والقراءات الإضافية على موقع صمود.",
-          },
-        ],
-      }
-    : {
-        title: "Search",
-        meta: [
-          {
-            name: "description",
-            content:
-              "Search the history, culture and further reading on Sumud.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

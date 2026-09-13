@@ -4,6 +4,7 @@ import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
 import { GLOSSARY_CATEGORIES } from "~/content/glossary";
+import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
 
@@ -16,6 +17,9 @@ const COPY = {
     sourcesLink: "sources",
     ledePost: ".",
     jsonLdName: "Sumud Glossary",
+    headTitle: "Glossary",
+    headDescription:
+      "A glossary of terms, places and institutions used throughout Sumud's history of Palestine.",
   },
   ar: {
     eyebrow: "المصطلحات",
@@ -25,6 +29,9 @@ const COPY = {
     sourcesLink: "المصادر",
     ledePost: ".",
     jsonLdName: "معجم صمود",
+    headTitle: "المصطلحات",
+    headDescription:
+      "معجم بالمصطلحات والأماكن والمؤسسات المستخدمة في تاريخ فلسطين على موقع صمود.",
   },
 };
 
@@ -89,27 +96,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "المصطلحات",
-        meta: [
-          {
-            name: "description",
-            content:
-              "معجم بالمصطلحات والأماكن والمؤسسات المستخدمة في تاريخ فلسطين على موقع صمود.",
-          },
-        ],
-      }
-    : {
-        title: "Glossary",
-        meta: [
-          {
-            name: "description",
-            content:
-              "A glossary of terms, places and institutions used throughout Sumud's history of Palestine.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

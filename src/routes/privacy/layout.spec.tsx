@@ -16,4 +16,16 @@ describe("privacy/layout", () => {
     expect(screen.querySelector("span")?.textContent).toBe("Legal");
     expect(screen.querySelector("p")?.textContent).toBe("Privacy body");
   });
+
+  it("switches to the Arabic eyebrow under /ar/", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/ar/privacy/">
+        <PrivacyLayout>
+          <p>Privacy body</p>
+        </PrivacyLayout>
+      </QwikCityMockProvider>,
+    );
+    expect(screen.querySelector("span")?.textContent).toBe("قانوني");
+  });
 });

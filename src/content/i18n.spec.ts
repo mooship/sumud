@@ -1,9 +1,9 @@
 import { describe, expect, it } from "vitest";
+import { localizedPathname } from "~/lib/locale";
 import { NAV_ITEMS } from "./nav";
 import {
   LANGUAGE_OFFER,
   LOCALE_AUTONYMS,
-  NAV_LABELS_AR,
   UI_STRINGS,
   localizedNavItems,
 } from "./i18n";
@@ -22,14 +22,6 @@ describe("UI_STRINGS", () => {
     }
     for (const value of Object.values(UI_STRINGS.ar)) {
       expect(value.length).toBeGreaterThan(0);
-    }
-  });
-});
-
-describe("NAV_LABELS_AR", () => {
-  it("has an Arabic label for every nav item", () => {
-    for (const item of NAV_ITEMS) {
-      expect(NAV_LABELS_AR[item.href]).toBeTruthy();
     }
   });
 });
@@ -53,8 +45,8 @@ describe("localizedNavItems", () => {
     expect(items).toHaveLength(NAV_ITEMS.length);
     for (const [i, item] of items.entries()) {
       const original = NAV_ITEMS[i]!;
-      expect(item.href).toBe(`/ar${original.href}`);
-      expect(item.label).toBe(NAV_LABELS_AR[original.href]);
+      expect(item.href).toBe(localizedPathname(original.href, "ar"));
+      expect(item.label).toBe(original.labelAr);
     }
   });
 });

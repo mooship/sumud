@@ -5,6 +5,7 @@ import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
 import { Landmark, ScrollText, BookOpen, Quote } from "~/components/ui/icons";
 import { BOOK_CATEGORIES } from "~/content/books";
+import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
 
@@ -20,6 +21,9 @@ const COPY = {
     ledePost:
       " as works this project draws on directly; others are here for readers who want the story told at greater length, or in a different register.",
     jsonLdName: "Further Reading -- Sumud",
+    headTitle: "Further Reading",
+    headDescription:
+      "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
   },
   ar: {
     eyebrow: "قراءات إضافية",
@@ -30,6 +34,9 @@ const COPY = {
     ledePost:
       " بوصفها أعمالًا يعتمد عليها هذا المشروع مباشرة؛ وبعضها الآخر هنا لمن يريد القصة مروية بتفصيل أكبر، أو بأسلوب مختلف.",
     jsonLdName: "قراءات إضافية -- صمود",
+    headTitle: "قراءات إضافية",
+    headDescription:
+      "كتب تاريخ ومذكرات وأدب روائي وشعر موصى بها عن فلسطين، بأقلام كتّاب فلسطينيين وإسرائيليين وغيرهم.",
   },
 };
 
@@ -110,27 +117,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "قراءات إضافية",
-        meta: [
-          {
-            name: "description",
-            content:
-              "كتب تاريخ ومذكرات وأدب روائي وشعر موصى بها عن فلسطين، بأقلام كتّاب فلسطينيين وإسرائيليين وغيرهم.",
-          },
-        ],
-      }
-    : {
-        title: "Further Reading",
-        meta: [
-          {
-            name: "description",
-            content:
-              "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

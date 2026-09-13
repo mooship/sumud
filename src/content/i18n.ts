@@ -1,4 +1,5 @@
-import type { Locale } from "~/lib/locale";
+import type { DocumentHeadValue } from "@builder.io/qwik-city";
+import { localizedPathname, type Locale } from "~/lib/locale";
 import { NAV_ITEMS } from "~/content/nav";
 
 /** Chrome strings (nav, footer, chapter navigation) that appear on every page, in both
@@ -63,19 +64,6 @@ export const UI_STRINGS: Record<Locale, UiStrings> = {
   },
 };
 
-/** Arabic labels for `NAV_ITEMS`, keyed by the same (locale-independent) `href`. English labels
- *  live on `NAV_ITEMS` itself. */
-export const NAV_LABELS_AR: Record<string, string> = {
-  "/history/": "التاريخ",
-  "/culture/": "الثقافة والصمود",
-  "/further-reading/": "قراءات إضافية",
-  "/glossary/": "المصطلحات",
-  "/sources/": "المصادر",
-  "/take-action/": "بادر بالفعل",
-  "/search/": "بحث",
-  "/about/": "عن الموقع",
-};
-
 // Each locale's own name for itself, i.e. what a switcher offering that locale should read.
 export const LOCALE_AUTONYMS: Record<Locale, string> = {
   en: "English",
@@ -104,13 +92,28 @@ export const LANGUAGE_OFFER: Record<Locale, LanguageOffer> = {
   },
 };
 
+/**
+ * Builds a route's `DocumentHead` (title + description meta) from a per-locale `copy` object
+ * that has at least `headTitle`/`headDescription` fields -- the shape every locale-aware route's
+ * own `COPY` dictionary already has, so `localizedHead(locale, COPY)` is the whole `head` export.
+ */
+export function localizedHead(
+  locale: Locale,
+  copy: Record<Locale, { headTitle: string; headDescription: string }>,
+): DocumentHeadValue {
+  return {
+    title: copy[locale].headTitle,
+    meta: [{ name: "description", content: copy[locale].headDescription }],
+  };
+}
+
 // `NAV_ITEMS` localized for `locale`: Arabic labels plus `/ar`-prefixed hrefs.
 export function localizedNavItems(
   locale: Locale,
 ): { href: string; label: string }[] {
   if (locale === "en") return NAV_ITEMS;
   return NAV_ITEMS.map((item) => ({
-    href: `/ar${item.href}`,
-    label: NAV_LABELS_AR[item.href]!,
+    href: localizedPathname(item.href, locale),
+    label: item.labelAr,
   }));
 }

@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { UI_STRINGS, localizedHead } from "~/content/i18n";
 import { SOURCE_SECTIONS } from "~/content/sources";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
@@ -20,9 +21,11 @@ const COPY = {
     correctionPre:
       "If something on this site is factually wrong, out of date, or misattributed, please ",
     correctionLink: "open an issue on GitHub",
-    correctionOpensNewTab: " (opens in a new tab)",
     correctionPost:
       ". Corrections are welcome and will be reviewed and, where warranted, applied promptly.",
+    headTitle: "Sources",
+    headDescription:
+      "The books, archives, UN records and human rights organisations this project draws on, and how to flag a correction.",
   },
   ar: {
     eyebrow: "المصادر",
@@ -37,9 +40,11 @@ const COPY = {
     correctionPre:
       "إذا كان هناك شيء غير دقيق أو قديم أو منسوب خطأً في هذا الموقع، يرجى ",
     correctionLink: "فتح تذكرة على GitHub",
-    correctionOpensNewTab: " (يفتح في تبويب جديد)",
     correctionPost:
       ". التصويبات موضع ترحيب وستُراجَع، وتُطبَّق سريعًا متى استدعى الأمر ذلك.",
+    headTitle: "المصادر",
+    headDescription:
+      "الكتب والأرشيفات وسجلات الأمم المتحدة ومنظمات حقوق الإنسان التي يعتمد عليها هذا المشروع، وكيفية الإبلاغ عن تصويب.",
   },
 };
 
@@ -47,6 +52,7 @@ export default component$(() => {
   const loc = useLocation();
   const locale = getLocaleFromPathname(loc.url.pathname);
   const copy = COPY[locale];
+  const strings = UI_STRINGS[locale];
 
   return (
     <Container width="content">
@@ -91,7 +97,7 @@ export default component$(() => {
             rel="noopener noreferrer"
           >
             {copy.correctionLink}
-            <span class="visually-hidden">{copy.correctionOpensNewTab}</span>
+            <span class="visually-hidden">{strings.opensNewTab}</span>
           </a>
           {copy.correctionPost}
         </p>
@@ -100,27 +106,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "المصادر",
-        meta: [
-          {
-            name: "description",
-            content:
-              "الكتب والأرشيفات وسجلات الأمم المتحدة ومنظمات حقوق الإنسان التي يعتمد عليها هذا المشروع، وكيفية الإبلاغ عن تصويب.",
-          },
-        ],
-      }
-    : {
-        title: "Sources",
-        meta: [
-          {
-            name: "description",
-            content:
-              "The books, archives, UN records and human rights organisations this project draws on, and how to flag a correction.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

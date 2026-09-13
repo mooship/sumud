@@ -1,7 +1,6 @@
 /** The two locales this site renders: English (default, unprefixed routes) and Arabic (every
  *  route mirrored under `/ar/` with identical slugs -- see `src/routes/ar/`). */
-export const LOCALES = ["en", "ar"] as const;
-export type Locale = (typeof LOCALES)[number];
+export type Locale = "en" | "ar";
 
 export const DEFAULT_LOCALE: Locale = "en";
 

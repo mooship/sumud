@@ -6,9 +6,14 @@ import { JsonLd } from "~/components/seo/json-ld";
 import { ArrowRight } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
 import { UI_STRINGS } from "~/content/i18n";
+import { NAV_ITEMS } from "~/content/nav";
 import { SITE_NAME, SITE_URL } from "~/content/site";
 import { formatDate } from "~/lib/format-date";
-import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
+import {
+  LOCALE_HTML_ATTRS,
+  getLocaleFromPathname,
+  localizedPathname,
+} from "~/lib/locale";
 import * as styles from "./layout.css";
 
 export default component$(() => {
@@ -29,6 +34,7 @@ export default component$(() => {
   const historyHref = localizedPathname("/history/", locale);
   const chapterHref = (slugValue: string) =>
     localizedPathname(`/history/${slugValue}/`, locale);
+  const historyNavItem = NAV_ITEMS.find((item) => item.href === "/history/")!;
 
   return (
     <Container width="content" as="article">
@@ -39,7 +45,7 @@ export default component$(() => {
           headline: head.title,
           description: head.meta.find((m) => m.name === "description")?.content,
           url: loc.url.href,
-          inLanguage: locale === "ar" ? "ar" : "en-GB",
+          inLanguage: LOCALE_HTML_ATTRS[locale].lang,
           isPartOf: {
             "@type": "WebSite",
             name: SITE_NAME,
@@ -62,7 +68,8 @@ export default component$(() => {
             {
               "@type": "ListItem",
               position: 2,
-              name: locale === "ar" ? "التاريخ" : "History",
+              name:
+                locale === "ar" ? historyNavItem.labelAr : historyNavItem.label,
               item: `${SITE_URL}${historyHref}`,
             },
             {

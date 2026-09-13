@@ -3,7 +3,7 @@ import { Link, useLocation } from "@builder.io/qwik-city";
 import { Menu, X } from "~/components/ui/icons";
 import { Container } from "~/components/ui/container";
 import { UI_STRINGS, localizedNavItems } from "~/content/i18n";
-import { getLocaleFromPathname } from "~/lib/locale";
+import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import { LanguageBanner } from "./language-banner";
 import { LanguageSwitcher } from "./language-switcher";
 import * as styles from "./header.css";
@@ -15,7 +15,7 @@ export const Header = component$(() => {
   const locale = getLocaleFromPathname(pathname);
   const strings = UI_STRINGS[locale];
   const navItems = localizedNavItems(locale);
-  const homeHref = locale === "ar" ? "/ar/" : "/";
+  const homeHref = localizedPathname("/", locale);
 
   return (
     <>

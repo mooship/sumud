@@ -3,6 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
 
@@ -11,11 +12,17 @@ const COPY = {
     eyebrow: "History",
     title: "Palestine, chapter by chapter",
     lede: "This is one continuous story told in seven parts: an Ottoman province, a British Mandate, a partition and a catastrophe, decades of exile and occupation, and the Palestine of today. Each chapter stands alone, but they are meant to be read in order.",
+    headTitle: "History",
+    headDescription:
+      "The history of Palestine from Ottoman rule through the British Mandate, the Nakba, occupation and exile, to the present day.",
   },
   ar: {
     eyebrow: "التاريخ",
     title: "فلسطين، فصلاً فصلاً",
     lede: "هذه قصة واحدة متصلة تُروى في سبعة أجزاء: ولاية عثمانية، وانتداب بريطاني، وتقسيم وكارثة، وعقود من المنفى والاحتلال، وفلسطين اليوم. يقف كل فصل بذاته، لكن الأفضل قراءتها بالترتيب.",
+    headTitle: "التاريخ",
+    headDescription:
+      "تاريخ فلسطين من الحكم العثماني مرورًا بالانتداب البريطاني والنكبة والاحتلال والمنفى، وصولًا إلى يومنا هذا.",
   },
 };
 
@@ -58,27 +65,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "التاريخ",
-        meta: [
-          {
-            name: "description",
-            content:
-              "تاريخ فلسطين من الحكم العثماني مرورًا بالانتداب البريطاني والنكبة والاحتلال والمنفى، وصولًا إلى يومنا هذا.",
-          },
-        ],
-      }
-    : {
-        title: "History",
-        meta: [
-          {
-            name: "description",
-            content:
-              "The history of Palestine from Ottoman rule through the British Mandate, the Nakba, occupation and exile, to the present day.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);

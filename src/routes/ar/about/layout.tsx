@@ -1,10 +1,3 @@
-import { component$, Slot } from "@builder.io/qwik";
-import { ArticleShell } from "~/components/layout/article-shell";
-
-export default component$(() => {
-  return (
-    <ArticleShell eyebrow="عن الموقع">
-      <Slot />
-    </ArticleShell>
-  );
-});
+// Shared with the English about layout -- the component itself reads the locale from the URL
+// (see src/routes/about/layout.tsx).
+export { default } from "~/routes/about/layout";

@@ -9,7 +9,7 @@ import {
   ShieldAlert,
 } from "~/components/ui/icons";
 import { ORG_GROUPS } from "~/content/organisations";
-import { UI_STRINGS } from "~/content/i18n";
+import { UI_STRINGS, localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
 import * as styles from "./index.css";
 
@@ -21,12 +21,18 @@ const COPY = {
     title: "Beyond reading",
     lede: "These are established humanitarian and human rights organisations working on the ground in Gaza, the West Bank and with Palestinian refugees across the region. Some are Palestinian, some Israeli, some international -- listed here because their work is documented and their reporting is widely used by journalists and researchers, not as an endorsement of every position any of them takes.",
     jsonLdName: "Take Action -- Sumud",
+    headTitle: "Take Action",
+    headDescription:
+      "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
   },
   ar: {
     eyebrow: "بادر بالفعل",
     title: "أبعد من القراءة",
     lede: "هذه منظمات إنسانية وحقوقية راسخة تعمل ميدانيًا في غزة والضفة الغربية ومع اللاجئين الفلسطينيين في أنحاء المنطقة. بعضها فلسطيني، وبعضها إسرائيلي، وبعضها دولي -- وأُدرجت هنا لأن عملها موثق وتقاريرها مستخدمة على نطاق واسع من قبل الصحفيين والباحثين، لا تأييدًا لكل موقف تتخذه أي منها.",
     jsonLdName: "بادر بالفعل -- صمود",
+    headTitle: "بادر بالفعل",
+    headDescription:
+      "منظمات إنسانية وحقوقية موثوقة تعمل في غزة والضفة الغربية ومع اللاجئين الفلسطينيين.",
   },
 };
 
@@ -105,27 +111,5 @@ export default component$(() => {
   );
 });
 
-export const head: DocumentHead = ({ url }) => {
-  const locale = getLocaleFromPathname(url.pathname);
-  return locale === "ar"
-    ? {
-        title: "بادر بالفعل",
-        meta: [
-          {
-            name: "description",
-            content:
-              "منظمات إنسانية وحقوقية موثوقة تعمل في غزة والضفة الغربية ومع اللاجئين الفلسطينيين.",
-          },
-        ],
-      }
-    : {
-        title: "Take Action",
-        meta: [
-          {
-            name: "description",
-            content:
-              "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
-          },
-        ],
-      };
-};
+export const head: DocumentHead = ({ url }) =>
+  localizedHead(getLocaleFromPathname(url.pathname), COPY);
