@@ -5,6 +5,11 @@ import {
   type DocumentMeta,
 } from "@builder.io/qwik-city";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "~/content/site";
+import {
+  DEFAULT_LOCALE,
+  getLocaleFromPathname,
+  localizedPathname,
+} from "~/lib/locale";
 
 /** Appends the site name to a page's own title, falling back to just the site name on the
  *  homepage (which sets no title of its own). */
@@ -37,11 +42,26 @@ export const RouterHead = component$(() => {
   const title = resolveHeadTitle(head.title);
   const description = resolveHeadDescription(head.meta);
   const ogImage = `${SITE_URL}/og-image.png`;
+  const locale = getLocaleFromPathname(loc.url.pathname);
+  const enHref = new URL(localizedPathname(loc.url.pathname, "en"), SITE_URL)
+    .href;
+  const arHref = new URL(localizedPathname(loc.url.pathname, "ar"), SITE_URL)
+    .href;
 
   return (
     <>
       <title>{title}</title>
       <link rel="canonical" href={canonical} />
+      <link rel="alternate" hreflang="en" href={enHref} />
+      <link rel="alternate" hreflang="ar" href={arHref} />
+      <link
+        rel="alternate"
+        hreflang="x-default"
+        href={
+          new URL(localizedPathname(loc.url.pathname, DEFAULT_LOCALE), SITE_URL)
+            .href
+        }
+      />
       <link
         rel="alternate"
         type="application/rss+xml"
@@ -64,7 +84,10 @@ export const RouterHead = component$(() => {
       <meta property="og:image:type" content="image/png" />
       <meta property="og:image:width" content="1200" />
       <meta property="og:image:height" content="630" />
-      <meta property="og:locale" content="en_GB" />
+      <meta
+        property="og:locale"
+        content={locale === "ar" ? "ar_AR" : "en_GB"}
+      />
       <meta name="twitter:card" content="summary_large_image" />
       <meta name="twitter:title" content={title} />
       <meta name="twitter:description" content={description} />

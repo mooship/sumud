@@ -27,3 +27,24 @@
 
 - [RSS](https://sumud.timothybrits.co.za/rss.xml)
 - [Atom](https://sumud.timothybrits.co.za/atom.xml)
+
+## Arabic (العربية)
+
+Every page above has a full Arabic translation at the same path under `/ar/`, e.g.
+https://sumud.timothybrits.co.za/ar/history/nakba/ for the Nakba chapter.
+
+- [نظرة عامة على التاريخ](https://sumud.timothybrits.co.za/ar/history/): سرد من سبعة فصول من فلسطين العثمانية إلى الحاضر.
+- [فلسطين العثمانية](https://sumud.timothybrits.co.za/ar/history/ottoman-palestine/): فلسطين كولاية عثمانية، حتى عام 1917.
+- [الانتداب البريطاني](https://sumud.timothybrits.co.za/ar/history/british-mandate/): 1917-1947، وعد بلفور والصراع المتنامي.
+- [التقسيم والنكبة](https://sumud.timothybrits.co.za/ar/history/nakba/): 1947-1949، التقسيم والحرب والتهجير الجماعي.
+- [المنفى والحكم العسكري](https://sumud.timothybrits.co.za/ar/history/occupation-and-exile/): 1949-1967، حياة اللاجئين وتأسيس منظمة التحرير الفلسطينية.
+- [الاحتلال والانتفاضة](https://sumud.timothybrits.co.za/ar/history/occupation-and-settlement/): 1967-1993، الاحتلال والاستيطان والانتفاضة.
+- [أوسلو وانهياره](https://sumud.timothybrits.co.za/ar/history/oslo-to-blockade/): 1993-2007، من اتفاقيات أوسلو إلى حصار غزة.
+- [الحصار والحرب والحاضر](https://sumud.timothybrits.co.za/ar/history/gaza-and-the-present/): من 2007 إلى اليوم.
+- [الثقافة والصمود](https://sumud.timothybrits.co.za/ar/culture/): الأرض والطعام والحرف واللغة والأدب، وفكرة الصمود نفسها.
+- [قراءات إضافية](https://sumud.timothybrits.co.za/ar/further-reading/): كتب تاريخ ومذكرات وأدب روائي وشعر موصى بها عن فلسطين.
+- [المصطلحات](https://sumud.timothybrits.co.za/ar/glossary/): مصطلحات وأماكن ومؤسسات مستخدمة في أنحاء الموقع.
+- [المصادر](https://sumud.timothybrits.co.za/ar/sources/): الكتب والأرشيفات والمنظمات التي يعتمد عليها هذا المشروع.
+- [بادر بالفعل](https://sumud.timothybrits.co.za/ar/take-action/): منظمات إنسانية وحقوقية تعمل ميدانيًا.
+- [عن الموقع](https://sumud.timothybrits.co.za/ar/about/): ماهية هذا المشروع، وكيفية الإبلاغ عن تصويب.
+- [بحث](https://sumud.timothybrits.co.za/ar/search/): بحث نصي كامل في الموقع.
