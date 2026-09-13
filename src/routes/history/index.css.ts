@@ -38,7 +38,7 @@ export const list = style({
       position: "absolute",
       top: 0,
       bottom: 0,
-      left: "9.75rem",
+      insetInlineStart: "9.75rem",
       width: "2px",
       backgroundColor: vars.color.sandLine,
     },
@@ -63,7 +63,7 @@ export const itemDot = style({
   // Aligned to sit level with the chapter title, not the row's vertical
   // centre -- rows vary in height with summary length, the title doesn't.
   top: `calc(${vars.space[5]} + 0.7em)`,
-  left: "9.75rem",
+  insetInlineStart: "9.75rem",
   width: "0.6rem",
   height: "0.6rem",
   borderRadius: vars.radius.pill,

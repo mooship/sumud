@@ -33,4 +33,15 @@ describe("GLOSSARY_CATEGORIES", () => {
     const titles = GLOSSARY_CATEGORIES.map((c) => c.title);
     expect(new Set(titles).size).toBe(titles.length);
   });
+
+  it("has a non-trivial Arabic translation for every term and category", () => {
+    for (const category of GLOSSARY_CATEGORIES) {
+      expect(category.ar.title.length).toBeGreaterThan(0);
+      expect(category.ar.intro.length).toBeGreaterThan(20);
+    }
+    for (const term of allTerms) {
+      expect(term.ar.term.length).toBeGreaterThan(0);
+      expect(term.ar.definition.length).toBeGreaterThan(20);
+    }
+  });
 });

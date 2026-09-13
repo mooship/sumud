@@ -21,7 +21,15 @@ describe("HISTORY_CHAPTERS", () => {
     }
   });
 
-  it("has an .mdx route file on disk for every chapter slug", () => {
+  it("has a non-empty Arabic title, period and summary for every chapter", () => {
+    for (const chapter of HISTORY_CHAPTERS) {
+      expect(chapter.ar.title.length).toBeGreaterThan(0);
+      expect(chapter.ar.period.length).toBeGreaterThan(0);
+      expect(chapter.ar.summary.length).toBeGreaterThan(20);
+    }
+  });
+
+  it("has an .mdx route file on disk for every chapter slug, in both locales", () => {
     for (const chapter of HISTORY_CHAPTERS) {
       const mdxPath = path.resolve(
         here,
@@ -30,6 +38,15 @@ describe("HISTORY_CHAPTERS", () => {
       expect(
         existsSync(mdxPath),
         `missing route file for "${chapter.slug}": ${mdxPath}`,
+      ).toBe(true);
+
+      const arMdxPath = path.resolve(
+        here,
+        `../routes/ar/history/(chapter)/${chapter.slug}/index.mdx`,
+      );
+      expect(
+        existsSync(arMdxPath),
+        `missing Arabic route file for "${chapter.slug}": ${arMdxPath}`,
       ).toBe(true);
     }
   });

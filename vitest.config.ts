@@ -39,6 +39,7 @@ export default defineConfig({
         "src/entry.cloudflare-pages.tsx",
         "src/root.tsx",
         "src/routes/layout.tsx",
+        "src/routes/ar/layout.tsx",
       ],
       // branches/lines are a genuine 100%. statements/functions sit fractionally below it
       // for one known, narrow gap: header.tsx's mobile nav Link closes the menu via an

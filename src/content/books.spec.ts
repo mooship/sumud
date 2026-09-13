@@ -28,4 +28,14 @@ describe("BOOK_CATEGORIES", () => {
     const titles = allBooks.map((b) => b.title);
     expect(new Set(titles).size).toBe(titles.length);
   });
+
+  it("has a non-trivial Arabic translation for every category and book", () => {
+    for (const category of BOOK_CATEGORIES) {
+      expect(category.ar.title.length).toBeGreaterThan(0);
+      expect(category.ar.intro.length).toBeGreaterThan(20);
+    }
+    for (const book of allBooks) {
+      expect(book.ar.description.length).toBeGreaterThan(20);
+    }
+  });
 });

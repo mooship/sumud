@@ -75,6 +75,61 @@ this wrong and a page either 404s in nav, or silently never appears anywhere but
   empty and it exposes no prop to seed it. Render `<HeadSeeder title="..." meta={[...]} />`
   (`src/testing/head-seeder.tsx`) as a sibling before the component under test; it writes into the
   same head store via a `useTask$`, since Qwik's dev mode flags a direct store write during render.
+- **Every page needs an Arabic counterpart under `src/routes/ar/`, at the identical slug.** The
+  site is bilingual (see "Arabic / RTL" below) -- adding a new English page without its `/ar/`
+  mirror leaves a dangling link the moment it's added to `NAV_ITEMS` (the header/footer nav is
+  locale-aware and always emits both). For a page whose `.tsx` component already reads its own
+  copy from `useLocation()`'s pathname (the pattern used throughout `src/routes/`), the `/ar/`
+  route file is a one-line re-export -- `export { default, head } from "~/routes/<page>/index";`
+  -- not a duplicate component. Only MDX prose (history chapters, About, Culture, Privacy) and the
+  small per-locale `ArticleShell` layouts need real duplicate files, since prose can't be
+  parameterized.
+
+## Arabic / RTL
+
+The site ships a full Arabic translation at `/ar/*`, mirroring every English route at the same
+slug -- no separate i18n library, just Qwik City's own routing and request-locale mechanism.
+
+- **Locale is set per-route, not detected at runtime.** `src/routes/layout.tsx`'s `onRequest`
+  calls `requestEvent.locale("en")`; `src/routes/ar/layout.tsx`'s does the same for `"ar"`,
+  overriding it for everything nested under `/ar/`. Qwik City's SSG runs this same request
+  pipeline once per crawled path at build time, so `getLocale()` (from `@builder.io/qwik`, used in
+  `root.tsx` and `entry.ssr.tsx`) resolves correctly for every static page with zero runtime cost.
+  `entry.ssr.tsx` reads the locale from `opts.serverData.locale` -- **not** a top-level
+  `opts.locale`, which doesn't exist and silently resolves to `undefined` if you reach for it
+  (this was a real, easy-to-make bug: every page rendered `<html lang="en-GB" dir="ltr">`
+  regardless of `requestEvent.locale()` until this was fixed).
+- **`src/lib/locale.ts`** is the single source of truth for locale logic: `getLocaleFromPathname`,
+  `localizedPathname` (maps a path to its equivalent in the other locale -- pure prefix
+  arithmetic, since slugs are always identical across locales), and `LOCALE_HTML_ATTRS`
+  (`lang`/`dir` per locale). Reach for these rather than checking `pathname.startsWith("/ar/")`
+  inline.
+- **Structured content data carries its Arabic translation inline, not in a parallel file.** Every
+  `src/content/*.ts` list (history chapters, glossary, sources, books, organisations) has an `ar`
+  field alongside each English one (`chapter.ar.title`, `org.ar.description`, etc.) -- proper
+  nouns, URLs, book titles and author names are kept as-is in both locales. Route components pick
+  the right one with `locale === "ar" ? x.ar.title : x.title`. Each content file's spec asserts
+  the Arabic fields are present and non-trivial, same as the English ones.
+- **RTL is handled with logical CSS properties, not a parallel stylesheet.** Use
+  `marginInlineStart`/`paddingInlineEnd`/`insetInlineStart`/`borderInlineStart`/`textAlign: "end"`
+  instead of `-Left`/`-Right`/`left`/`right` in any new `.css.ts` -- `dir="rtl"` on `<html>` (set
+  automatically per the locale mechanism above) flips these for free. The one physical exception
+  is `env(safe-area-inset-left/right)` in `container.css.ts`: that's a device notch position, not
+  a text-direction concern, so it stays paired with physical `paddingLeft`/`paddingRight`. A
+  directional icon (an arrow implying "forward") needs an explicit mirror: add the `rtl-mirror`
+  utility class (`src/styles/global.css.ts`) to the icon element itself.
+- **The language switcher and first-visit suggestion banner use a plain `<a>`/`<button>`, not
+  Qwik City's `Link`.** `Link`'s own click-preload handler intercepts simulated clicks in this
+  project's test harness before a component's `onClick$` gets a turn (the same reason
+  `header.tsx`'s mobile-nav-close handler is the one documented coverage gap in
+  `vitest.config.ts`) -- a plain element sidesteps that and stays fully testable. Detection
+  (`src/components/layout/language-banner-logic.ts`) is a pure, directly-tested function reading
+  `navigator.languages`/`localStorage`; the component itself just wires it into a
+  `useVisibleTask$`, following the same split already used by `src/routes/search/pagefind.ts`.
+  `src/lib/safe-storage.ts` wraps all `localStorage` access (`getLocalStorage()`,
+  `safeGetItem`/`safeSetItem`) so a missing or throwing `localStorage` -- including in this
+  project's non-browser unit test environment, where the bare global isn't declared at all --
+  degrades to a no-op instead of an unhandled rejection.
 
 ## Architecture gotchas (learned the hard way while building this)
 

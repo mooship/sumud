@@ -50,5 +50,5 @@ export const link = style({
 export const externalIcon = style({
   display: "inline-block",
   verticalAlign: "-0.15em",
-  marginLeft: "0.2em",
+  marginInlineStart: "0.2em",
 });

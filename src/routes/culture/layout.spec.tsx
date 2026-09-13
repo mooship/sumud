@@ -16,4 +16,16 @@ describe("culture/layout", () => {
     expect(screen.querySelector("span")?.textContent).toBe("Culture");
     expect(screen.querySelector("p")?.textContent).toBe("Culture body");
   });
+
+  it("switches to the Arabic eyebrow under /ar/", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider url="http://localhost/ar/culture/">
+        <CultureLayout>
+          <p>Culture body</p>
+        </CultureLayout>
+      </QwikCityMockProvider>,
+    );
+    expect(screen.querySelector("span")?.textContent).toBe("الثقافة");
+  });
 });

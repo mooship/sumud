@@ -3,6 +3,10 @@ import type { RequestHandler } from "@builder.io/qwik-city";
 import { Header } from "~/components/layout/header";
 import { Footer } from "~/components/layout/footer";
 
+export const onRequest: RequestHandler = ({ locale }) => {
+  locale("en");
+};
+
 export const onGet: RequestHandler = async ({ cacheControl }) => {
   cacheControl({
     staleWhileRevalidate: 60 * 60 * 24 * 7,
