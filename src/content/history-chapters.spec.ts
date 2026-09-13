@@ -21,6 +21,14 @@ describe("HISTORY_CHAPTERS", () => {
     }
   });
 
+  it("has a non-empty Arabic title, period and summary for every chapter", () => {
+    for (const chapter of HISTORY_CHAPTERS) {
+      expect(chapter.ar.title.length).toBeGreaterThan(0);
+      expect(chapter.ar.period.length).toBeGreaterThan(0);
+      expect(chapter.ar.summary.length).toBeGreaterThan(20);
+    }
+  });
+
   it("has an .mdx route file on disk for every chapter slug", () => {
     for (const chapter of HISTORY_CHAPTERS) {
       const mdxPath = path.resolve(

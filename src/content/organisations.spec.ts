@@ -27,4 +27,14 @@ describe("ORG_GROUPS", () => {
     const names = allOrgs.map((o) => o.name);
     expect(new Set(names).size).toBe(names.length);
   });
+
+  it("has a non-trivial Arabic translation for every group and organisation", () => {
+    for (const group of ORG_GROUPS) {
+      expect(group.ar.title.length).toBeGreaterThan(0);
+      expect(group.ar.intro.length).toBeGreaterThan(20);
+    }
+    for (const org of allOrgs) {
+      expect(org.ar.description.length).toBeGreaterThan(20);
+    }
+  });
 });

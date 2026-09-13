@@ -4,3 +4,5 @@ export const SITE_NAME = "Sumud";
 export const SITE_URL = "https://sumud.timothybrits.co.za";
 export const SITE_DESCRIPTION =
   "Sumud tells the story of Palestine and its people, before 1947 and after -- their history, culture, and steadfastness.";
+export const SITE_DESCRIPTION_AR =
+  "يروي صمود قصة فلسطين وأهلها، قبل عام 1947 وبعده -- تاريخهم وثقافتهم وصمودهم.";

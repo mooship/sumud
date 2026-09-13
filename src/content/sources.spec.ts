@@ -34,4 +34,13 @@ describe("SOURCE_SECTIONS", () => {
     const titles = SOURCE_SECTIONS.map((section) => section.title);
     expect(new Set(titles).size).toBe(titles.length);
   });
+
+  it("has a non-trivial Arabic translation for every section title and entry meta", () => {
+    for (const section of SOURCE_SECTIONS) {
+      expect(section.ar.title.length).toBeGreaterThan(0);
+    }
+    for (const entry of allEntries) {
+      expect(entry.ar.meta.length).toBeGreaterThan(20);
+    }
+  });
 });
