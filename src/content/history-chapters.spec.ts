@@ -29,7 +29,7 @@ describe("HISTORY_CHAPTERS", () => {
     }
   });
 
-  it("has an .mdx route file on disk for every chapter slug", () => {
+  it("has an .mdx route file on disk for every chapter slug, in both locales", () => {
     for (const chapter of HISTORY_CHAPTERS) {
       const mdxPath = path.resolve(
         here,
@@ -38,6 +38,15 @@ describe("HISTORY_CHAPTERS", () => {
       expect(
         existsSync(mdxPath),
         `missing route file for "${chapter.slug}": ${mdxPath}`,
+      ).toBe(true);
+
+      const arMdxPath = path.resolve(
+        here,
+        `../routes/ar/history/(chapter)/${chapter.slug}/index.mdx`,
+      );
+      expect(
+        existsSync(arMdxPath),
+        `missing Arabic route file for "${chapter.slug}": ${arMdxPath}`,
       ).toBe(true);
     }
   });
