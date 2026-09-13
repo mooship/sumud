@@ -19,7 +19,12 @@ import Root from "./root";
 import { DEFAULT_LOCALE, LOCALE_HTML_ATTRS, type Locale } from "./lib/locale";
 
 export default function renderSsr(opts: RenderToStreamOptions) {
-  const locale = (opts.locale as Locale | undefined) ?? DEFAULT_LOCALE;
+  // Qwik City's request handler nests the per-request locale (set via `requestEvent.locale()`
+  // in a route's onRequest, see routes/layout.tsx and routes/ar/layout.tsx) under
+  // `serverData.locale`, not a top-level `opts.locale` -- there is no such top-level option.
+  const locale =
+    ((opts.serverData as { locale?: string } | undefined)?.locale as
+      Locale | undefined) ?? DEFAULT_LOCALE;
   const { lang, dir } = LOCALE_HTML_ATTRS[locale];
 
   return renderToStream(<Root />, {

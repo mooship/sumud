@@ -5,12 +5,17 @@ import { Prose } from "~/components/ui/prose";
 import { JsonLd } from "~/components/seo/json-ld";
 import { ArrowRight } from "~/components/ui/icons";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
+import { UI_STRINGS } from "~/content/i18n";
+import { SITE_NAME, SITE_URL } from "~/content/site";
 import { formatDate } from "~/lib/format-date";
+import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./layout.css";
 
 export default component$(() => {
   const head = useDocumentHead();
   const loc = useLocation();
+  const locale = getLocaleFromPathname(loc.url.pathname);
+  const strings = UI_STRINGS[locale];
   const period = (head.frontmatter as { period?: string } | undefined)?.period;
 
   const slug = loc.url.pathname.split("/").findLast(Boolean);
@@ -21,6 +26,9 @@ export default component$(() => {
     index !== -1 && index < HISTORY_CHAPTERS.length - 1
       ? HISTORY_CHAPTERS[index + 1]
       : undefined;
+  const historyHref = localizedPathname("/history/", locale);
+  const chapterHref = (slugValue: string) =>
+    localizedPathname(`/history/${slugValue}/`, locale);
 
   return (
     <Container width="content" as="article">
@@ -31,11 +39,11 @@ export default component$(() => {
           headline: head.title,
           description: head.meta.find((m) => m.name === "description")?.content,
           url: loc.url.href,
-          inLanguage: "en-GB",
+          inLanguage: locale === "ar" ? "ar" : "en-GB",
           isPartOf: {
             "@type": "WebSite",
-            name: "Sumud",
-            url: "https://sumud.timothybrits.co.za",
+            name: SITE_NAME,
+            url: SITE_URL,
           },
           ...(chapter?.verified && { dateModified: chapter.verified }),
         }}
@@ -48,14 +56,14 @@ export default component$(() => {
             {
               "@type": "ListItem",
               position: 1,
-              name: "Sumud",
-              item: "https://sumud.timothybrits.co.za/",
+              name: SITE_NAME,
+              item: `${SITE_URL}${localizedPathname("/", locale)}`,
             },
             {
               "@type": "ListItem",
               position: 2,
-              name: "History",
-              item: "https://sumud.timothybrits.co.za/history/",
+              name: locale === "ar" ? "التاريخ" : "History",
+              item: `${SITE_URL}${historyHref}`,
             },
             {
               "@type": "ListItem",
@@ -68,14 +76,14 @@ export default component$(() => {
       />
 
       <header class={styles.header}>
-        <Link href="/history/" class={styles.backLink}>
-          ← All chapters
+        <Link href={historyHref} class={styles.backLink}>
+          {strings.allChapters}
         </Link>
         {period && <span class={styles.period}>{period}</span>}
         <h1 class={styles.title}>{head.title}</h1>
         {chapter?.verified && (
           <p class={styles.verified}>
-            Facts and figures last verified {formatDate(chapter.verified)}
+            {strings.factsVerifiedPrefix} {formatDate(chapter.verified)}
           </p>
         )}
       </header>
@@ -86,21 +94,24 @@ export default component$(() => {
 
       <nav class={styles.chapterNav} aria-label="Chapter navigation">
         {prev ? (
-          <Link href={`/history/${prev.slug}/`} class={styles.chapterNavLink}>
-            <span class={styles.chapterNavLabel}>Previous</span>
-            {prev.title}
+          <Link href={chapterHref(prev.slug)} class={styles.chapterNavLink}>
+            <span class={styles.chapterNavLabel}>
+              {strings.previousChapter}
+            </span>
+            {locale === "ar" ? prev.ar.title : prev.title}
           </Link>
         ) : (
           <span />
         )}
         {next ? (
           <Link
-            href={`/history/${next.slug}/`}
+            href={chapterHref(next.slug)}
             class={styles.chapterNavLink}
             style={{ textAlign: "end" }}
           >
-            <span class={styles.chapterNavLabel}>Next</span>
-            {next.title} <ArrowRight size={14} />
+            <span class={styles.chapterNavLabel}>{strings.nextChapter}</span>
+            {locale === "ar" ? next.ar.title : next.title}{" "}
+            <ArrowRight size={14} class="rtl-mirror" />
           </Link>
         ) : (
           <span />
