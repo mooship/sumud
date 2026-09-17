@@ -10,6 +10,11 @@ the prose (`src/routes/**/*.mdx`) and the content data (`src/content/*.ts`), not
 plumbing. Stack: Qwik + Qwik City (SSG), TypeScript, vanilla-extract, Vitest, deployed as static
 output plus a thin Cloudflare Pages Worker.
 
+## Safety
+
+- **Never deploy to production (`wrangler deploy`) without explicit permission from the user.**
+  Always ask first and wait for confirmation.
+
 ## Before touching historical/factual content
 
 - **Prose must read as human-written, not AI-generated**: no listicle cadence, no "in
@@ -180,6 +185,20 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
   `server/`, both produced by `pnpm build`) -- the `[build] command` in `wrangler.jsonc` makes
   `wrangler dev` rebuild automatically, which takes several seconds; don't assume a stale
   request means the server is broken, it may just still be building.
+
+## Deployment (Cloudflare Workers)
+
+The site deploys as a Worker with static assets, configured by the root `wrangler.jsonc`
+(previously undocumented here): `name: "sumud"`, `main: "dist/_worker.js"` (the Qwik Cloudflare
+Pages adapter's output -- see `src/entry.cloudflare-pages.tsx`), `assets.directory: "dist"` with
+`binding: "ASSETS"` and `not_found_handling: "404-page"`, custom domain
+`sumud.timothybrits.co.za`, `compatibility_date` kept current with `nodejs_compat`, Smart
+Placement, cross-version caching, and full observability (logs + traces, `head_sampling_rate: 1`).
+This is the same config shape shared across all three `timothybrits.co.za` Workers (karta, pacer,
+sumud). `build.command` (`pnpm run build`) is what `wrangler dev`/Workers Builds uses to
+(re)build the site -- see the gotcha above. There is no automated deploy step in
+`.github/workflows/ci.yml`; deploying is a manual `wrangler deploy`, which needs a local
+`wrangler login`.
 
 ## Design tokens, icons and brand assets
 
