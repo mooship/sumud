@@ -19,13 +19,35 @@
   // DNS record and route automatically.
   "routes": [{ "pattern": "sumud.timothybrits.co.za", "custom_domain": true }],
 
+  // Smart Placement runs the Worker near wherever it does most of its work
+  // rather than always at the request's edge location -- low-impact for a
+  // mostly-static site, kept for parity with the other timothybrits.co.za
+  // Workers (karta, pacer).
+  "placement": {
+    "mode": "smart",
+  },
+
+  // Shares cached responses across Worker versions instead of a cold cache
+  // on every deploy. Only matters if code uses the Cache API; harmless
+  // otherwise.
+  "cache": {
+    "enabled": true,
+    "cross_version_cache": true,
+  },
+
   // Workers Logs: structured request/console logging in the dashboard, with
-  // 100% sampling since this is a low-traffic content site.
+  // 100% sampling since this is a low-traffic content site. Traces give the
+  // same visibility into request timing/spans.
   "observability": {
     "enabled": true,
+    "head_sampling_rate": 1,
     "logs": {
       "enabled": true,
       "invocation_logs": true,
+      "head_sampling_rate": 1,
+    },
+    "traces": {
+      "enabled": true,
       "head_sampling_rate": 1,
     },
   },
