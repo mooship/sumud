@@ -15,6 +15,7 @@
     "search.index": "pagefind --site dist",
     "dev": "vite --mode ssr",
     "preview": "npm run build && wrangler dev",
+    "prepare": "lefthook install --force",
     "deploy": "npm run build && wrangler deploy",
     "start": "vite --open --mode ssr",
     "lint": "eslint \"src/**/*.ts*\" \"*.ts\" \"adapters/**/*.ts\"",
