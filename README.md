@@ -32,7 +32,7 @@ npm run check    # lint + typecheck + test + build
 ## Editing content
 
 Chapter text lives in `src/routes/history/(chapter)/*/index.mdx`. Chapter order, sources, and
-Take Action listings live in `src/content/*.ts`. See [`CLAUDE.md`](CLAUDE.md) for architecture
+Take Action listings live in `src/content/*.ts`. See [`AGENTS.md`](AGENTS.md) for architecture
 notes and deeper technical detail.
 
 ## Licence
