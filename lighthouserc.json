@@ -3,7 +3,7 @@
     "collect": {
       "url": ["http://localhost:4173/", "http://localhost:4173/history/nakba/"],
       "numberOfRuns": 3,
-      "startServerCommand": "pnpm exec wrangler dev --port 4173",
+      "startServerCommand": "npx wrangler dev --port 4173",
       "startServerReadyPattern": "Ready on",
       "startServerReadyTimeout": 60000
     },

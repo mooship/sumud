@@ -16,24 +16,22 @@ jobs:
     steps:
       - uses: actions/checkout@v4
 
-      - uses: pnpm/action-setup@v4
-
       - uses: actions/setup-node@v4
         with:
           node-version: 22
-          cache: pnpm
+          cache: npm
 
       - name: Install dependencies
-        run: pnpm install --frozen-lockfile
+        run: npm ci
 
       - name: Lint
-        run: pnpm run lint
+        run: npm run lint
 
       - name: Typecheck
-        run: pnpm run typecheck
+        run: npm run typecheck
 
       - name: Test
-        run: pnpm run test.coverage
+        run: npm run test.coverage
 
       - name: Upload coverage report
         if: always()
@@ -44,4 +42,4 @@ jobs:
           retention-days: 14
 
       - name: Build
-        run: pnpm run build
+        run: npm run build

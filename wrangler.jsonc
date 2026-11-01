@@ -7,7 +7,7 @@
   "workers_dev": false,
   "preview_urls": true,
 
-  // Static output from `pnpm build`. Requests that match a file here are served
+  // Static output from `npm run build`. Requests that match a file here are served
   // directly by Cloudflare's edge and never reach the Worker script below --
   // the Worker only runs for the small number of routes that need it.
   "assets": {
@@ -56,6 +56,6 @@
 
   // Used by `wrangler dev`/Workers Builds to know how to (re)build the site.
   "build": {
-    "command": "pnpm run build",
+    "command": "npm run build",
   },
 }

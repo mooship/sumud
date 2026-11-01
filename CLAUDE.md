@@ -45,7 +45,7 @@ this wrong and a page either 404s in nav, or silently never appears anywhere but
 
 - **A new route directory under `src/routes/` is enough to make it live and indexed.** The
   Cloudflare Pages adapter (`adapters/cloudflare-pages/vite.config.ts`) runs Qwik City's SSG with
-  `ssg.include: ["/*"]`, so `pnpm build` prerenders every route it finds and regenerates
+  `ssg.include: ["/*"]`, so `npm run build` prerenders every route it finds and regenerates
   `dist/sitemap.xml` from the same crawl -- no per-route registration needed for either.
 - **Header nav and footer are not automatic in the same way.** Add the route to `NAV_ITEMS` in
   `src/content/nav.ts` to have it appear in the header (`src/components/layout/header.tsx`); the
@@ -141,9 +141,9 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
 - **vanilla-extract selectors**: `style({ selectors: { "&:hover h2": {...} } })` fails to build
   -- `&` can only combine with pseudo-classes/attribute selectors on the _same_ element, never
   descendant combinators. For "style raw child tags inside this component" (e.g. `Prose`,
-  which styles MDX-rendered `h2`/`p`/`blockquote`), use `globalStyle(\`${parentClass} h2\`, ...)`
+  which styles MDX-rendered `h2`/`p`/`blockquote`), use ``globalStyle(`${parentClass} h2`, ...)``
   instead -- see `src/components/ui/prose.css.ts`. For "style element B differently when A is
-  hovered," define B's style with `selectors: { [\`${aClass}:hover &\`]: {...} }` on B, not on A
+  hovered," define B's style with ``selectors: { [`${aClass}:hover &`]: {...} }`` on B, not on A
   (vanilla-extract requires the cross-reference to live on the target class, and the referenced
   class must already be defined above it in the file).
 - **Fontaine fallback names**: the generated fallback family is `"<Family> fallback"` where
@@ -182,7 +182,7 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
   (`SECURITY_HEADERS`/`applySecurityHeaders` in `src/security-headers.ts`, unit-tested directly so
   it can be checked without booting the whole app). If you change one, change both.
 - **`wrangler dev`/`wrangler deploy` need a real production-shaped build first** (`dist/` +
-  `server/`, both produced by `pnpm build`) -- the `[build] command` in `wrangler.jsonc` makes
+  `server/`, both produced by `npm run build`) -- the `[build] command` in `wrangler.jsonc` makes
   `wrangler dev` rebuild automatically, which takes several seconds; don't assume a stale
   request means the server is broken, it may just still be building.
 
@@ -195,7 +195,7 @@ Pages adapter's output -- see `src/entry.cloudflare-pages.tsx`), `assets.directo
 `sumud.timothybrits.co.za`, `compatibility_date` kept current with `nodejs_compat`, Smart
 Placement, cross-version caching, and full observability (logs + traces, `head_sampling_rate: 1`).
 This is the same config shape shared across all three `timothybrits.co.za` Workers (karta, pacer,
-sumud). `build.command` (`pnpm run build`) is what `wrangler dev`/Workers Builds uses to
+sumud). `build.command` (`npm run build`) is what `wrangler dev`/Workers Builds uses to
 (re)build the site -- see the gotcha above. There is no automated deploy step in
 `.github/workflows/ci.yml`; deploying is a manual `wrangler deploy`, which needs a local
 `wrangler login`.
@@ -210,7 +210,7 @@ color-scheme: dark)": { vars: {...} } } })` block at the bottom of the same file
   a subset of the colour tokens. A component that only ever reads `vars.color.*` gets dark mode
   for free; introducing a raw colour bypasses it.
 - **Icons are generated, not hand-written.** `src/components/ui/icons/*.tsx` and its `index.ts`
-  barrel are produced by `pnpm icons` (`scripts/generate-icons.mjs`) from `lucide-static` SVGs --
+  barrel are produced by `npm run icons` (`scripts/generate-icons.mjs`) from `lucide-static` SVGs --
   add the Lucide icon's PascalCase name and kebab-case filename to the `ICONS` map at the top of
   the script, re-run it, and the component + barrel export appear together. Don't edit the
   generated `.tsx` files directly, edits will be silently lost next run.
@@ -224,9 +224,9 @@ color-scheme: dark)": { vars: {...} } } })` block at the bottom of the same file
 ## Commands
 
 ```bash
-pnpm check          # lint + typecheck + test + build -- run this before considering anything done
-pnpm test.coverage  # vitest run --coverage (istanbul provider -- see below); CI-enforced, not pre-commit
-pnpm icons          # after adding an icon name to scripts/generate-icons.mjs
+npm run check          # lint + typecheck + test + build -- run this before considering anything done
+npm run test.coverage  # vitest run --coverage (istanbul provider -- see below); CI-enforced, not pre-commit
+npm run icons          # after adding an icon name to scripts/generate-icons.mjs
 node scripts/generate-images.mjs  # after editing public/favicon.svg or its brand colours
 ```
 
@@ -244,14 +244,14 @@ these through its own internal module resolution rather than a plain import, so 
 rendered, passing unit test (confirmed for `routes/layout.tsx`) still reports 0% -- they're only
 reachable end-to-end, via a real dev/preview server request.
 
-There is no separate "format" CI check currently wired up beyond `pnpm fmt.check`; run `pnpm fmt`
+There is no separate "format" CI check currently wired up beyond `npm run fmt.check`; run `npm run fmt`
 before committing if you've hand-edited anything Prettier would reflow.
 
 **Pre-commit vs. CI aren't the same checks.** `lefthook.yml` runs on staged files at commit time:
 `eslint --fix` and `prettier --write` (both `stage_fixed`, so their fixes get included in the
-commit automatically), plus a full `pnpm run test` -- no coverage, no typecheck, no build. CI
+commit automatically), plus a full `npm test` -- no coverage, no typecheck, no build. CI
 (`.github/workflows/ci.yml`) runs the fuller sequence on every push/PR: lint, typecheck,
 `test.coverage` (coverage thresholds are only enforced here), then build. A commit can pass the
 local hook and still fail CI on typecheck, coverage thresholds, or a production-only build error
--- run `pnpm check` (and `pnpm test.coverage` if you touched anything coverage-sensitive) before
+-- run `npm run check` (and `npm run test.coverage` if you touched anything coverage-sensitive) before
 treating something as done, don't rely on the hook alone.

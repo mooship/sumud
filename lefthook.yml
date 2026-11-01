@@ -2,10 +2,10 @@ pre-commit:
   commands:
     eslint:
       glob: "*.{ts,tsx}"
-      run: pnpm exec eslint --fix {staged_files}
+      run: npx eslint --fix {staged_files}
       stage_fixed: true
     prettier:
-      run: pnpm exec prettier --write --ignore-unknown {staged_files}
+      run: npx prettier --write --ignore-unknown {staged_files}
       stage_fixed: true
     vitest:
-      run: pnpm run test
+      run: npm test

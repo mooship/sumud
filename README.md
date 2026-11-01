@@ -16,17 +16,17 @@ Qwik + Qwik City, TypeScript, vanilla-extract, Vitest, deployed to Cloudflare Wo
 
 ## Getting started
 
-Requires Node 22+ and [pnpm](https://pnpm.io/).
+Requires Node 22+ and npm.
 
 ```bash
-pnpm install
-pnpm dev      # http://localhost:5173
+npm install
+npm run dev      # http://localhost:5173
 ```
 
 ```bash
-pnpm build    # production build
-pnpm test     # run the test suite
-pnpm check    # lint + typecheck + test + build
+npm run build    # production build
+npm test         # run the test suite
+npm run check    # lint + typecheck + test + build
 ```
 
 ## Editing content

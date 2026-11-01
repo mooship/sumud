@@ -21,7 +21,7 @@ function initPagefindUI(doc: Document): void {
 }
 
 /**
- * Injects Pagefind's self-hosted UI assets (built by `pnpm run search.index`
+ * Injects Pagefind's self-hosted UI assets (built by `npm run search.index`
  * into `dist/pagefind/`, so these are always same-origin) and instantiates
  * `PagefindUI` against {@link SEARCH_MOUNT_ID} once the script has loaded.
  * Pagefind isn't a Qwik-aware library, so this is deliberately plain DOM
