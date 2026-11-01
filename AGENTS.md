@@ -192,10 +192,11 @@ The site deploys as a Worker with static assets, configured by the root `wrangle
 (previously undocumented here): `name: "sumud"`, `main: "dist/_worker.js"` (the Qwik Cloudflare
 Pages adapter's output -- see `src/entry.cloudflare-pages.tsx`), `assets.directory: "dist"` with
 `binding: "ASSETS"` and `not_found_handling: "404-page"`, custom domain
-`sumud.timothybrits.co.za`, `compatibility_date` kept current with `nodejs_compat`, Smart
-Placement, cross-version caching, and full observability (logs + traces, `head_sampling_rate: 1`).
-This is the same config shape shared across all three `timothybrits.co.za` Workers (karta, pacer,
-sumud). `build.command` (`npm run build`) is what `wrangler dev`/Workers Builds uses to
+`sumud.timothybrits.co.za`, `compatibility_date` kept current with `nodejs_compat`, and full
+observability (logs + traces, `head_sampling_rate: 1`). There is no Smart Placement (the Worker
+has no back end to sit near) and no Workers Cache (`cache.enabled` would count every static
+asset request as a billed Worker request).
+`build.command` (`npm run build`) is what `wrangler dev`/Workers Builds uses to
 (re)build the site -- see the gotcha above. There is no automated deploy step in
 `.github/workflows/ci.yml`; deploying is a manual `wrangler deploy`, which needs a local
 `wrangler login`.
