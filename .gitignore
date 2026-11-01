@@ -92,6 +92,11 @@ tsconfig.tsbuildinfo
 # Lighthouse CI results
 .lighthouseci
 
+# Playwright
+test-results/
+playwright-report/
+.playwright-mcp/
+
 # Gatsby files
 .cache/
 # Comment in the public line in if your project uses Gatsby and not Next.js

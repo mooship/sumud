@@ -18,5 +18,12 @@
       "~/*": ["./src/*"]
     }
   },
-  "include": ["src", "adapters", "vite.config.ts", "vitest.config.ts"]
+  "include": [
+    "src",
+    "adapters",
+    "e2e",
+    "vite.config.ts",
+    "vitest.config.ts",
+    "playwright.config.ts"
+  ]
 }

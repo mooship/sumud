@@ -227,6 +227,7 @@ color-scheme: dark)": { vars: {...} } } })` block at the bottom of the same file
 ```bash
 npm run check          # lint + typecheck + test + build -- run this before considering anything done
 npm run test.coverage  # vitest run --coverage (istanbul provider -- see below); CI-enforced, not pre-commit
+npm run test.e2e       # Playwright against the built site (npm run preview on port 4174); not in CI yet
 npm run icons          # after adding an icon name to scripts/generate-icons.mjs
 node scripts/generate-images.mjs  # after editing public/favicon.svg or its brand colours
 ```
