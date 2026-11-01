@@ -4,14 +4,8 @@ import {
 } from "@builder.io/qwik-city/middleware/cloudflare-pages";
 import qwikCityPlan from "@qwik-city-plan";
 import render from "./entry.ssr";
-import { applySecurityHeaders } from "./security-headers";
 
-const qwikCityFetch = createQwikCity({ render, qwikCityPlan });
-
-const fetch: typeof qwikCityFetch = async (request, env, ctx) => {
-  const response = await qwikCityFetch(request, env, ctx);
-  return applySecurityHeaders(response);
-};
+const fetch = createQwikCity({ render, qwikCityPlan });
 
 export { fetch };
 

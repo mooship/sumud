@@ -179,10 +179,9 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
 - **`public/_headers` sets every header.** The deployed Worker is assets-only (no `main` in
   `wrangler.jsonc`): every route is prerendered, and unknown paths get `dist/404.html` from the
   assets layer, so no Worker code runs and `_headers` applies to every response, the 404 included.
-  `src/entry.cloudflare-pages.tsx` and `SECURITY_HEADERS`/`applySecurityHeaders` in
-  `src/security-headers.ts` still build into `dist/_worker.js`, which `public/.assetsignore` keeps
-  out of the upload. If a route ever needs to render on request, put `main` back and keep the two
-  header lists in step.
+  The Cloudflare Pages adapter entry remains necessary for prerendering, but its generated
+  `dist/_worker.js` is excluded by `public/.assetsignore`. If a route ever needs to render on
+  request, put `main` back and add runtime response headers for that route.
 - **`wrangler dev`/`wrangler deploy` need a real production-shaped build first** (`dist/` +
   `server/`, both produced by `npm run build`) -- the `[build] command` in `wrangler.jsonc` makes
   `wrangler dev` rebuild automatically, which takes several seconds; don't assume a stale
