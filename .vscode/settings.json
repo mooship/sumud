@@ -1,0 +1,20 @@
+{
+  "files.exclude": {
+    ".lighthouseci": true,
+    ".playwright-mcp": true,
+    ".wrangler": true,
+    "coverage": true,
+    "dist": true,
+    "playwright-report": true,
+    "server": true,
+    "test-results": true,
+    "tsconfig.tsbuildinfo": true
+  },
+  "explorer.fileNesting.enabled": true,
+  "explorer.fileNesting.expand": false,
+  "explorer.fileNesting.patterns": {
+    "package.json": "package-lock.json, tsconfig.json, vite.config.ts, vitest.config.ts, playwright.config.ts, wrangler.jsonc, eslint.config.js, .prettierignore, lefthook.yml, lighthouserc.json, .mcp.json, skills-lock.json",
+    "README.md": "AGENTS.md, CLAUDE.md, LICENSE",
+    ".gitignore": ".env*, .dev.vars*, .editorconfig, .gitattributes"
+  }
+}
