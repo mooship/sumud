@@ -176,11 +176,13 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
   parse structured data anywhere in the document, and Qwik City's head API has no first-class
   slot for arbitrary body scripts. `data` is passed as a plain object and `JSON.stringify`'d
   inline, so never put unsanitised user input in it (there is none on this site today).
-- **`_headers` only covers static-asset responses.** Anything rendered by the Worker itself (the
-  404 page; in principle any non-prerendered route) skips `public/_headers` entirely. The same
-  security header set is therefore duplicated in `src/entry.cloudflare-pages.tsx`
-  (`SECURITY_HEADERS`/`applySecurityHeaders` in `src/security-headers.ts`, unit-tested directly so
-  it can be checked without booting the whole app). If you change one, change both.
+- **`public/_headers` sets every header.** The deployed Worker is assets-only (no `main` in
+  `wrangler.jsonc`): every route is prerendered, and unknown paths get `dist/404.html` from the
+  assets layer, so no Worker code runs and `_headers` applies to every response, the 404 included.
+  `src/entry.cloudflare-pages.tsx` and `SECURITY_HEADERS`/`applySecurityHeaders` in
+  `src/security-headers.ts` still build into `dist/_worker.js`, which `public/.assetsignore` keeps
+  out of the upload. If a route ever needs to render on request, put `main` back and keep the two
+  header lists in step.
 - **`wrangler dev`/`wrangler deploy` need a real production-shaped build first** (`dist/` +
   `server/`, both produced by `npm run build`) -- the `[build] command` in `wrangler.jsonc` makes
   `wrangler dev` rebuild automatically, which takes several seconds; don't assume a stale
@@ -188,14 +190,12 @@ slug -- no separate i18n library, just Qwik City's own routing and request-local
 
 ## Deployment (Cloudflare Workers)
 
-The site deploys as a Worker with static assets, configured by the root `wrangler.jsonc`
-(previously undocumented here): `name: "sumud"`, `main: "dist/_worker.js"` (the Qwik Cloudflare
-Pages adapter's output -- see `src/entry.cloudflare-pages.tsx`), `assets.directory: "dist"` with
-`binding: "ASSETS"` and `not_found_handling: "404-page"`, custom domain
+The site deploys as an assets-only Worker, configured by the root `wrangler.jsonc`:
+`name: "sumud"`, `assets.directory: "dist"` with `not_found_handling: "404-page"`, custom domain
 `sumud.timothybrits.co.za`, `compatibility_date` kept current with `nodejs_compat`, and full
-observability (logs + traces, `head_sampling_rate: 1`). There is no Smart Placement (the Worker
-has no back end to sit near) and no Workers Cache (`cache.enabled` would count every static
-asset request as a billed Worker request).
+observability (logs + traces, `head_sampling_rate: 1`). There is no Smart Placement and no
+Workers Cache (`cache.enabled` would count every static asset request as a billed Worker
+request).
 `build.command` (`npm run build`) is what `wrangler dev`/Workers Builds uses to
 (re)build the site -- see the gotcha above. There is no automated deploy step in
 `.github/workflows/ci.yml`; deploying is a manual `wrangler deploy`, which needs a local
