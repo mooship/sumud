@@ -254,7 +254,7 @@ before committing if you've hand-edited anything Prettier would reflow.
 
 **Pre-commit vs. CI aren't the same checks.** `lefthook.yml` runs on staged files at commit time:
 `eslint --fix` and `prettier --write` (both `stage_fixed`, so their fixes get included in the
-commit automatically), plus a full `npm test` -- no coverage, no typecheck, no build. CI
+commit automatically) -- no unit tests, coverage, typecheck or build. Unit tests run separately and in CI. CI
 (`.github/workflows/ci.yml`) runs the fuller sequence on every push/PR: lint, typecheck,
 `test.coverage` (coverage thresholds are only enforced here), then build. A commit can pass the
 local hook and still fail CI on typecheck, coverage thresholds, or a production-only build error
