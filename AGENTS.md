@@ -15,6 +15,10 @@ output plus a thin Cloudflare Pages Worker.
 - **Never deploy to production (`wrangler deploy`) without explicit permission from the user.**
   Always ask first and wait for confirmation.
 
+## Commit messages
+
+Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for every commit, with the subject format `<type>[optional scope][!]: <description>`. Use a recognised type such as `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `build`, `ci` or `chore`. Mark breaking changes with `!` and explain them in the body or a `BREAKING CHANGE:` footer.
+
 ## Before touching historical/factual content
 
 - **Prose must read as human-written, not AI-generated**: no listicle cadence, no "in
