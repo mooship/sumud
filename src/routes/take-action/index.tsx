@@ -3,17 +3,11 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
-import {
-  ExternalLink,
-  HeartHandshake,
-  ShieldAlert,
-} from "~/components/ui/icons";
+import { ExternalLink } from "~/components/ui/icons";
 import { ORG_GROUPS } from "~/content/organisations";
 import { UI_STRINGS, localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
 import * as styles from "./index.css";
-
-const GROUP_ICONS = [HeartHandshake, ShieldAlert];
 
 const COPY = {
   en: {
@@ -69,44 +63,35 @@ export default component$(() => {
         <p class={styles.lede}>{copy.lede}</p>
       </header>
 
-      {ORG_GROUPS.map((group, i) => {
-        const GroupIcon = GROUP_ICONS[i % GROUP_ICONS.length];
-        return (
-          <section key={group.title} class={styles.group}>
-            <div class={styles.groupTitleRow}>
-              <span class={styles.groupIconBadge}>
-                <GroupIcon size={20} />
-              </span>
-              <h2 class={styles.groupTitle}>
-                {locale === "ar" ? group.ar.title : group.title}
-              </h2>
-            </div>
-            <p class={styles.groupIntro}>
-              {locale === "ar" ? group.ar.intro : group.intro}
-            </p>
-            <div class={styles.grid}>
-              {group.orgs.map((org) => (
+      {ORG_GROUPS.map((group) => (
+        <section key={group.title} class={styles.group}>
+          <h2 class={styles.groupTitle}>
+            {locale === "ar" ? group.ar.title : group.title}
+          </h2>
+          <p class={styles.groupIntro}>
+            {locale === "ar" ? group.ar.intro : group.intro}
+          </p>
+          <ul class={styles.list}>
+            {group.orgs.map((org) => (
+              <li key={org.name} class={styles.item}>
                 <a
-                  key={org.name}
                   href={org.url}
-                  class={styles.card}
+                  class={styles.orgLink}
                   target="_blank"
                   rel="noopener noreferrer"
                 >
-                  <p class={styles.cardName}>
-                    {org.name}
-                    <ExternalLink size={14} class={styles.cardIcon} />
-                    <span class="visually-hidden">{strings.opensNewTab}</span>
-                  </p>
-                  <p class={styles.cardDescription}>
-                    {locale === "ar" ? org.ar.description : org.description}
-                  </p>
+                  {org.name}
+                  <ExternalLink size={13} class={styles.orgIcon} />
+                  <span class="visually-hidden">{strings.opensNewTab}</span>
                 </a>
-              ))}
-            </div>
-          </section>
-        );
-      })}
+                <p class={styles.orgDescription}>
+                  {locale === "ar" ? org.ar.description : org.description}
+                </p>
+              </li>
+            ))}
+          </ul>
+        </section>
+      ))}
     </Container>
   );
 });

@@ -32,41 +32,34 @@ export const group = style({
   borderTop: `1px solid ${vars.color.sandLine}`,
 });
 
-export const groupTitleRow = style({
-  display: "flex",
-  alignItems: "center",
-  gap: vars.space[2],
-  marginBottom: vars.space[1],
-});
-
-export const groupIconBadge = style({
-  display: "inline-flex",
-  alignItems: "center",
-  justifyContent: "center",
-  width: "2.5rem",
-  height: "2.5rem",
-  flexShrink: 0,
-  borderRadius: vars.radius.pill,
-  backgroundColor: vars.color.terracottaLight,
-  color: vars.color.terracotta,
-});
-
 export const groupTitle = style({
   fontFamily: vars.font.serif,
   fontSize: vars.fontSize.lg,
-  margin: 0,
+  marginBottom: vars.space[1],
 });
 
 export const groupIntro = style({
+  maxWidth: "60ch",
   color: vars.color.inkMuted,
   fontSize: vars.fontSize.sm,
   marginBottom: vars.space[4],
 });
 
-export const grid = style({
+export const list = style({
+  listStyle: "none",
+  margin: 0,
+  padding: 0,
+  borderTop: `1px solid ${vars.color.sandLine}`,
+});
+
+export const item = style({
   display: "grid",
-  gridTemplateColumns: "repeat(2, 1fr)",
-  gap: vars.space[3],
+  gridTemplateColumns: "minmax(0, 14rem) minmax(0, 1fr)",
+  columnGap: vars.space[4],
+  rowGap: vars.space[1],
+  alignItems: "baseline",
+  paddingBlock: vars.space[3],
+  borderBottom: `1px solid ${vars.color.sandLine}`,
   "@media": {
     "screen and (max-width: 40rem)": {
       gridTemplateColumns: "1fr",
@@ -74,33 +67,27 @@ export const grid = style({
   },
 });
 
-export const card = style({
-  display: "block",
-  padding: vars.space[3],
-  border: `1px solid ${vars.color.sandLine}`,
-  borderRadius: vars.radius.md,
-  textDecoration: "none",
-  color: "inherit",
-  transition: "border-color 0.15s ease",
+export const orgLink = style({
+  fontWeight: 600,
+  color: vars.color.ink,
+  textDecorationColor: vars.color.sandLine,
+  textUnderlineOffset: "0.2em",
   selectors: {
-    "&:hover": { borderColor: vars.color.olive },
+    "&:hover": {
+      color: vars.color.terracotta,
+      textDecorationColor: "currentColor",
+    },
   },
 });
 
-export const cardName = style({
-  display: "flex",
-  alignItems: "center",
-  gap: vars.space[1],
-  fontWeight: 600,
-  color: vars.color.ink,
-  marginBottom: "0.3em",
-});
-
-export const cardIcon = style({
+export const orgIcon = style({
+  display: "inline-block",
+  marginInlineStart: "0.3em",
+  verticalAlign: "-0.1em",
   color: vars.color.inkFaint,
 });
 
-export const cardDescription = style({
+export const orgDescription = style({
   fontSize: vars.fontSize.sm,
   color: vars.color.inkMuted,
   margin: 0,
