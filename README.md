@@ -27,6 +27,7 @@ npm run dev      # http://localhost:5173
 npm run build    # production build
 npm test         # run the test suite
 npm run check    # lint + typecheck + test + build
+npm run test.e2e # Playwright against the production build
 ```
 
 ## Editing content
@@ -34,6 +35,15 @@ npm run check    # lint + typecheck + test + build
 Chapter text lives in `src/routes/history/(chapter)/*/index.mdx`. Chapter order, sources, and
 Take Action listings live in `src/content/*.ts`. See [`AGENTS.md`](AGENTS.md) for architecture
 notes and deeper technical detail.
+
+The homepage is a reading guide: a short introduction, the meaning of sumud, an ordered
+chapter list, and links to culture and aid organisations. Keep introductory copy specific
+and brief rather than repeating the project's mission on each page. English and Arabic
+share the page layouts; copy changes need both versions.
+
+Browser tests cover the reading guide, mobile navigation, language switching, keyboard
+access, light/dark button contrast and search. Search uses Pagefind's WebAssembly worker;
+its scoped CSP exception lives in `public/_headers` alongside the search-page exceptions.
 
 ## Licence
 

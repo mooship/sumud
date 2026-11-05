@@ -10,7 +10,7 @@ const base = style({
   fontSize: vars.fontSize.sm,
   fontWeight: 600,
   textDecoration: "none",
-  borderRadius: vars.radius.pill,
+  borderRadius: vars.radius.sm,
   paddingBlock: vars.space[2],
   paddingInline: vars.space[4],
   border: "1px solid transparent",
@@ -24,7 +24,7 @@ export const variant = styleVariants({
     base,
     {
       backgroundColor: vars.color.olive,
-      color: vars.color.white,
+      color: vars.color.onOlive,
       selectors: {
         "&:hover": { backgroundColor: vars.color.oliveDark },
       },

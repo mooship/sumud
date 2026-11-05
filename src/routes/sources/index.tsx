@@ -10,11 +10,11 @@ import * as styles from "./index.css";
 const COPY = {
   en: {
     eyebrow: "Sources",
-    title: "How this was written",
+    title: "Sources and corrections",
     lede1:
-      "This project synthesises mainstream historical scholarship, UN and archival records, and reporting from human rights organisations across the political spectrum -- Israeli, Palestinian and international. Where historians genuinely disagree, we have tried to say so rather than flatten the disagreement. Figures for casualties and displacement, particularly for events since 2023, are attributed to their source rather than stated as uncontested fact, because they often are contested.",
+      "The history chapters draw on books, UN and archival records, and reporting by Palestinian, Israeli and international human rights organisations. Disagreements between historians are noted in the text. Casualty and displacement figures should be read with their attribution and date, especially in the chapter covering events since 2023.",
     lede2Pre:
-      "This is not an academic work with a footnote for every sentence. It is a synthesis, and synthesis involves judgement. The list below is not exhaustive, but it represents the kinds of sources drawn on throughout the site. For a longer list of books, including memoir, fiction and poetry, see ",
+      "The list below is a guide to the sources used, not a sentence-by-sentence bibliography. Links in the chapters point to relevant entries here. For memoir, fiction and poetry as well as more history, see ",
     furtherReadingLink: "further reading",
     lede2Post: ".",
     correctionTitle: "Found an error?",
@@ -22,18 +22,18 @@ const COPY = {
       "If something on this site is factually wrong, out of date, or misattributed, please ",
     correctionLink: "open an issue on GitHub",
     correctionPost:
-      ". Corrections are welcome and will be reviewed and, where warranted, applied promptly.",
+      ". Include the page, the passage and a source for the correction so it can be checked.",
     headTitle: "Sources",
     headDescription:
       "The books, archives, UN records and human rights organisations this project draws on, and how to flag a correction.",
   },
   ar: {
     eyebrow: "المصادر",
-    title: "كيف كُتب هذا",
+    title: "المصادر والتصويبات",
     lede1:
-      "يجمع هذا المشروع بين الدراسات التاريخية المعتمدة، والسجلات الأممية والأرشيفية، وتقارير منظمات حقوق الإنسان عبر الطيف السياسي -- الإسرائيلي والفلسطيني والدولي. وحيثما يختلف المؤرخون فعلًا، حاولنا ذكر ذلك بدلًا من تسطيح الخلاف. وتُنسب أرقام الضحايا والتهجير، لا سيما للأحداث منذ عام 2023، إلى مصدرها بدلًا من تقديمها كحقيقة غير متنازع عليها، لأنها كثيرًا ما تكون كذلك.",
+      "تستند فصول التاريخ إلى الكتب والسجلات الأممية والأرشيفية وتقارير منظمات حقوق الإنسان الفلسطينية والإسرائيلية والدولية. يذكر النص مواضع الخلاف بين المؤرخين. وينبغي قراءة أرقام الضحايا والتهجير مع مصادرها وتواريخها، خصوصًا في الفصل الذي يغطي الأحداث منذ عام 2023.",
     lede2Pre:
-      "هذا ليس عملًا أكاديميًا بحاشية لكل جملة. إنه توليف، والتوليف ينطوي على اجتهاد. القائمة أدناه ليست شاملة، لكنها تمثل أنواع المصادر المعتمدة في أنحاء الموقع. للاطلاع على قائمة أطول من الكتب، بما فيها المذكرات والأدب الروائي والشعر، انظر ",
+      "القائمة أدناه دليل إلى المصادر المستخدمة، وليست توثيقًا لكل جملة. تشير روابط الفصول إلى المداخل ذات الصلة هنا. للمذكرات والروايات والشعر ومزيد من كتب التاريخ، انظر ",
     furtherReadingLink: "قراءات إضافية",
     lede2Post: ".",
     correctionTitle: "وجدت خطأ؟",
@@ -41,7 +41,7 @@ const COPY = {
       "إذا كان هناك شيء غير دقيق أو قديم أو منسوب خطأً في هذا الموقع، يرجى ",
     correctionLink: "فتح تذكرة على GitHub",
     correctionPost:
-      ". التصويبات موضع ترحيب وستُراجَع، وتُطبَّق سريعًا متى استدعى الأمر ذلك.",
+      ". أرفق الصفحة والمقطع ومصدرًا للتصويب حتى يمكن التحقق منه.",
     headTitle: "المصادر",
     headDescription:
       "الكتب والأرشيفات وسجلات الأمم المتحدة ومنظمات حقوق الإنسان التي يعتمد عليها هذا المشروع، وكيفية الإبلاغ عن تصويب.",

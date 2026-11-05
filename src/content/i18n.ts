@@ -32,7 +32,7 @@ export const UI_STRINGS: Record<Locale, UiStrings> = {
     openMenu: "Open menu",
     closeMenu: "Close menu",
     footerTagline:
-      "An independent, non-commercial project telling the story of Palestine and its people -- before 1947 and after. Sumud means steadfastness: staying rooted in the land and the story, whatever comes.",
+      "An independent, non-commercial guide to Palestinian history and culture. Read in English or Arabic.",
     footerReadHeading: "Read",
     footerProjectHeading: "Project",
     sourceOnGithub: "Source on GitHub",
@@ -50,7 +50,7 @@ export const UI_STRINGS: Record<Locale, UiStrings> = {
     openMenu: "فتح القائمة",
     closeMenu: "إغلاق القائمة",
     footerTagline:
-      "مشروع مستقل وغير ربحي يروي قصة فلسطين وأهلها، قبل عام 1947 وبعده. الصمود يعني الثبات: البقاء متجذرًا في الأرض وفي الحكاية، مهما حدث.",
+      "دليل مستقل وغير ربحي إلى التاريخ والثقافة الفلسطينية. اقرأ بالعربية أو بالإنجليزية.",
     footerReadHeading: "القراءة",
     footerProjectHeading: "المشروع",
     sourceOnGithub: "المصدر على GitHub",

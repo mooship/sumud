@@ -26,8 +26,10 @@ export const Header = component$(() => {
       <header class={styles.header}>
         <Container width="wide">
           <div class={styles.bar}>
-            <Link href={homeHref} class={styles.brand}>
-              <span class={styles.brandMark}>سمود</span>
+            <Link href={homeHref} class={styles.brand} translate="no">
+              <span class={styles.brandMark} lang="ar" dir="rtl">
+                صمود
+              </span>
               <span>Sumud</span>
             </Link>
 

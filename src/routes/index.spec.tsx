@@ -23,6 +23,13 @@ describe("routes/index (homepage)", () => {
       </QwikCityMockProvider>,
     );
     expect(screen.querySelector("h1")?.textContent).toBe("Sumud");
+    expect(screen.querySelector("aside")?.textContent).toContain(
+      "standing firm",
+    );
+    expect(screen.querySelectorAll(":scope ol li")).toHaveLength(
+      HISTORY_CHAPTERS.length,
+    );
+    expect(screen.querySelectorAll('a[href="/history/"]')).toHaveLength(1);
     const jsonLd = JSON.parse(
       screen.querySelector('script[type="application/ld+json"]')?.innerHTML ??
         "{}",
@@ -75,6 +82,12 @@ describe("routes/index (homepage)", () => {
     expect(hrefs).toContain("/ar/culture/");
     expect(hrefs).toContain("/ar/take-action/");
     expect(hrefs).toContain("/ar/sources/");
+    expect(screen.querySelector("aside")?.textContent).toContain(
+      "أن تقف راسخًا",
+    );
+    expect(screen.querySelectorAll(":scope ol li")).toHaveLength(
+      HISTORY_CHAPTERS.length,
+    );
     for (const chapter of HISTORY_CHAPTERS) {
       expect(hrefs).toContain(`/ar/history/${chapter.slug}/`);
       expect(screen.textContent).toContain(chapter.ar.title);

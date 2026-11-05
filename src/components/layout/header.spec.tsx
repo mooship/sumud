@@ -21,6 +21,9 @@ describe("Header", () => {
     );
     expect(current?.getAttribute("aria-current")).toBe("page");
     expect(other?.getAttribute("aria-current")).toBeFalsy();
+    const wordmark = screen.querySelector(':scope a[href="/"] [lang="ar"]');
+    expect(wordmark?.textContent).toBe("صمود");
+    expect(wordmark?.getAttribute("dir")).toBe("rtl");
   });
 
   it("switches to Arabic nav labels, hrefs and the Arabic homepage link under /ar/", async () => {

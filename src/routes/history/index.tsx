@@ -11,7 +11,7 @@ const COPY = {
   en: {
     eyebrow: "History",
     title: "Palestine, chapter by chapter",
-    lede: "This is one continuous story told in seven parts: an Ottoman province, a British Mandate, a partition and a catastrophe, decades of exile and occupation, and the Palestine of today. Each chapter stands alone, but they are meant to be read in order.",
+    lede: "Begin under Ottoman rule and follow Palestine through the British Mandate, the Nakba, exile and occupation. The seven chapters work best in order, but you can also go straight to a particular period.",
     headTitle: "History",
     headDescription:
       "The history of Palestine from Ottoman rule through the British Mandate, the Nakba, occupation and exile, to the present day.",
@@ -19,7 +19,7 @@ const COPY = {
   ar: {
     eyebrow: "التاريخ",
     title: "فلسطين، فصلاً فصلاً",
-    lede: "هذه قصة واحدة متصلة تُروى في سبعة أجزاء: ولاية عثمانية، وانتداب بريطاني، وتقسيم وكارثة، وعقود من المنفى والاحتلال، وفلسطين اليوم. يقف كل فصل بذاته، لكن الأفضل قراءتها بالترتيب.",
+    lede: "ابدأ بالحكم العثماني وتابع تاريخ فلسطين عبر الانتداب البريطاني والنكبة والمنفى والاحتلال. الأفضل قراءة الفصول السبعة بالترتيب، ويمكنك أيضًا الانتقال مباشرة إلى فترة بعينها.",
     headTitle: "التاريخ",
     headDescription:
       "تاريخ فلسطين من الحكم العثماني مرورًا بالانتداب البريطاني والنكبة والاحتلال والمنفى، وصولًا إلى يومنا هذا.",

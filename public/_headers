@@ -1,7 +1,6 @@
 # Cloudflare Workers static assets: https://developers.cloudflare.com/workers/static-assets/headers/
 # Security headers for every static response (HTML, fonts, images, JSON...).
-# The equivalent set for responses rendered by the Worker itself (e.g. the
-# 404 page) is applied in src/entry.cloudflare-pages.tsx.
+# The site is assets-only, so this also covers the prerendered 404 page.
 
 /*
   X-Content-Type-Options: nosniff
@@ -13,13 +12,20 @@
   Strict-Transport-Security: max-age=31536000; includeSubDomains; preload
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
 
-# /search/ loads Pagefind's client-side search index, which falls back to WASM for
-# brotli decompression on browsers without native support -- 'wasm-unsafe-eval' only
-# allows compiling WebAssembly, not arbitrary eval, and is scoped to just this page
-# rather than the whole site.
+# Pagefind uses WebAssembly. Allow compilation on the search pages and on its
+# dedicated worker, which uses its own response's CSP rather than the page's.
+# 'wasm-unsafe-eval' does not permit JavaScript eval.
 /search/*
   ! Content-Security-Policy
   Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+
+/ar/search/*
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline' 'wasm-unsafe-eval'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; base-uri 'self'; form-action 'self'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+
+/pagefind/pagefind-worker.js
+  ! Content-Security-Policy
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'wasm-unsafe-eval'; connect-src 'self'; base-uri 'none'; object-src 'none'
 
 # Hashed, content-addressed build output -- safe to cache forever.
 /build/*

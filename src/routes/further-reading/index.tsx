@@ -16,10 +16,10 @@ const COPY = {
     eyebrow: "Further Reading",
     title: "Books about Palestine",
     ledePre:
-      "A site can only go so far. These are history, memoir, fiction and poetry that go further, from Palestinian, Israeli and other writers. Several are cited on the ",
+      "History, memoir, fiction and poetry by Palestinian, Israeli and other writers. Books used in the history chapters also appear on the ",
     sourcesLink: "sources page",
     ledePost:
-      " as works this project draws on directly; others are here for readers who want the story told at greater length, or in a different register.",
+      ". The rest offer other ways into the subject, through personal accounts, novels and poems.",
     jsonLdName: "Further Reading -- Sumud",
     headTitle: "Further Reading",
     headDescription:
@@ -29,10 +29,10 @@ const COPY = {
     eyebrow: "قراءات إضافية",
     title: "كتب عن فلسطين",
     ledePre:
-      "لا يمكن لموقع أن يفي بكل شيء. هذه كتب تاريخ ومذكرات وأدب روائي وشعر تذهب أبعد من ذلك، بأقلام كتّاب فلسطينيين وإسرائيليين وغيرهم. بعضها مذكور في ",
+      "كتب تاريخ ومذكرات وروايات وشعر بأقلام كتّاب فلسطينيين وإسرائيليين وغيرهم. وتظهر الكتب المستخدمة في فصول التاريخ أيضًا في ",
     sourcesLink: "صفحة المصادر",
     ledePost:
-      " بوصفها أعمالًا يعتمد عليها هذا المشروع مباشرة؛ وبعضها الآخر هنا لمن يريد القصة مروية بتفصيل أكبر، أو بأسلوب مختلف.",
+      ". أما بقية الكتب فتقدم مداخل أخرى إلى الموضوع، عبر الشهادات الشخصية والروايات والقصائد.",
     jsonLdName: "قراءات إضافية -- صمود",
     headTitle: "قراءات إضافية",
     headDescription:

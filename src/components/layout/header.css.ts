@@ -58,7 +58,7 @@ export const nav = style({
   alignItems: "center",
   gap: vars.space[4],
   "@media": {
-    "screen and (max-width: 48rem)": {
+    "screen and (max-width: 72rem)": {
       display: "none",
     },
   },
@@ -96,7 +96,7 @@ export const menuButton = style({
   cursor: "pointer",
   color: vars.color.ink,
   "@media": {
-    "screen and (max-width: 48rem)": {
+    "screen and (max-width: 72rem)": {
       display: "inline-flex",
     },
   },
@@ -114,7 +114,7 @@ export const mobileNav = style({
     },
   },
   "@media": {
-    "screen and (min-width: 48.0625rem)": {
+    "screen and (min-width: 72.0625rem)": {
       display: "none !important",
     },
   },

@@ -18,8 +18,8 @@ const GROUP_ICONS = [HeartHandshake, ShieldAlert];
 const COPY = {
   en: {
     eyebrow: "Take Action",
-    title: "Beyond reading",
-    lede: "These are established humanitarian and human rights organisations working on the ground in Gaza, the West Bank and with Palestinian refugees across the region. Some are Palestinian, some Israeli, some international -- listed here because their work is documented and their reporting is widely used by journalists and researchers, not as an endorsement of every position any of them takes.",
+    title: "Aid and human rights organisations",
+    lede: "These organisations provide humanitarian aid or document human rights abuses in Gaza, the West Bank and refugee communities. Follow the links to read about their current work and ways to support it. Inclusion here is not an endorsement of every position an organisation takes.",
     jsonLdName: "Take Action -- Sumud",
     headTitle: "Take Action",
     headDescription:
@@ -27,8 +27,8 @@ const COPY = {
   },
   ar: {
     eyebrow: "بادر بالفعل",
-    title: "أبعد من القراءة",
-    lede: "هذه منظمات إنسانية وحقوقية راسخة تعمل ميدانيًا في غزة والضفة الغربية ومع اللاجئين الفلسطينيين في أنحاء المنطقة. بعضها فلسطيني، وبعضها إسرائيلي، وبعضها دولي -- وأُدرجت هنا لأن عملها موثق وتقاريرها مستخدمة على نطاق واسع من قبل الصحفيين والباحثين، لا تأييدًا لكل موقف تتخذه أي منها.",
+    title: "منظمات الإغاثة وحقوق الإنسان",
+    lede: "تقدم هذه المنظمات مساعدات إنسانية أو توثق انتهاكات حقوق الإنسان في غزة والضفة الغربية وتجمعات اللاجئين. اتبع الروابط للاطلاع على عملها الحالي وطرق دعمه. إدراج منظمة هنا لا يعني تأييد كل موقف تتخذه.",
     jsonLdName: "بادر بالفعل -- صمود",
     headTitle: "بادر بالفعل",
     headDescription:
