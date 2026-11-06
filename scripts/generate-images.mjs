@@ -13,12 +13,23 @@ import path from "node:path";
 const rootDir = fileURLToPath(new URL("..", import.meta.url));
 const publicDir = path.join(rootDir, "public");
 
-const BG = "#faf6ef";
-const OLIVE = "#4b5d3a";
+// Kept in step with the light theme in src/styles/theme.css.ts.
+const BG = "#f6f1e7";
+const OLIVE = "#4a5a35";
 const OLIVE_MID = "#6f8a55";
-const TERRACOTTA = "#a9432f";
-const INK = "#241f1c";
-const INK_MUTED = "#5b5348";
+const ACCENT = "#8e2b25";
+const INK = "#1f1b17";
+const INK_MUTED = "#5a5246";
+const SAND_LINE = "#cfc3a8";
+
+// librsvg resolves fonts through fontconfig, not the site's woff2 files, so these name the same
+// families as the site and fall back to Arabic-capable system faces. Install Noto Naskh Arabic
+// (fonts-noto on Debian/Ubuntu) before regenerating, or the Arabic falls back to whatever the
+// machine has.
+const SERIF = "Newsreader, Georgia, 'Times New Roman', serif";
+const SANS = "'IBM Plex Sans', 'Segoe UI', Arial, sans-serif";
+const ARABIC =
+  "'Noto Naskh Arabic', 'Traditional Arabic', 'Geeza Pro', 'Times New Roman', serif";
 
 async function renderIcon(svgBuffer, size, { maskable = false } = {}) {
   // Maskable icons need generous padding: Android's adaptive-icon mask can
@@ -72,21 +83,28 @@ function ogSvg() {
   const markX = 110;
   const markY = 130;
 
+  // The same tatreez diamond as src/components/ui/ornament-divider.tsx, as a rule under the title.
+  const ornament = `<pattern id="tatreez" width="20" height="14" patternUnits="userSpaceOnUse">
+      <path d="M10 2 L16 7 L10 12 L4 7 Z" fill="none" stroke="${SAND_LINE}" stroke-width="1.25" />
+      <circle cx="10" cy="7" r="1" fill="${SAND_LINE}" />
+    </pattern>`;
+
   return `<svg xmlns="http://www.w3.org/2000/svg" width="${width}" height="${height}" viewBox="0 0 ${width} ${height}">
+  <defs>${ornament}</defs>
   <rect width="${width}" height="${height}" fill="${BG}" />
-  <rect x="0" y="0" width="14" height="${height}" fill="${TERRACOTTA}" />
+  <rect x="100" y="530" width="320" height="14" fill="url(#tatreez)" />
   <g transform="translate(${markX} ${markY}) scale(${markScale})">
     <path d="M5 23c5-11 13-17 23-14" fill="none" stroke="${OLIVE}" stroke-width="1.3" stroke-linecap="round" />
     <path d="M5.8 21.4c0.4 1.5 0.5 2.9 0.4 3.9" fill="none" stroke="${OLIVE}" stroke-width="1" stroke-linecap="round" />
-    <circle cx="6.3" cy="25.6" r="1.3" fill="${TERRACOTTA}" />
+    <circle cx="6.3" cy="25.6" r="1.3" fill="${ACCENT}" />
     <ellipse cx="5.1" cy="16.9" rx="3.2" ry="1.3" transform="rotate(-58 5.1 16.9)" fill="${OLIVE}" />
     <ellipse cx="14.2" cy="14.6" rx="3.2" ry="1.3" transform="rotate(-41 14.2 14.6)" fill="${OLIVE_MID}" />
     <ellipse cx="16.5" cy="6.7" rx="3.2" ry="1.3" transform="rotate(-21 16.5 6.7)" fill="${OLIVE}" />
     <ellipse cx="23.5" cy="11" rx="2.8" ry="1.2" transform="rotate(2 23.5 11)" fill="${OLIVE_MID}" />
   </g>
-  <text x="110" y="430" font-family="DejaVu Serif, Georgia, serif" font-size="108" font-weight="700" fill="${INK}">Sumud</text>
-  <text x="115" y="480" font-family="Liberation Sans, Arial, sans-serif" font-size="30" fill="${INK_MUTED}">The story of Palestine, before 1947 and after</text>
-  <text x="990" y="90" font-family="DejaVu Serif, Georgia, serif" font-size="40" fill="${TERRACOTTA}" text-anchor="end">&#1589;&#1605;&#1608;&#1583;</text>
+  <text x="110" y="430" font-family="${SERIF}" font-size="108" font-weight="600" fill="${INK}">Sumud</text>
+  <text x="115" y="480" font-family="${SANS}" font-size="30" fill="${INK_MUTED}">The story of Palestine, before 1947 and after</text>
+  <text x="990" y="90" font-family="${ARABIC}" font-size="44" fill="${ACCENT}" text-anchor="end" direction="rtl" xml:lang="ar">&#1589;&#1605;&#1608;&#1583;</text>
 </svg>`;
 }
 
