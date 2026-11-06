@@ -22,6 +22,7 @@ export interface UiStrings {
   allChapters: string;
   previousChapter: string;
   nextChapter: string;
+  chapterNav: string;
   factsVerifiedPrefix: string;
 }
 
@@ -42,6 +43,7 @@ export const UI_STRINGS: Record<Locale, UiStrings> = {
     allChapters: "All chapters",
     previousChapter: "Previous",
     nextChapter: "Next",
+    chapterNav: "Chapter navigation",
     factsVerifiedPrefix: "Facts and figures last verified",
   },
   ar: {
@@ -60,6 +62,7 @@ export const UI_STRINGS: Record<Locale, UiStrings> = {
     allChapters: "كل الفصول",
     previousChapter: "السابق",
     nextChapter: "التالي",
+    chapterNav: "التنقل بين الفصول",
     factsVerifiedPrefix: "آخر تحقق من الوقائع والأرقام:",
   },
 };

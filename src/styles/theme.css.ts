@@ -97,7 +97,7 @@ globalStyle(":root", {
         [vars.color.bgRaised]: "#211e18",
         [vars.color.ink]: "#ece5d6",
         [vars.color.inkMuted]: "#bdb39f",
-        [vars.color.inkFaint]: "#9a917d",
+        [vars.color.inkFaint]: "#a39a86",
         [vars.color.olive]: "#a3b884",
         [vars.color.oliveDark]: "#b9cb9c",
         [vars.color.oliveLight]: "#2a3324",

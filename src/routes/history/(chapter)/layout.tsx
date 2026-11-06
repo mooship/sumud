@@ -99,7 +99,7 @@ export default component$(() => {
         <Slot />
       </Prose>
 
-      <nav class={styles.chapterNav} aria-label="Chapter navigation">
+      <nav class={styles.chapterNav} aria-label={strings.chapterNav}>
         {prev ? (
           <Link href={chapterHref(prev.slug)} class={styles.chapterNavLink}>
             <span class={styles.chapterNavLabel}>

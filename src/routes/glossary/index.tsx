@@ -78,7 +78,12 @@ export default component$(() => {
                 <dt class={styles.term}>
                   {locale === "ar" ? term.ar.term : term.term}
                   {locale === "en" && term.arabic && (
-                    <span class={styles.arabic}> · {term.arabic}</span>
+                    <span class={styles.arabic}>
+                      {" · "}
+                      <span lang="ar" dir="rtl">
+                        {term.arabic}
+                      </span>
+                    </span>
                   )}
                 </dt>
                 <dd class={styles.definition}>

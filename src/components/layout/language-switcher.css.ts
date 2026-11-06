@@ -10,7 +10,7 @@ export const switcher = style({
   fontWeight: 500,
   textDecoration: "none",
   color: vars.color.inkMuted,
-  border: `1px solid ${vars.color.sandLine}`,
+  border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.pill,
   selectors: {
     "&:hover": {

@@ -35,7 +35,7 @@ export const variant = styleVariants({
     {
       backgroundColor: "transparent",
       color: vars.color.ink,
-      borderColor: vars.color.sandLine,
+      borderColor: vars.color.border,
       selectors: {
         "&:hover": { borderColor: vars.color.ink },
       },

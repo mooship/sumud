@@ -188,7 +188,7 @@ describe("history/(chapter)/layout", () => {
     ) as HTMLAnchorElement | null;
     expect(backLink?.textContent).toBe("كل الفصول");
 
-    const nav = screen.querySelector('nav[aria-label="Chapter navigation"]');
+    const nav = screen.querySelector('nav[aria-label="التنقل بين الفصول"]');
     const hrefs = Array.from(nav?.querySelectorAll("a") ?? [], (a) =>
       a.getAttribute("href"),
     );
