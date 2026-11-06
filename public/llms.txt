@@ -6,11 +6,11 @@
 
 - [History overview](https://sumud.timothybrits.co.za/history/): A seven-chapter narrative from Ottoman Palestine to the present.
 - [Ottoman Palestine](https://sumud.timothybrits.co.za/history/ottoman-palestine/): Palestine as an Ottoman province, until 1917.
-- [The British Mandate](https://sumud.timothybrits.co.za/history/british-mandate/): 1917-1947, the Balfour Declaration and growing conflict.
-- [Partition and the Nakba](https://sumud.timothybrits.co.za/history/nakba/): 1947-1949, partition, war, and mass displacement.
-- [Exile and Military Rule](https://sumud.timothybrits.co.za/history/occupation-and-exile/): 1949-1967, refugee life and the founding of the PLO.
-- [Occupation and the Intifada](https://sumud.timothybrits.co.za/history/occupation-and-settlement/): 1967-1993, occupation, settlement, and uprising.
-- [Oslo, and its Unravelling](https://sumud.timothybrits.co.za/history/oslo-to-blockade/): 1993-2007, the Oslo Accords through the Gaza blockade.
+- [The British Mandate](https://sumud.timothybrits.co.za/history/british-mandate/): 1917–1947, the Balfour Declaration and growing conflict.
+- [Partition and the Nakba](https://sumud.timothybrits.co.za/history/nakba/): 1947–1949, partition, war, and mass displacement.
+- [Exile and Military Rule](https://sumud.timothybrits.co.za/history/occupation-and-exile/): 1949–1967, refugee life and the founding of the PLO.
+- [Occupation and the Intifada](https://sumud.timothybrits.co.za/history/occupation-and-settlement/): 1967–1993, occupation, settlement, and uprising.
+- [Oslo, and its Unravelling](https://sumud.timothybrits.co.za/history/oslo-to-blockade/): 1993–2007, the Oslo Accords through the Gaza blockade.
 - [Siege, War and the Present](https://sumud.timothybrits.co.za/history/gaza-and-the-present/): 2007 to today.
 
 ## Culture and further reading
@@ -35,11 +35,11 @@ https://sumud.timothybrits.co.za/ar/history/nakba/ for the Nakba chapter.
 
 - [نظرة عامة على التاريخ](https://sumud.timothybrits.co.za/ar/history/): سرد من سبعة فصول من فلسطين العثمانية إلى الحاضر.
 - [فلسطين العثمانية](https://sumud.timothybrits.co.za/ar/history/ottoman-palestine/): فلسطين كولاية عثمانية، حتى عام 1917.
-- [الانتداب البريطاني](https://sumud.timothybrits.co.za/ar/history/british-mandate/): 1917-1947، وعد بلفور والصراع المتنامي.
-- [التقسيم والنكبة](https://sumud.timothybrits.co.za/ar/history/nakba/): 1947-1949، التقسيم والحرب والتهجير الجماعي.
-- [المنفى والحكم العسكري](https://sumud.timothybrits.co.za/ar/history/occupation-and-exile/): 1949-1967، حياة اللاجئين وتأسيس منظمة التحرير الفلسطينية.
-- [الاحتلال والانتفاضة](https://sumud.timothybrits.co.za/ar/history/occupation-and-settlement/): 1967-1993، الاحتلال والاستيطان والانتفاضة.
-- [أوسلو وانهياره](https://sumud.timothybrits.co.za/ar/history/oslo-to-blockade/): 1993-2007، من اتفاقيات أوسلو إلى حصار غزة.
+- [الانتداب البريطاني](https://sumud.timothybrits.co.za/ar/history/british-mandate/): 1917–1947، وعد بلفور والصراع المتنامي.
+- [التقسيم والنكبة](https://sumud.timothybrits.co.za/ar/history/nakba/): 1947–1949، التقسيم والحرب والتهجير الجماعي.
+- [المنفى والحكم العسكري](https://sumud.timothybrits.co.za/ar/history/occupation-and-exile/): 1949–1967، حياة اللاجئين وتأسيس منظمة التحرير الفلسطينية.
+- [الاحتلال والانتفاضة](https://sumud.timothybrits.co.za/ar/history/occupation-and-settlement/): 1967–1993، الاحتلال والاستيطان والانتفاضة.
+- [أوسلو وانهياره](https://sumud.timothybrits.co.za/ar/history/oslo-to-blockade/): 1993–2007، من اتفاقيات أوسلو إلى حصار غزة.
 - [الحصار والحرب والحاضر](https://sumud.timothybrits.co.za/ar/history/gaza-and-the-present/): من 2007 إلى اليوم.
 - [الثقافة والصمود](https://sumud.timothybrits.co.za/ar/culture/): الأرض والطعام والحرف واللغة والأدب، وفكرة الصمود نفسها.
 - [قراءات إضافية](https://sumud.timothybrits.co.za/ar/further-reading/): كتب تاريخ ومذكرات وأدب روائي وشعر موصى بها عن فلسطين.

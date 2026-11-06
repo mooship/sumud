@@ -48,7 +48,7 @@ const COPY = {
     actionLink: "Find organisations",
     quote: "We have on this land that which makes life worth living.",
     quoteCite: "Mahmoud Darwish, 'On This Land'",
-    headTitle: "Sumud -- the story of Palestine",
+    headTitle: "Sumud: the story of Palestine",
     headDescription: SITE_DESCRIPTION,
   },
   ar: {

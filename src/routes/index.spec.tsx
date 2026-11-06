@@ -64,7 +64,7 @@ describe("routes/index (homepage)", () => {
 
   it("sets a page title and description", () => {
     const documentHead = resolveHead("/");
-    expect(documentHead.title).toBe("Sumud -- the story of Palestine");
+    expect(documentHead.title).toBe("Sumud: the story of Palestine");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);
   });
 

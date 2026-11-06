@@ -63,11 +63,11 @@ export const GLOSSARY_CATEGORIES: GlossaryCategory[] = [
         term: "Nakba",
         arabic: "النكبة",
         definition:
-          "'The catastrophe': the displacement of more than 700,000 Palestinians and destruction of some 500 villages during the 1947-49 war, marking the founding of the state of Israel and the start of the Palestinian refugee experience.",
+          "'The catastrophe': the displacement of more than 700,000 Palestinians and destruction of some 500 villages during the 1947–49 war, marking the founding of the state of Israel and the start of the Palestinian refugee experience.",
         ar: {
           term: "النكبة",
           definition:
-            "«الكارثة»: تهجير أكثر من 700,000 فلسطيني وتدمير نحو 500 قرية خلال حرب 1947-1949، وهي الأحداث التي رافقت تأسيس دولة إسرائيل وبداية تجربة اللجوء الفلسطيني.",
+            "«الكارثة»: تهجير أكثر من 700,000 فلسطيني وتدمير نحو 500 قرية خلال حرب 1947–1949، وهي الأحداث التي رافقت تأسيس دولة إسرائيل وبداية تجربة اللجوء الفلسطيني.",
         },
       },
       {
@@ -75,11 +75,11 @@ export const GLOSSARY_CATEGORIES: GlossaryCategory[] = [
         term: "Intifada",
         arabic: "انتفاضة",
         definition:
-          "Literally 'shaking off'. Used for two mass Palestinian uprisings against the occupation: the First Intifada (1987-93), largely civil disobedience and strikes, and the more violent Second Intifada (2000-05).",
+          "Literally 'shaking off'. Used for two mass Palestinian uprisings against the occupation: the First Intifada (1987–93), largely civil disobedience and strikes, and the more violent Second Intifada (2000–05).",
         ar: {
           term: "انتفاضة",
           definition:
-            "تعني حرفيًا «النفض». تُستخدم للإشارة إلى انتفاضتين فلسطينيتين جماهيريتين ضد الاحتلال: الانتفاضة الأولى (1987-1993)، التي غلب عليها العصيان المدني والإضرابات، والانتفاضة الثانية (2000-2005) الأكثر عنفًا.",
+            "تعني حرفيًا «النفض». تُستخدم للإشارة إلى انتفاضتين فلسطينيتين جماهيريتين ضد الاحتلال: الانتفاضة الأولى (1987–1993)، التي غلب عليها العصيان المدني والإضرابات، والانتفاضة الثانية (2000–2005) الأكثر عنفًا.",
         },
       },
       {

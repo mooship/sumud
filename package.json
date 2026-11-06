@@ -1,7 +1,7 @@
 {
   "name": "sumud",
   "version": "0.1.0",
-  "description": "Sumud -- the story of Palestine, before 1947 and after.",
+  "description": "Sumud: the story of Palestine, before 1947 and after.",
   "private": true,
   "type": "module",
   "engines": {

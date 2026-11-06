@@ -42,7 +42,7 @@ export const SOURCE_SECTIONS: SourceSection[] = [
       },
       {
         id: "ocha",
-        name: "UN Office for the Coordination of Humanitarian Affairs -- oPt (OCHA)",
+        name: "UN Office for the Coordination of Humanitarian Affairs, oPt (OCHA)",
         meta: "Humanitarian situation updates for the West Bank and Gaza Strip.",
         ar: {
           meta: "تحديثات حول الوضع الإنساني في الضفة الغربية وقطاع غزة.",

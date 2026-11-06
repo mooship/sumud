@@ -20,7 +20,7 @@ const COPY = {
     sourcesLink: "sources page",
     ledePost:
       ". The rest offer other ways into the subject, through personal accounts, novels and poems.",
-    jsonLdName: "Further Reading -- Sumud",
+    jsonLdName: "Further Reading · Sumud",
     headTitle: "Further Reading",
     headDescription:
       "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
@@ -101,7 +101,7 @@ export default component$(() => {
                     {book.title}
                     <span class={styles.bookMeta}>
                       {" "}
-                      -- {book.author}, {book.year}
+                      {book.author}, {book.year}
                     </span>
                   </p>
                   <p class={styles.bookDescription}>

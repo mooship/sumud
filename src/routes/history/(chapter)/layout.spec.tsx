@@ -75,14 +75,14 @@ describe("history/(chapter)/layout", () => {
     const { screen, render } = await createDOM();
     await render(
       <QwikCityMockProvider url="http://localhost/history/nakba/">
-        <HeadSeeder title="Nakba" frontmatter={{ period: "1947 – 1949" }} />
+        <HeadSeeder title="Nakba" frontmatter={{ period: "1947–1949" }} />
         <ChapterLayout>
           <p>Body</p>
         </ChapterLayout>
       </QwikCityMockProvider>,
     );
     const header = screen.querySelector("header");
-    expect(header?.querySelector("span")?.textContent).toBe("1947 – 1949");
+    expect(header?.querySelector("span")?.textContent).toBe("1947–1949");
   });
 
   it("shows a verified-date line on the current chapter", async () => {
