@@ -22,4 +22,17 @@ describe("Footer", () => {
     expect(hrefs).toContain("/sources/");
     expect(hrefs).toContain("/privacy/");
   });
+
+  it("uses real headings and marks the Arabic wordmark", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider>
+        <Footer />
+      </QwikCityMockProvider>,
+    );
+    expect(screen.querySelectorAll(":scope footer h2")).toHaveLength(3);
+    const wordmark = screen.querySelector(':scope footer h2 [lang="ar"]');
+    expect(wordmark?.textContent?.trim()).toBe("صمود");
+    expect(wordmark?.getAttribute("dir")).toBe("rtl");
+  });
 });

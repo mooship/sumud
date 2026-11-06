@@ -24,6 +24,8 @@ export const heading = style({
   fontFamily: vars.font.serif,
   color: vars.color.ink,
   fontSize: vars.fontSize.base,
+  fontWeight: 600,
+  lineHeight: vars.lineHeight.snug,
   margin: `0 0 ${vars.space[2]}`,
 });
 
@@ -37,12 +39,15 @@ export const list = style({
 });
 
 export const link = style({
-  textDecoration: "none",
   color: vars.color.inkMuted,
+  textDecorationLine: "underline",
+  textDecorationThickness: "1px",
+  textDecorationColor: vars.color.sandLine,
+  textUnderlineOffset: "0.25em",
   selectors: {
     "&:hover": {
       color: vars.color.ink,
-      textDecoration: "underline",
+      textDecorationColor: "currentColor",
     },
   },
 });

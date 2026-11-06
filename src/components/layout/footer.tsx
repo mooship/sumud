@@ -19,12 +19,17 @@ export const Footer = component$(() => {
       <Container width="wide">
         <div class={styles.grid}>
           <div>
-            <p class={styles.heading}>Sumud · صمود</p>
+            <h2 class={styles.heading} translate="no">
+              Sumud ·{" "}
+              <span lang="ar" dir="rtl">
+                صمود
+              </span>
+            </h2>
             <p>{strings.footerTagline}</p>
           </div>
 
           <div>
-            <p class={styles.heading}>{strings.footerReadHeading}</p>
+            <h2 class={styles.heading}>{strings.footerReadHeading}</h2>
             <ul class={styles.list}>
               {navItems.map((item) => (
                 <li key={item.href}>
@@ -37,7 +42,7 @@ export const Footer = component$(() => {
           </div>
 
           <div>
-            <p class={styles.heading}>{strings.footerProjectHeading}</p>
+            <h2 class={styles.heading}>{strings.footerProjectHeading}</h2>
             <ul class={styles.list}>
               <li>
                 <a
