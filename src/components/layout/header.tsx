@@ -34,16 +34,18 @@ export const Header = component$(() => {
             </Link>
 
             <nav class={styles.nav} aria-label={strings.primaryNav}>
-              {navItems.map((item) => (
-                <Link
-                  key={item.href}
-                  href={item.href}
-                  class={styles.navLink}
-                  aria-current={pathname === item.href ? "page" : undefined}
-                >
-                  {item.label}
-                </Link>
-              ))}
+              {navItems
+                .filter((item) => !item.secondary)
+                .map((item) => (
+                  <Link
+                    key={item.href}
+                    href={item.href}
+                    class={styles.navLink}
+                    aria-current={pathname === item.href ? "page" : undefined}
+                  >
+                    {item.label}
+                  </Link>
+                ))}
               <LanguageSwitcher />
             </nav>
 

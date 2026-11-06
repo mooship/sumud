@@ -110,10 +110,11 @@ export function localizedHead(
 // `NAV_ITEMS` localized for `locale`: Arabic labels plus `/ar`-prefixed hrefs.
 export function localizedNavItems(
   locale: Locale,
-): { href: string; label: string }[] {
+): { href: string; label: string; secondary?: boolean }[] {
   if (locale === "en") return NAV_ITEMS;
   return NAV_ITEMS.map((item) => ({
     href: localizedPathname(item.href, locale),
     label: item.labelAr,
+    secondary: item.secondary,
   }));
 }

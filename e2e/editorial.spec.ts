@@ -34,7 +34,7 @@ for (const locale of ["en", "ar"] as const) {
       }
       await expect(page.locator('header span[lang="ar"]')).toHaveText("صمود");
       const menu = page.locator('button[aria-controls="mobile-nav"]');
-      if (width <= 1152) await expect(menu).toBeVisible();
+      if (width <= 896) await expect(menu).toBeVisible();
       else await expect(menu).toBeHidden();
       expect(
         await page.evaluate(

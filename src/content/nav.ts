@@ -5,6 +5,9 @@ export interface NavItem {
   Arabic translation of `label`, used on the `/ar/` route tree.
   */
   labelAr: string;
+  // Reference pages stay in the footer and the mobile menu but not the desktop bar, which only
+  // has room for six links before it has to collapse.
+  secondary?: boolean;
 }
 
 export const NAV_ITEMS: NavItem[] = [
@@ -19,8 +22,18 @@ export const NAV_ITEMS: NavItem[] = [
     label: "Further reading",
     labelAr: "قراءات إضافية",
   },
-  { href: "/glossary/", label: "Glossary", labelAr: "المصطلحات" },
-  { href: "/sources/", label: "Sources", labelAr: "المصادر" },
+  {
+    href: "/glossary/",
+    label: "Glossary",
+    labelAr: "المصطلحات",
+    secondary: true,
+  },
+  {
+    href: "/sources/",
+    label: "Sources",
+    labelAr: "المصادر",
+    secondary: true,
+  },
   { href: "/take-action/", label: "Take action", labelAr: "بادر بالفعل" },
   { href: "/search/", label: "Search", labelAr: "بحث" },
   { href: "/about/", label: "About", labelAr: "عن الموقع" },

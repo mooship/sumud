@@ -26,6 +26,29 @@ describe("Header", () => {
     expect(wordmark?.getAttribute("dir")).toBe("rtl");
   });
 
+  it("keeps reference pages out of the desktop bar but in the mobile menu", async () => {
+    const { screen, render } = await createDOM();
+    await render(
+      <QwikCityMockProvider>
+        <Header />
+      </QwikCityMockProvider>,
+    );
+    const navs = Array.from(screen.querySelectorAll("nav"));
+    const desktop = navs.find((nav) => nav.getAttribute("id") !== "mobile-nav");
+    const mobile = navs.find((nav) => nav.getAttribute("id") === "mobile-nav");
+    const desktopHrefs = Array.from(desktop?.querySelectorAll("a") ?? [], (a) =>
+      a.getAttribute("href"),
+    );
+    const mobileHrefs = Array.from(mobile?.querySelectorAll("a") ?? [], (a) =>
+      a.getAttribute("href"),
+    );
+    expect(desktopHrefs).toContain("/search/");
+    for (const href of ["/glossary/", "/sources/"]) {
+      expect(desktopHrefs).not.toContain(href);
+      expect(mobileHrefs).toContain(href);
+    }
+  });
+
   it("switches to Arabic nav labels, hrefs and the Arabic homepage link under /ar/", async () => {
     const { screen, render } = await createDOM();
     await render(
