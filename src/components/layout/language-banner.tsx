@@ -17,8 +17,9 @@ import * as styles from "./language-banner.css";
  * First-visit suggestion, not an auto-redirect: research on language-based redirects (and
  * Google's own guidance against them) shows they trap crawlers and returning visitors on the
  * wrong page, so this only ever offers a switch and lets the visitor decide. Detection needs
- * `navigator.language`/`localStorage`, both browser-only, hence the visible task -- see
- * `language-banner-logic.ts` for the (directly unit-tested) decision itself.
+ * `navigator.language`/`localStorage`, both browser-only, hence the visible task (see
+ * `language-banner-logic.ts` for the decision itself, which is unit-tested directly). The banner is
+ * fixed to the bottom of the viewport, so showing it late doesn't shift the page.
  */
 export const LanguageBanner = component$(() => {
   const loc = useLocation();

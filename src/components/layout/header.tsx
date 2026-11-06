@@ -19,7 +19,6 @@ export const Header = component$(() => {
 
   return (
     <>
-      <LanguageBanner />
       <a href="#main-content" class={styles.skipLink}>
         {strings.skipToContent}
       </a>
@@ -82,6 +81,7 @@ export const Header = component$(() => {
           </nav>
         </Container>
       </header>
+      <LanguageBanner />
     </>
   );
 });
