@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { PageHeader } from "~/components/ui/page-header";
 import { UI_STRINGS, localizedHead } from "~/content/i18n";
 import { SOURCE_SECTIONS } from "~/content/sources";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
@@ -9,7 +10,6 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "Sources",
     title: "Sources and corrections",
     lede1:
       "The history chapters draw on books, UN and archival records, and reporting by Palestinian, Israeli and international human rights organisations. Disagreements between historians are noted in the text. Casualty and displacement figures should be read with their attribution and date, especially in the chapter covering events since 2023.",
@@ -28,7 +28,6 @@ const COPY = {
       "The books, archives, UN records and human rights organisations this project draws on, and how to flag a correction.",
   },
   ar: {
-    eyebrow: "المصادر",
     title: "المصادر والتصويبات",
     lede1:
       "تستند فصول التاريخ إلى الكتب والسجلات الأممية والأرشيفية وتقارير منظمات حقوق الإنسان الفلسطينية والإسرائيلية والدولية. يذكر النص مواضع الخلاف بين المؤرخين. وينبغي قراءة أرقام الضحايا والتهجير مع مصادرها وتواريخها، خصوصًا في الفصل الذي يغطي الأحداث منذ عام 2023.",
@@ -56,18 +55,16 @@ export default component$(() => {
 
   return (
     <Container width="content">
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>{copy.lede1}</p>
-        <p class={styles.lede}>
+      <PageHeader title={copy.title} compact>
+        <p>{copy.lede1}</p>
+        <p>
           {copy.lede2Pre}
           <a href={localizedPathname("/further-reading/", locale)}>
             {copy.furtherReadingLink}
           </a>
           {copy.lede2Post}
         </p>
-      </header>
+      </PageHeader>
 
       {SOURCE_SECTIONS.map((section) => (
         <section key={section.title} class={styles.section}>

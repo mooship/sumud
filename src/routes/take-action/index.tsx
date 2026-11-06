@@ -4,6 +4,7 @@ import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
 import { ExternalLink } from "~/components/ui/icons";
+import { PageHeader } from "~/components/ui/page-header";
 import { ORG_GROUPS } from "~/content/organisations";
 import { UI_STRINGS, localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
@@ -11,7 +12,6 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "Take action",
     title: "Aid and human rights organisations",
     lede: "These organisations provide humanitarian aid or document human rights abuses in Gaza, the West Bank and refugee communities. Follow the links to read about their current work and ways to support it. Inclusion here is not an endorsement of every position an organisation takes.",
     jsonLdName: "Take action · Sumud",
@@ -20,7 +20,6 @@ const COPY = {
       "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
   },
   ar: {
-    eyebrow: "بادر بالفعل",
     title: "منظمات الإغاثة وحقوق الإنسان",
     lede: "تقدم هذه المنظمات مساعدات إنسانية أو توثق انتهاكات حقوق الإنسان في غزة والضفة الغربية وتجمعات اللاجئين. اتبع الروابط للاطلاع على عملها الحالي وطرق دعمه. إدراج منظمة هنا لا يعني تأييد كل موقف تتخذه.",
     jsonLdName: "بادر بالفعل · صمود",
@@ -57,11 +56,9 @@ export default component$(() => {
           })),
         }}
       />
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>{copy.lede}</p>
-      </header>
+      <PageHeader title={copy.title}>
+        <p>{copy.lede}</p>
+      </PageHeader>
 
       {ORG_GROUPS.map((group) => (
         <section key={group.title} class={styles.group}>

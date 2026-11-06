@@ -2,6 +2,7 @@ import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { PageHeader } from "~/components/ui/page-header";
 import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
 import { loadPagefindUI, SEARCH_MOUNT_ID } from "./pagefind";
@@ -9,7 +10,6 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "Search",
     title: "Search Sumud",
     lede: "Search across the history, culture and further reading on this site.",
     headTitle: "Search",
@@ -17,7 +17,6 @@ const COPY = {
       "Search the history, culture and further reading on Sumud.",
   },
   ar: {
-    eyebrow: "بحث",
     title: "البحث في صمود",
     lede: "ابحث في التاريخ والثقافة والقراءات الإضافية على هذا الموقع.",
     headTitle: "بحث",
@@ -42,11 +41,9 @@ export default component$(() => {
 
   return (
     <Container width="content">
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>{copy.lede}</p>
-      </header>
+      <PageHeader title={copy.title} compact>
+        <p>{copy.lede}</p>
+      </PageHeader>
       <div id={SEARCH_MOUNT_ID} ref={mountRef} class={styles.mount} />
     </Container>
   );

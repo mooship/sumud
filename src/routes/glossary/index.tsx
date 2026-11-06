@@ -3,6 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
+import { PageHeader } from "~/components/ui/page-header";
 import { GLOSSARY_CATEGORIES } from "~/content/glossary";
 import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
@@ -10,7 +11,6 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "Glossary",
     title: "Terms used on this site",
     ledePre:
       "Words and names that recur across the history chapters, defined in one place for readers who land partway through the story. For the books, archives and organisations behind the facts themselves, see ",
@@ -22,7 +22,6 @@ const COPY = {
       "A glossary of terms, places and institutions used throughout Sumud's history of Palestine.",
   },
   ar: {
-    eyebrow: "المصطلحات",
     title: "مصطلحات مستخدمة في هذا الموقع",
     ledePre:
       "كلمات وأسماء تتكرر عبر فصول التاريخ، جُمعت تعريفاتها في مكان واحد للقراء الذين يبدأون من منتصف القصة. للاطلاع على الكتب والأرشيفات والمؤسسات التي تستند إليها الوقائع نفسها، انظر ",
@@ -55,17 +54,15 @@ export default component$(() => {
           })),
         }}
       />
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>
+      <PageHeader title={copy.title} compact>
+        <p>
           {copy.ledePre}
           <a href={localizedPathname("/sources/", locale)}>
             {copy.sourcesLink}
           </a>
           {copy.ledePost}
         </p>
-      </header>
+      </PageHeader>
 
       {GLOSSARY_CATEGORIES.map((category) => (
         <section key={category.title} class={styles.section}>

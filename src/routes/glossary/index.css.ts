@@ -2,32 +2,6 @@ import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
 import { anchorTarget } from "~/styles/anchor-target.css";
 
-export const header = style({
-  paddingBlockStart: vars.space[7],
-  paddingBlockEnd: vars.space[5],
-});
-
-export const eyebrow = style({
-  fontSize: vars.fontSize.xs,
-  fontWeight: 600,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: vars.color.oliveDark,
-  marginBottom: vars.space[2],
-});
-
-export const title = style({
-  fontSize: vars.fontSize.xl3,
-  maxWidth: "20ch",
-});
-
-export const lede = style({
-  maxWidth: "62ch",
-  color: vars.color.inkMuted,
-  fontSize: vars.fontSize.md,
-  lineHeight: vars.lineHeight.relaxed,
-});
-
 export const section = style({
   paddingBlock: vars.space[6],
   borderTop: `1px solid ${vars.color.sandLine}`,

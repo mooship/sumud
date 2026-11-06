@@ -2,6 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
+import { PageHeader } from "~/components/ui/page-header";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
 import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
@@ -9,7 +10,6 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "History",
     title: "Palestine, chapter by chapter",
     lede: "Begin under Ottoman rule and follow Palestine through the British Mandate, the Nakba, exile and occupation. The seven chapters work best in order, but you can also go straight to a particular period.",
     headTitle: "History",
@@ -17,7 +17,6 @@ const COPY = {
       "The history of Palestine from Ottoman rule through the British Mandate, the Nakba, occupation and exile, to the present day.",
   },
   ar: {
-    eyebrow: "التاريخ",
     title: "فلسطين، فصلاً فصلاً",
     lede: "ابدأ بالحكم العثماني وتابع تاريخ فلسطين عبر الانتداب البريطاني والنكبة والمنفى والاحتلال. الأفضل قراءة الفصول السبعة بالترتيب، ويمكنك أيضًا الانتقال مباشرة إلى فترة بعينها.",
     headTitle: "التاريخ",
@@ -33,11 +32,9 @@ export default component$(() => {
 
   return (
     <Container width="content">
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>{copy.lede}</p>
-      </header>
+      <PageHeader title={copy.title}>
+        <p>{copy.lede}</p>
+      </PageHeader>
 
       <div class={styles.list}>
         {HISTORY_CHAPTERS.map((chapter) => (

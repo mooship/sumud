@@ -3,17 +3,14 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
-import { Landmark, ScrollText, BookOpen, Quote } from "~/components/ui/icons";
+import { PageHeader } from "~/components/ui/page-header";
 import { BOOK_CATEGORIES } from "~/content/books";
 import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
 
-const CATEGORY_ICONS = [Landmark, ScrollText, BookOpen, Quote];
-
 const COPY = {
   en: {
-    eyebrow: "Further reading",
     title: "Books about Palestine",
     ledePre:
       "History, memoir, fiction and poetry by Palestinian, Israeli and other writers. Books used in the history chapters also appear on the ",
@@ -26,7 +23,6 @@ const COPY = {
       "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
   },
   ar: {
-    eyebrow: "قراءات إضافية",
     title: "كتب عن فلسطين",
     ledePre:
       "كتب تاريخ ومذكرات وروايات وشعر بأقلام كتّاب فلسطينيين وإسرائيليين وغيرهم. وتظهر الكتب المستخدمة في فصول التاريخ أيضًا في ",
@@ -67,30 +63,22 @@ export default component$(() => {
           })),
         }}
       />
-      <header class={styles.header}>
-        <p class={styles.eyebrow}>{copy.eyebrow}</p>
-        <h1 class={styles.title}>{copy.title}</h1>
-        <p class={styles.lede}>
+      <PageHeader title={copy.title}>
+        <p>
           {copy.ledePre}
           <a href={localizedPathname("/sources/", locale)}>
             {copy.sourcesLink}
           </a>
           {copy.ledePost}
         </p>
-      </header>
+      </PageHeader>
 
-      {BOOK_CATEGORIES.map((category, i) => {
-        const CategoryIcon = CATEGORY_ICONS[i % CATEGORY_ICONS.length];
+      {BOOK_CATEGORIES.map((category) => {
         return (
           <section key={category.title} class={styles.category}>
-            <div class={styles.categoryTitleRow}>
-              <span class={styles.categoryIconBadge}>
-                <CategoryIcon size={20} />
-              </span>
-              <h2 class={styles.categoryTitle}>
-                {locale === "ar" ? category.ar.title : category.title}
-              </h2>
-            </div>
+            <h2 class={styles.categoryTitle}>
+              {locale === "ar" ? category.ar.title : category.title}
+            </h2>
             <p class={styles.categoryIntro}>
               {locale === "ar" ? category.ar.intro : category.intro}
             </p>

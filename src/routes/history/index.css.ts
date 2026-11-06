@@ -1,31 +1,8 @@
 import { style } from "@vanilla-extract/css";
 import { vars } from "~/styles/theme.css";
 
-export const header = style({
-  paddingBlockStart: vars.space[7],
-  paddingBlockEnd: vars.space[6],
-});
-
-export const eyebrow = style({
-  fontSize: vars.fontSize.xs,
-  fontWeight: 600,
-  letterSpacing: "0.08em",
-  textTransform: "uppercase",
-  color: vars.color.oliveDark,
-  marginBottom: vars.space[2],
-});
-
-export const title = style({
-  fontSize: vars.fontSize.xl3,
-  maxWidth: "18ch",
-});
-
-export const lede = style({
-  maxWidth: "60ch",
-  color: vars.color.inkMuted,
-  fontSize: vars.fontSize.md,
-  lineHeight: vars.lineHeight.relaxed,
-});
+// The rail sits in the middle of the gap between the date column and the text.
+const railInset = `calc(${vars.layout.timelineDateColumn} + ${vars.space[4]} / 2)`;
 
 export const list = style({
   position: "relative",
@@ -38,7 +15,7 @@ export const list = style({
       position: "absolute",
       top: 0,
       bottom: 0,
-      insetInlineStart: "9.75rem",
+      insetInlineStart: railInset,
       width: "2px",
       backgroundColor: vars.color.sandLine,
     },
@@ -61,9 +38,9 @@ export const itemPeriod = style({
 export const itemDot = style({
   position: "absolute",
   // Aligned to sit level with the chapter title, not the row's vertical
-  // centre -- rows vary in height with summary length, the title doesn't.
+  // centre, because rows vary in height with summary length, the title doesn't.
   top: `calc(${vars.space[5]} + 0.7em)`,
-  insetInlineStart: "9.75rem",
+  insetInlineStart: railInset,
   width: "0.6rem",
   height: "0.6rem",
   borderRadius: vars.radius.pill,
@@ -80,7 +57,7 @@ export const itemDot = style({
 export const item = style({
   position: "relative",
   display: "grid",
-  gridTemplateColumns: "9rem 1fr",
+  gridTemplateColumns: `${vars.layout.timelineDateColumn} 1fr`,
   gap: vars.space[4],
   paddingBlock: vars.space[5],
   borderTop: `1px solid ${vars.color.sandLine}`,
