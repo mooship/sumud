@@ -29,7 +29,7 @@ const COPY = {
     startHistory: "Start with the history",
     definition: "Sumud / steadfastness",
     definitionBody:
-      "The Arabic word for standing firm. In Palestinian life, it can mean staying on the land, tending an olive grove or rebuilding a home. It gives this site its name.",
+      "The Arabic word for standing firm. In Palestinian life it can mean something as plain as staying on the land. It gives this site its name.",
     sourcesNote:
       "An independent introduction, drawing on historical scholarship, archives and human rights reporting.",
     sourcesLink: "Sources and corrections",
@@ -40,7 +40,7 @@ const COPY = {
     onwardTitle: "Culture and practical help",
     cultureTitle: "Culture and sumud",
     cultureBody:
-      "The patterns of a thobe, the autumn olive harvest, a plate of musakhan. Read about Palestinian food, craft, poetry and film, and what sumud means in daily life.",
+      "Food, embroidery, poetry and film, and what sumud means in daily life.",
     cultureLink: "Explore the culture",
     actionTitle: "Take action",
     actionBody:
@@ -58,7 +58,7 @@ const COPY = {
     startHistory: "ابدأ بالتاريخ",
     definition: "الصمود / الثبات",
     definitionBody:
-      "أن تقف راسخًا. في الحياة الفلسطينية، قد يعني البقاء في الأرض، أو العناية ببستان زيتون، أو إعادة بناء بيت. ومنه أخذ هذا الموقع اسمه.",
+      "أن تقف راسخًا. في الحياة الفلسطينية قد يعني شيئًا بسيطًا مثل البقاء في الأرض. ومنه أخذ هذا الموقع اسمه.",
     sourcesNote:
       "مدخل مستقل يستند إلى الدراسات التاريخية والأرشيفات وتقارير حقوق الإنسان.",
     sourcesLink: "المصادر والتصويبات",
@@ -69,7 +69,7 @@ const COPY = {
     onwardTitle: "الثقافة وسبل المساعدة",
     cultureTitle: "الثقافة والصمود",
     cultureBody:
-      "نقوش الثوب، وموسم قطف الزيتون، وطبق المسخن. اقرأ عن الطعام والحرف والشعر والسينما الفلسطينية، وعن معنى الصمود في الحياة اليومية.",
+      "الطعام والتطريز والشعر والسينما، ومعنى الصمود في الحياة اليومية.",
     cultureLink: "استكشف الثقافة",
     actionTitle: "بادر بالفعل",
     actionBody:
