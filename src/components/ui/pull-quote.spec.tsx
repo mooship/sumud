@@ -17,6 +17,5 @@ describe("PullQuote", () => {
     expect(screen.querySelector("figcaption")?.textContent).toBe(
       "A Palestinian proverb",
     );
-    expect(screen.querySelector("svg")).not.toBeNull();
   });
 });

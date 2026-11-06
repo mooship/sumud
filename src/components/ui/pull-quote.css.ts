@@ -3,24 +3,19 @@ import { vars } from "~/styles/theme.css";
 
 export const figure = style({
   margin: `${vars.space[4]} 0`,
-  maxWidth: "38ch",
+  maxWidth: "34ch",
   marginInline: "auto",
   textAlign: "center",
 });
 
-export const mark = style({
-  color: vars.color.accent,
-  opacity: 0.6,
-  marginBottom: vars.space[1],
-});
-
+// Set large and upright. On Arabic pages the global :lang(ar) rule keeps it upright anyway;
+// weight and colour carry the emphasis in both scripts.
 export const quote = style({
   fontFamily: vars.font.serif,
-  fontStyle: "italic",
   fontWeight: 500,
-  fontSize: vars.fontSize.lg,
+  fontSize: vars.fontSize.xl,
   lineHeight: vars.lineHeight.snug,
-  color: vars.color.ink,
+  color: vars.color.oliveDark,
   margin: 0,
 });
 
@@ -28,9 +23,6 @@ export const cite = style({
   display: "block",
   marginTop: vars.space[3],
   fontFamily: vars.font.sans,
-  fontStyle: "normal",
-  fontSize: vars.fontSize.xs,
-  letterSpacing: "0.06em",
-  textTransform: "uppercase",
+  fontSize: vars.fontSize.sm,
   color: vars.color.inkFaint,
 });

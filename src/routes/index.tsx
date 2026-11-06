@@ -21,6 +21,8 @@ import {
 import { JsonLd } from "~/components/seo/json-ld";
 import * as styles from "./index.css";
 
+const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"];
+
 const COPY = {
   en: {
     heroSubtitle: "Palestine, before 1947 and after",
@@ -33,7 +35,6 @@ const COPY = {
     sourcesNote:
       "An independent introduction, drawing on historical scholarship, archives and human rights reporting.",
     sourcesLink: "Sources and corrections",
-    briefEyebrow: "Read the history",
     briefTitle: "From Ottoman rule to the present",
     briefLede:
       "Seven chapters, in order. Start at the beginning or choose a period you want to understand.",
@@ -62,7 +63,6 @@ const COPY = {
     sourcesNote:
       "مدخل مستقل يستند إلى الدراسات التاريخية والأرشيفات وتقارير حقوق الإنسان.",
     sourcesLink: "المصادر والتصويبات",
-    briefEyebrow: "اقرأ التاريخ",
     briefTitle: "من الحكم العثماني إلى الحاضر",
     briefLede:
       "سبعة فصول مرتبة زمنيًا. ابدأ من البداية، أو اختر الفترة التي تريد فهمها.",
@@ -110,104 +110,86 @@ export default component$(() => {
         }}
       />
       <section class={styles.hero} aria-labelledby="home-title">
-        <Container width="wide">
-          <div class={styles.heroGrid}>
-            <div>
-              <h1 id="home-title" class={styles.heroTitle} translate="no">
-                Sumud
-              </h1>
-              <p class={styles.heroSubtitle}>{copy.heroSubtitle}</p>
-              <p class={styles.heroLede}>{copy.heroLede}</p>
-              <div class={styles.heroActions}>
-                <ButtonLink href={path("/history/")} variant="primary">
-                  {copy.startHistory}
-                  <ArrowRight size={16} class="rtl-mirror" />
-                </ButtonLink>
-              </div>
-            </div>
-            <aside class={styles.definition} aria-labelledby="sumud-definition">
-              <span class={styles.heroWord} lang="ar" dir="rtl" translate="no">
-                صمود
-              </span>
-              <h2 id="sumud-definition" class={styles.definitionTitle}>
-                {copy.definition}
-              </h2>
-              <p>{copy.definitionBody}</p>
-              <p class={styles.sourcesNote}>{copy.sourcesNote}</p>
-              <a class={styles.textLink} href={path("/sources/")}>
+        <Container width="content">
+          <h1 id="home-title" class={styles.heroTitle} translate="no">
+            Sumud
+          </h1>
+          <p class={styles.heroSubtitle}>{copy.heroSubtitle}</p>
+          <p class={styles.heroLede}>{copy.heroLede}</p>
+          <aside class={styles.definition} aria-labelledby="sumud-definition">
+            <span class={styles.heroWord} lang="ar" dir="rtl" translate="no">
+              صمود
+            </span>
+            <h2 id="sumud-definition" class={styles.definitionTitle}>
+              {copy.definition}
+            </h2>
+            <p>{copy.definitionBody}</p>
+            <p class={styles.sourcesNote}>
+              {copy.sourcesNote}{" "}
+              <a class={styles.inlineLink} href={path("/sources/")}>
                 {copy.sourcesLink}
               </a>
-            </aside>
+            </p>
+          </aside>
+          <div class={styles.heroActions}>
+            <ButtonLink href={path("/history/")} variant="primary">
+              {copy.startHistory}
+              <ArrowRight size={16} class="rtl-mirror" />
+            </ButtonLink>
           </div>
         </Container>
       </section>
-
-      <section class={styles.sectionAlt} aria-labelledby="history-title">
-        <Container width="wide">
-          <div class={styles.historyGrid}>
-            <div>
-              <p class={styles.eyebrow}>{copy.briefEyebrow}</p>
-              <h2 id="history-title" class={styles.sectionTitle}>
-                {copy.briefTitle}
-              </h2>
-              <p class={styles.sectionLede}>{copy.briefLede}</p>
-            </div>
-            <ol class={styles.timelineStrip}>
-              {HISTORY_CHAPTERS.map((chapter) => (
+      <section class={styles.section} aria-labelledby="history-title">
+        <Container width="content">
+          <h2 id="history-title" class={styles.sectionTitle}>
+            {copy.briefTitle}
+          </h2>
+          <p class={styles.sectionLede}>{copy.briefLede}</p>
+          <ol class={styles.chapterIndex}>
+            {HISTORY_CHAPTERS.map((chapter, i) => {
+              const text = locale === "ar" ? chapter.ar : chapter;
+              return (
                 <li key={chapter.slug}>
                   <a
                     href={path(`/history/${chapter.slug}/`)}
-                    class={styles.timelineItem}
+                    class={styles.chapterLink}
                   >
-                    <span
-                      class={
-                        chapter.current
-                          ? styles.timelineDotCurrent
-                          : styles.timelineDot
-                      }
-                      aria-hidden="true"
-                    />
-                    <span class={styles.timelineYear}>
-                      {locale === "ar" ? chapter.ar.period : chapter.period}
+                    <span class={styles.chapterNumeral} aria-hidden="true">
+                      {ROMAN_NUMERALS[i]}
                     </span>
-                    <span class={styles.timelineLabel}>
-                      {locale === "ar" ? chapter.ar.title : chapter.title}
-                    </span>
+                    <span class={styles.chapterPeriod}>{text.period}</span>
+                    <span class={styles.chapterTitle}>{text.title}</span>
+                    <span class={styles.chapterSummary}>{text.summary}</span>
                   </a>
                 </li>
-              ))}
-            </ol>
-          </div>
+              );
+            })}
+          </ol>
         </Container>
       </section>
-
       <section class={styles.section} aria-labelledby="onward-title">
-        <Container width="wide">
-          <h2 id="onward-title" class="visually-hidden">
+        <Container width="content">
+          <h2 id="onward-title" class={styles.sectionTitle}>
             {copy.onwardTitle}
           </h2>
-          <div class={styles.cardGrid}>
-            <div class={styles.card}>
-              <h3 class={styles.cardTitle}>{copy.cultureTitle}</h3>
-              <p class={styles.cardBody}>{copy.cultureBody}</p>
-              <a href={path("/culture/")} class={styles.textLink}>
-                {copy.cultureLink} <ArrowRight size={14} class="rtl-mirror" />
-              </a>
-            </div>
-            <div class={styles.card}>
-              <h3 class={styles.cardTitle}>{copy.actionTitle}</h3>
-              <p class={styles.cardBody}>{copy.actionBody}</p>
-              <a href={path("/take-action/")} class={styles.textLink}>
-                {copy.actionLink} <ArrowRight size={14} class="rtl-mirror" />
-              </a>
-            </div>
-          </div>
-        </Container>
-        <Container width="content">
+          <h3 class={styles.onwardTitle}>{copy.cultureTitle}</h3>
+          <p class={styles.onwardBody}>
+            {copy.cultureBody}{" "}
+            <a href={path("/culture/")} class={styles.inlineLink}>
+              {copy.cultureLink}
+            </a>
+          </p>
+          <h3 class={styles.onwardTitle}>{copy.actionTitle}</h3>
+          <p class={styles.onwardBody}>
+            {copy.actionBody}{" "}
+            <a href={path("/take-action/")} class={styles.inlineLink}>
+              {copy.actionLink}
+            </a>
+          </p>
           <OrnamentDivider tone="sand" class={styles.centeredDivider} />
           <PullQuote quote={copy.quote} cite={copy.quoteCite} />
         </Container>
-      </section>
+      </section>{" "}
     </>
   );
 });
