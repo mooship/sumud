@@ -21,7 +21,7 @@ const AUDIT_IDS = [
 
 function formatScore(score) {
   return score === null || score === undefined
-    ? "—"
+    ? "n/a"
     : String(Math.round(score * 100));
 }
 
@@ -72,7 +72,7 @@ function buildSummary(reports) {
       ...buildTable(
         AUDIT_IDS,
         urlReports,
-        (report, id) => report.audits[id]?.displayValue ?? "—",
+        (report, id) => report.audits[id]?.displayValue ?? "n/a",
       ),
     );
     lines.push("");
