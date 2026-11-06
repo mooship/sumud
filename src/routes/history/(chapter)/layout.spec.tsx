@@ -89,7 +89,7 @@ describe("history/(chapter)/layout", () => {
     const { screen, render } = await createDOM();
     await render(
       <QwikCityMockProvider url="http://localhost/history/gaza-and-the-present/">
-        <HeadSeeder title="Siege, War and the Present" />
+        <HeadSeeder title="Siege, war and the present" />
         <ChapterLayout>
           <p>Body</p>
         </ChapterLayout>
@@ -160,7 +160,7 @@ describe("history/(chapter)/layout", () => {
     const { screen, render } = await createDOM();
     await render(
       <QwikCityMockProvider url="http://localhost/history/gaza-and-the-present/">
-        <HeadSeeder title="Siege, War and the Present" />
+        <HeadSeeder title="Siege, war and the present" />
         <ChapterLayout>
           <p>Body</p>
         </ChapterLayout>

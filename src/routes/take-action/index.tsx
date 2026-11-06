@@ -11,11 +11,11 @@ import * as styles from "./index.css";
 
 const COPY = {
   en: {
-    eyebrow: "Take Action",
+    eyebrow: "Take action",
     title: "Aid and human rights organisations",
     lede: "These organisations provide humanitarian aid or document human rights abuses in Gaza, the West Bank and refugee communities. Follow the links to read about their current work and ways to support it. Inclusion here is not an endorsement of every position an organisation takes.",
-    jsonLdName: "Take Action · Sumud",
-    headTitle: "Take Action",
+    jsonLdName: "Take action · Sumud",
+    headTitle: "Take action",
     headDescription:
       "Reputable humanitarian and human rights organisations working in Gaza, the West Bank and with Palestinian refugees.",
   },

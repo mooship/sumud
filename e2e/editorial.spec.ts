@@ -141,7 +141,7 @@ for (const locale of ["en", "ar"] as const) {
       .getByRole("textbox")
       .fill(locale === "ar" ? "التطريز" : "tatreez");
     const result = page.getByRole("main").getByRole("link", {
-      name: locale === "ar" ? "الثقافة والصمود" : "Culture & Sumud",
+      name: locale === "ar" ? "الثقافة والصمود" : "Culture and sumud",
       exact: true,
     });
     await expect(result).toHaveAttribute("href", `${prefix}/culture/`);

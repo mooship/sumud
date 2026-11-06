@@ -33,7 +33,7 @@ npm run test.e2e # Playwright against the production build
 ## Editing content
 
 Chapter text lives in `src/routes/history/(chapter)/*/index.mdx`. Chapter order, sources, and
-Take Action listings live in `src/content/*.ts`. See [`AGENTS.md`](AGENTS.md) for architecture
+Take action listings live in `src/content/*.ts`. See [`AGENTS.md`](AGENTS.md) for architecture
 notes and deeper technical detail.
 
 The homepage is a reading guide: a short introduction, the meaning of sumud, an ordered

@@ -51,7 +51,7 @@ export const GLOSSARY_CATEGORIES: GlossaryCategory[] = [
         term: "Sumud",
         arabic: "صمود",
         definition:
-          "Steadfastness: the decision to stay on the land, in the village or the camp, rather than leave, and to keep living and rebuilding in the face of occupation, dispossession or exile. See the Culture & Sumud page for the idea in full.",
+          "Steadfastness: the decision to stay on the land, in the village or the camp, rather than leave, and to keep living and rebuilding in the face of occupation, dispossession or exile. See the Culture and sumud page for the idea in full.",
         ar: {
           term: "صمود",
           definition:

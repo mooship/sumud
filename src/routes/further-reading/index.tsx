@@ -13,15 +13,15 @@ const CATEGORY_ICONS = [Landmark, ScrollText, BookOpen, Quote];
 
 const COPY = {
   en: {
-    eyebrow: "Further Reading",
+    eyebrow: "Further reading",
     title: "Books about Palestine",
     ledePre:
       "History, memoir, fiction and poetry by Palestinian, Israeli and other writers. Books used in the history chapters also appear on the ",
     sourcesLink: "sources page",
     ledePost:
       ". The rest offer other ways into the subject, through personal accounts, novels and poems.",
-    jsonLdName: "Further Reading · Sumud",
-    headTitle: "Further Reading",
+    jsonLdName: "Further reading · Sumud",
+    headTitle: "Further reading",
     headDescription:
       "Recommended history, memoir, fiction and poetry about Palestine, from Palestinian, Israeli and other writers.",
   },

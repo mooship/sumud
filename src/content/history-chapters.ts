@@ -69,7 +69,7 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
   {
     slug: "occupation-and-exile",
     period: "1949–1967",
-    title: "Exile and Military Rule",
+    title: "Exile and military rule",
     summary:
       "Palestinian refugees built new lives in camps across the region. Those who stayed inside the new state of Israel lived for nearly two decades under military rule. In 1964 the PLO was founded.",
     ar: {
@@ -95,7 +95,7 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
   {
     slug: "oslo-to-blockade",
     period: "1993–2007",
-    title: "Oslo, and its Unravelling",
+    title: "Oslo and its unravelling",
     summary:
       "The Oslo Accords promised a path to statehood but delivered fragmented self-rule under continued occupation. A second, bloodier intifada followed, then Israel's withdrawal from Gaza and, within two years, a blockade.",
     ar: {
@@ -108,7 +108,7 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
   {
     slug: "gaza-and-the-present",
     period: "2007–present",
-    title: "Siege, War and the Present",
+    title: "Siege, war and the present",
     summary:
       "Gaza has lived under blockade for close to two decades and endured repeated wars. Since October 2023 it has faced the most destructive of them. This chapter carries the story to today.",
     current: true,

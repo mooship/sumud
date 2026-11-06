@@ -60,7 +60,7 @@ describe("routes/take-action index", () => {
 
   it("sets a page title and description", () => {
     const documentHead = resolveHead("/take-action/");
-    expect(documentHead.title).toBe("Take Action");
+    expect(documentHead.title).toBe("Take action");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);
   });
 

@@ -38,7 +38,7 @@ Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
   and intent behind 1948 expulsions), say so rather than picking a side silently. See
   `src/routes/sources/index.tsx` / `src/content/sources.ts` for the kind of sourcing already in
   use, and add to it rather than inventing citations.
-- Don't add a "Take Action" organisation, book, quote, or claimed statistic without being able
+- Don't add a "Take action" organisation, book, quote, or claimed statistic without being able
   to justify it. This is a real-world sensitive-topics site, not a placeholder demo. Every
   entry in `src/content/organisations.ts` and `src/content/books.ts` should be a real,
   independently verifiable organisation or book, not one assembled from a vague memory of the
@@ -70,7 +70,7 @@ this wrong and a page either 404s in nav, or silently never appears anywhere but
   _history chapter_ instead goes inside `src/routes/history/(chapter)/` and needs an entry added
   to `HISTORY_CHAPTERS` in `src/content/history-chapters.ts` (slug order there drives the
   prev/next links). See "Pathless layout groups" below for what that shell gives it for free.
-  A page with bespoke layout needs (like Take Action, Sources, Further Reading, or the homepage)
+  A page with bespoke layout needs (like Take action, Sources, Further reading, or the homepage)
   is just a plain `index.tsx` built from `Container` and hand-written `index.css.ts`, following
   whichever of those is closest in shape.
 - Structured content data gets a sibling spec file. Every `src/content/*.ts` list

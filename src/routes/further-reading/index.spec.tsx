@@ -60,7 +60,7 @@ describe("routes/further-reading index", () => {
 
   it("sets a page title and description", () => {
     const documentHead = resolveHead("/further-reading/");
-    expect(documentHead.title).toBe("Further Reading");
+    expect(documentHead.title).toBe("Further reading");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);
   });
 

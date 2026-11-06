@@ -38,11 +38,11 @@ const COPY = {
     briefLede:
       "Seven chapters, in order. Start at the beginning or choose a period you want to understand.",
     onwardTitle: "Culture and practical help",
-    cultureTitle: "Culture & Sumud",
+    cultureTitle: "Culture and sumud",
     cultureBody:
       "The patterns of a thobe, the autumn olive harvest, a plate of musakhan. Read about Palestinian food, craft, poetry and film, and what sumud means in daily life.",
     cultureLink: "Explore the culture",
-    actionTitle: "Take Action",
+    actionTitle: "Take action",
     actionBody:
       "Find humanitarian aid and human rights organisations working in Gaza, the West Bank and with refugees. Visit their own sites to check their work and ways to support it.",
     actionLink: "Find organisations",
