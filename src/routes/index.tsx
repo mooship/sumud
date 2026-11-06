@@ -77,7 +77,7 @@ const COPY = {
     actionLink: "تعرّف على المنظمات",
     quote: "على هذه الأرض ما يستحق الحياة",
     quoteCite: "محمود درويش، «على هذه الأرض»",
-    headTitle: "صمود -- قصة فلسطين",
+    headTitle: "صمود: قصة فلسطين",
     headDescription: SITE_DESCRIPTION_AR,
   },
 };

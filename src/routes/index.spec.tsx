@@ -97,7 +97,7 @@ describe("routes/index (homepage)", () => {
     );
 
     const documentHead = resolveHead("/ar/");
-    expect(documentHead.title).toBe("صمود -- قصة فلسطين");
+    expect(documentHead.title).toBe("صمود: قصة فلسطين");
     expect(documentHead.meta?.[0]?.content?.length).toBeGreaterThan(0);
   });
 });
