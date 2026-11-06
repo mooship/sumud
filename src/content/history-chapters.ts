@@ -32,12 +32,12 @@ export const HISTORY_CHAPTERS: HistoryChapter[] = [
     period: "Until 1917",
     title: "Ottoman Palestine",
     summary:
-      "For four centuries Palestine was a province of the Ottoman Empire: a mixed, mostly agrarian society of Muslims, Christians and a small Jewish minority, bound together by land, trade and faith.",
+      "For four centuries Palestine was a province of the Ottoman Empire: a mixed, mostly agrarian society of Muslims, Christians and a small Jewish minority.",
     ar: {
       period: "حتى عام 1917",
       title: "فلسطين العثمانية",
       summary:
-        "لأربعة قرون كانت فلسطين ولاية تابعة للدولة العثمانية: مجتمعًا مختلطًا وزراعيًا في الغالب من المسلمين والمسيحيين وأقلية يهودية صغيرة، جمعتهم الأرض والتجارة والإيمان.",
+        "لأربعة قرون كانت فلسطين ولاية تابعة للدولة العثمانية: مجتمعًا مختلطًا وزراعيًا في الغالب من المسلمين والمسيحيين وأقلية يهودية صغيرة.",
     },
   },
   {

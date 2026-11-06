@@ -39,7 +39,7 @@ export const GLOSSARY_CATEGORIES: GlossaryCategory[] = [
   {
     title: "Core terms",
     intro:
-      "Words that recur across this site's history chapters, usually left untranslated because no single English word carries the same weight.",
+      "Words that recur across this site's history chapters, usually left untranslated because English has no exact equivalent.",
     ar: {
       title: "مصطلحات أساسية",
       intro:

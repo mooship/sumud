@@ -66,7 +66,7 @@ export const BOOK_CATEGORIES: BookCategory[] = [
         author: "Edward Said",
         year: 1979,
         description:
-          "An early, influential articulation of the Palestinian case for an English-language audience, from the literary critic and public intellectual.",
+          "An early and influential statement of the Palestinian case for an English-language audience, from the literary critic and public intellectual.",
         ar: {
           description:
             "من أوائل الصياغات المؤثرة للقضية الفلسطينية الموجهة لجمهور ناطق بالإنجليزية، بقلم الناقد الأدبي والمفكر العام.",
@@ -165,10 +165,10 @@ export const BOOK_CATEGORIES: BookCategory[] = [
         author: "Adania Shibli",
         year: 2020,
         description:
-          "A taut, formally daring novel linking a 1949 atrocity to a present-day search for the truth about it. Shortlisted for the International Booker Prize.",
+          "A novel linking a 1949 atrocity to a present-day search for the truth about it. Shortlisted for the International Booker Prize.",
         ar: {
           description:
-            "رواية مشدودة وجريئة الشكل تربط بين جريمة وقعت عام 1949 وبحث معاصر عن حقيقتها. وصلت إلى القائمة القصيرة لجائزة البوكر الدولية.",
+            "رواية تربط بين جريمة وقعت عام 1949 وبحث معاصر عن حقيقتها. وصلت إلى القائمة القصيرة لجائزة البوكر الدولية.",
         },
       },
       {
@@ -197,7 +197,7 @@ export const BOOK_CATEGORIES: BookCategory[] = [
         author: "Mahmoud Darwish",
         year: 2003,
         description:
-          "A representative selection from Palestine's national poet, translated by Munir Akash and Carolyn Forche.",
+          "A representative selection from Palestine's national poet, translated by Munir Akash and Carolyn Forché.",
         ar: {
           description:
             "مختارات ممثِّلة لشاعر فلسطين الوطني، ترجمها منير عكش وكارولين فورشيه.",

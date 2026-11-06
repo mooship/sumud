@@ -97,7 +97,7 @@ export const SOURCE_SECTIONS: SourceSection[] = [
       {
         id: "said-question-of-palestine",
         name: "Edward Said, The Question of Palestine (1979)",
-        meta: "An early, influential articulation of the Palestinian national narrative for an English-language audience.",
+        meta: "An early and influential statement of the Palestinian national narrative for an English-language audience.",
         ar: {
           meta: "من أوائل الصياغات المؤثرة للسردية الوطنية الفلسطينية الموجهة لجمهور ناطق بالإنجليزية.",
         },
