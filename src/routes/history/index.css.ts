@@ -67,7 +67,7 @@ export const itemDot = style({
   width: "0.6rem",
   height: "0.6rem",
   borderRadius: vars.radius.pill,
-  backgroundColor: vars.color.terracotta,
+  backgroundColor: vars.color.accent,
   border: `2px solid ${vars.color.bg}`,
   transform: "translate(-50%, -50%)",
   "@media": {
@@ -106,7 +106,7 @@ export const itemTitle = style({
   transition: "color 0.15s ease",
   selectors: {
     [`${item}:hover &`]: {
-      color: vars.color.terracotta,
+      color: vars.color.accent,
     },
   },
 });

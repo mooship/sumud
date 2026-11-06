@@ -74,7 +74,7 @@ export const orgLink = style({
   textUnderlineOffset: "0.2em",
   selectors: {
     "&:hover": {
-      color: vars.color.terracotta,
+      color: vars.color.accent,
       textDecorationColor: "currentColor",
     },
   },

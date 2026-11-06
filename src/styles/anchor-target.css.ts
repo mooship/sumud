@@ -11,7 +11,7 @@ export const anchorTarget = style({
   scrollMarginTop: `calc(${vars.layout.headerHeight} + ${vars.space[3]})`,
   selectors: {
     "&:target": {
-      borderInlineStartColor: vars.color.terracotta,
+      borderInlineStartColor: vars.color.accent,
     },
   },
 });

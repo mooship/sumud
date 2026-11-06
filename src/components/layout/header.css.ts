@@ -50,7 +50,7 @@ export const brand = style({
 });
 
 export const brandMark = style({
-  color: vars.color.terracotta,
+  color: vars.color.accent,
 });
 
 export const nav = style({
@@ -78,7 +78,7 @@ export const navLink = style({
     },
     '&[aria-current="page"]': {
       color: vars.color.ink,
-      borderBottomColor: vars.color.terracotta,
+      borderBottomColor: vars.color.accent,
     },
   },
 });

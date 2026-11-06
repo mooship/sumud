@@ -33,7 +33,7 @@ globalStyle(`${prose} a`, {
 });
 
 globalStyle(`${prose} a:hover`, {
-  color: vars.color.terracotta,
+  color: vars.color.accent,
   textDecorationColor: "currentColor",
 });
 

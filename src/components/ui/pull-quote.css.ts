@@ -9,7 +9,7 @@ export const figure = style({
 });
 
 export const mark = style({
-  color: vars.color.terracotta,
+  color: vars.color.accent,
   opacity: 0.6,
   marginBottom: vars.space[1],
 });

@@ -47,8 +47,8 @@ export const categoryIconBadge = style({
   height: "2.5rem",
   flexShrink: 0,
   borderRadius: vars.radius.pill,
-  backgroundColor: vars.color.terracottaLight,
-  color: vars.color.terracotta,
+  backgroundColor: vars.color.accentLight,
+  color: vars.color.accent,
 });
 
 export const categoryTitle = style({

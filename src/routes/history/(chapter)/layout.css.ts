@@ -29,7 +29,7 @@ export const period = style({
   fontWeight: 600,
   letterSpacing: "0.06em",
   textTransform: "uppercase",
-  color: vars.color.terracotta,
+  color: vars.color.accent,
   marginBottom: vars.space[1],
 });
 

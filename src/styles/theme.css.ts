@@ -1,31 +1,37 @@
 import { createGlobalTheme, globalStyle } from "@vanilla-extract/css";
 
 /**
- * Sumud (صمود) -- "steadfastness". The palette draws on the land itself: olive
- * groves, sun-worn stone, parchment -- rather than a literal flag treatment.
+ * Sumud (صمود), "steadfastness". The palette is archival paper, olive and one tatreez red,
+ * kept well clear of a literal flag treatment. Contrast for every text pair is checked in
+ * both schemes (WCAG 2.2 AA); `sandLine` is for decorative rules only, and anything a
+ * reader can click gets the darker `border`.
  */
 export const vars = createGlobalTheme(":root", {
   color: {
-    bg: "#faf6ef",
-    bgAlt: "#f1ead9",
-    bgRaised: "#ffffff",
-    ink: "#241f1c",
-    inkMuted: "#5b5348",
-    inkFaint: "#6b6353",
-    olive: "#4b5d3a",
+    bg: "#f6f1e7",
+    bgAlt: "#ede5d3",
+    bgRaised: "#fbf8f2",
+    ink: "#1f1b17",
+    inkMuted: "#5a5246",
+    inkFaint: "#665e4f",
+    olive: "#4a5a35",
     oliveDark: "#34432a",
-    oliveLight: "#e4e9db",
+    oliveLight: "#e3e8d8",
     onOlive: "#ffffff",
-    terracotta: "#a9432f",
-    terracottaLight: "#f4e0da",
-    sandLine: "#ded2b8",
+    accent: "#8e2b25",
+    accentLight: "#f2dfd8",
+    sandLine: "#cfc3a8",
+    border: "#8a8170",
     focus: "#1d5fae",
     white: "#ffffff",
   },
   font: {
-    sans: "'Inter Variable', 'Inter Variable fallback', system-ui, 'Segoe UI', sans-serif",
+    // Each Latin face is paired with an Arabic one. Neither Latin font has Arabic glyphs, so
+    // the browser falls through to the Arabic face character by character, which also covers
+    // inline Arabic on English pages.
+    sans: "'IBM Plex Sans Variable', 'IBM Plex Sans Arabic', 'IBM Plex Sans Variable fallback', 'IBM Plex Sans Arabic fallback', system-ui, 'Segoe UI', Tahoma, sans-serif",
     serif:
-      "'Newsreader Variable', 'Newsreader Variable fallback', 'Iowan Old Style', Georgia, serif",
+      "'Newsreader Variable', 'Noto Naskh Arabic Variable', 'Newsreader Variable fallback', 'Noto Naskh Arabic Variable fallback', 'Iowan Old Style', Georgia, 'Times New Roman', serif",
   },
   fontSize: {
     xs: "0.8125rem",
@@ -70,8 +76,9 @@ export const vars = createGlobalTheme(":root", {
     lg: "0 12px 36px rgba(36, 31, 28, 0.12)",
   },
   layout: {
-    contentWidth: "42rem",
+    contentWidth: "40rem",
     wideWidth: "72rem",
+    timelineDateColumn: "9rem",
     headerHeight: "4rem",
   },
   zIndex: {
@@ -85,21 +92,39 @@ globalStyle(":root", {
   "@media": {
     "(prefers-color-scheme: dark)": {
       vars: {
-        [vars.color.bg]: "#151310",
-        [vars.color.bgAlt]: "#1d1a15",
+        [vars.color.bg]: "#14120f",
+        [vars.color.bgAlt]: "#1c1915",
         [vars.color.bgRaised]: "#211e18",
-        [vars.color.ink]: "#f2ecdf",
+        [vars.color.ink]: "#ece5d6",
         [vars.color.inkMuted]: "#bdb39f",
-        [vars.color.inkFaint]: "#8c8471",
-        [vars.color.olive]: "#93ac74",
-        [vars.color.oliveDark]: "#71895a",
+        [vars.color.inkFaint]: "#9a917d",
+        [vars.color.olive]: "#a3b884",
+        [vars.color.oliveDark]: "#b9cb9c",
         [vars.color.oliveLight]: "#2a3324",
-        [vars.color.onOlive]: "#151310",
-        [vars.color.terracotta]: "#e2896b",
-        [vars.color.terracottaLight]: "#3a2620",
+        [vars.color.onOlive]: "#14120f",
+        [vars.color.accent]: "#e08a74",
+        [vars.color.accentLight]: "#3a2620",
         [vars.color.sandLine]: "#3a3327",
+        [vars.color.border]: "#7a715f",
         [vars.color.focus]: "#7fb3ff",
       },
     },
+  },
+});
+
+// Arabic pages: Naskh and Plex Arabic sit lower and need more room between lines than the
+// Latin faces, so sizes step up slightly and every line height opens out. Components use
+// these tokens, so nothing else has to know about the script.
+globalStyle(":root:lang(ar)", {
+  vars: {
+    [vars.fontSize.xs]: "0.875rem",
+    [vars.fontSize.sm]: "1rem",
+    [vars.fontSize.base]: "1.125rem",
+    [vars.fontSize.md]: "1.25rem",
+    [vars.fontSize.lg]: "1.4375rem",
+    [vars.lineHeight.tight]: "1.4",
+    [vars.lineHeight.snug]: "1.55",
+    [vars.lineHeight.normal]: "1.75",
+    [vars.lineHeight.relaxed]: "1.85",
   },
 });

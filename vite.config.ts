@@ -39,7 +39,7 @@ export default defineConfig(({ mode }): UserConfig => {
       }),
       FontaineTransform.vite({
         fallbacks: {
-          Inter: [
+          "IBM Plex Sans Variable": [
             "system-ui",
             "Segoe UI",
             "Roboto",
@@ -47,12 +47,19 @@ export default defineConfig(({ mode }): UserConfig => {
             "Arial",
             "sans-serif",
           ],
-          Newsreader: [
+          "IBM Plex Sans Arabic": ["Segoe UI", "Tahoma", "Geeza Pro", "Arial"],
+          "Newsreader Variable": [
             "Iowan Old Style",
             "Georgia",
             "Cambria",
             "Times New Roman",
             "serif",
+          ],
+          "Noto Naskh Arabic Variable": [
+            "Times New Roman",
+            "Traditional Arabic",
+            "Geeza Pro",
+            "Arial",
           ],
         },
       }),

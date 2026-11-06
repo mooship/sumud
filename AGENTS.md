@@ -157,11 +157,16 @@ slug. There is no separate i18n library, just Qwik City's own routing and reques
   class must already be defined above it in the file).
 - Fontaine fallback names: the generated fallback family is `"<Family> fallback"` where
   `<Family>` is the _exact_ `font-family` string in the source `@font-face` (e.g. Fontsource's
-  `"Inter Variable"`, not `"Inter"`). Theme font stacks must reference the fallback as
-  `"Inter Variable fallback"` verbatim or the fallback face silently never matches. Fontaine
+  `"IBM Plex Sans Variable"`, not `"IBM Plex Sans"`). Theme font stacks must reference the fallback as
+  `"IBM Plex Sans Variable fallback"` verbatim or the fallback face silently never matches. Fontaine
   resolves metrics by name first (works for any font in the Capsize database, i.e. most of
   Google Fonts) before falling back to reading the actual font file, so no `resolvePath` is needed
-  for Fontsource fonts.
+  for Fontsource fonts. The pairing is IBM Plex Sans with IBM Plex Sans Arabic for UI and body,
+  and Newsreader with Noto Naskh Arabic for headings and quotes (`src/styles/fonts.ts`). Each
+  Fontsource file carries a `unicode-range`, so a page only downloads the scripts it uses.
+- Arabic text is never italic, uppercased or letter-spaced. `src/styles/global.css.ts` resets
+  those on `:lang(ar)`, and `:root:lang(ar)` in `theme.css.ts` raises the type scale and line
+  height. Mark inline Arabic in English pages with `lang="ar" dir="rtl"` so the reset applies.
 - Polymorphic `as="tag"` components (`Container`): typing props as `PropsOf<"div"> & { as?:
 ... }` breaks the Qwik JSX optimizer's type-check when the tag actually renders as something
   else (`ref` type mismatch between element types). Fix: `Omit<PropsOf<"div">, "ref">`. `as` itself

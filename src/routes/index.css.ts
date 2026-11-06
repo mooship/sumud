@@ -56,7 +56,7 @@ export const definition = style({
 export const heroWord = style({
   display: "inline-block",
   fontFamily: vars.font.serif,
-  color: vars.color.terracotta,
+  color: vars.color.accent,
   fontSize: vars.fontSize.xl2,
   marginBottom: vars.space[2],
 });
@@ -75,7 +75,7 @@ export const textLink = style({
   paddingBlock: vars.space[2],
   fontSize: vars.fontSize.sm,
   fontWeight: 600,
-  color: vars.color.terracotta,
+  color: vars.color.accent,
   textUnderlineOffset: "0.2em",
   selectors: { "&:hover": { color: vars.color.ink } },
 });
@@ -181,7 +181,7 @@ export const timelineDot = style({
 });
 export const timelineDotCurrent = style([
   timelineDot,
-  { backgroundColor: vars.color.terracotta },
+  { backgroundColor: vars.color.accent },
 ]);
 export const timelineYear = style({
   fontSize: vars.fontSize.xs,
@@ -194,6 +194,6 @@ export const timelineLabel = style({
   fontWeight: 500,
   transition: "color 0.15s ease",
   selectors: {
-    [`${timelineItem}:hover &`]: { color: vars.color.terracotta },
+    [`${timelineItem}:hover &`]: { color: vars.color.accent },
   },
 });
