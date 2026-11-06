@@ -5,7 +5,7 @@ import {
   type DocumentHeadProps,
   type DocumentHeadValue,
 } from "@builder.io/qwik-city";
-import NotFound, { head } from "./404";
+import NotFound, { head } from "./not-found";
 
 function resolveHead(pathname: string): DocumentHeadValue {
   return (head as (props: DocumentHeadProps) => DocumentHeadValue)({
@@ -13,7 +13,7 @@ function resolveHead(pathname: string): DocumentHeadValue {
   } as unknown as DocumentHeadProps);
 }
 
-describe("routes/404", () => {
+describe("not-found", () => {
   it("points back to the history chapters and search", async () => {
     const { screen, render } = await createDOM();
     await render(
