@@ -1,6 +1,6 @@
-import { describe, expect, it } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
 import { QwikCityMockProvider } from "@builder.io/qwik-city";
+import { describe, expect, it } from "vitest";
 import AboutLayout from "./layout";
 
 describe("about/layout", () => {

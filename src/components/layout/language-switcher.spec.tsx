@@ -1,6 +1,6 @@
-import { afterEach, describe, expect, it, vi } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
 import { QwikCityMockProvider } from "@builder.io/qwik-city";
+import { afterEach, describe, expect, it, vi } from "vitest";
 import { LOCALE_STORAGE_KEY } from "~/lib/locale";
 import { stubStorage } from "~/testing/storage-stub";
 import { LanguageSwitcher } from "./language-switcher";

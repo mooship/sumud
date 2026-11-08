@@ -1,8 +1,8 @@
-import { defineConfig } from "vitest/config";
+import { fileURLToPath } from "node:url";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig } from "vitest/config";
 
 export default defineConfig({
   plugins: [
@@ -14,9 +14,11 @@ export default defineConfig({
       },
     }),
     qwikVite(),
-    tsconfigPaths({ root: "." }),
     vanillaExtractPlugin({ identifiers: "debug" }),
   ],
+  resolve: {
+    alias: { "~": fileURLToPath(new URL("./src", import.meta.url)) },
+  },
   test: {
     environment: "node",
     include: ["src/**/*.spec.{ts,tsx}"],

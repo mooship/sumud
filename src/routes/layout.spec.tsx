@@ -1,6 +1,6 @@
-import { describe, expect, it, vi } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
 import { QwikCityMockProvider } from "@builder.io/qwik-city";
+import { describe, expect, it, vi } from "vitest";
 import RootLayout, { onGet } from "./layout";
 
 describe("routes/layout onGet", () => {

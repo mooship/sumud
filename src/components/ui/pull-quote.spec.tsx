@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
+import { describe, expect, it } from "vitest";
 import { PullQuote } from "./pull-quote";
 
 describe("PullQuote", () => {

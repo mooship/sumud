@@ -1,11 +1,12 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
-import { Container } from "~/components/ui/container";
+import { JsonLd } from "~/components/seo/json-ld";
 import { ButtonLink } from "~/components/ui/button-link";
-import { PullQuote } from "~/components/ui/pull-quote";
-import { OrnamentDivider } from "~/components/ui/ornament-divider";
+import { Container } from "~/components/ui/container";
 import { ArrowRight } from "~/components/ui/icons";
+import { OrnamentDivider } from "~/components/ui/ornament-divider";
+import { PullQuote } from "~/components/ui/pull-quote";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
 import { localizedHead } from "~/content/i18n";
 import {
@@ -14,11 +15,10 @@ import {
   SITE_URL,
 } from "~/content/site";
 import {
-  LOCALE_HTML_ATTRS,
   getLocaleFromPathname,
+  LOCALE_HTML_ATTRS,
   localizedPathname,
 } from "~/lib/locale";
-import { JsonLd } from "~/components/seo/json-ld";
 import * as styles from "./index.css";
 
 const ROMAN_NUMERALS = ["I", "II", "III", "IV", "V", "VI", "VII"];
@@ -102,7 +102,7 @@ export default component$(() => {
             "@type": "SearchAction",
             target: {
               "@type": "EntryPoint",
-              // eslint-disable-next-line unicorn/no-incorrect-template-string-interpolation -- Schema.org URL template, not a JS interpolation.
+              // `{search_term_string}` is a Schema.org URL template, not a JS interpolation.
               urlTemplate: `${SITE_URL}${path("/search/")}?q={search_term_string}`,
             },
             "query-input": "required name=search_term_string",

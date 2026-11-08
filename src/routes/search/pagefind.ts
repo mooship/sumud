@@ -47,13 +47,11 @@ export function loadPagefindUI(doc: Document): void {
   // `Element` interface that merges into DOM's own `Element`, and its `append(content:
   // string | ReadableStream | Response)` shadows the real one -- appendChild isn't on
   // that interface, so it keeps the standard DOM signature.
-  // eslint-disable-next-line unicorn/prefer-dom-node-append
   doc.head.appendChild(link);
 
   const script = doc.createElement("script");
   script.id = SCRIPT_ID;
   script.src = "/pagefind/pagefind-ui.js";
   script.addEventListener("load", () => initPagefindUI(doc));
-  // eslint-disable-next-line unicorn/prefer-dom-node-append -- see the comment above.
   doc.body.appendChild(script);
 }

@@ -11,12 +11,12 @@
  *
  */
 import {
-  renderToStream,
   type RenderToStreamOptions,
+  renderToStream,
 } from "@builder.io/qwik/server";
 import { manifest } from "@qwik-client-manifest";
-import Root from "./root";
 import { DEFAULT_LOCALE, LOCALE_HTML_ATTRS, type Locale } from "./lib/locale";
+import Root from "./root";
 
 export default function renderSsr(opts: RenderToStreamOptions) {
   // Qwik City's request handler nests the per-request locale (set via `requestEvent.locale()`
@@ -24,7 +24,8 @@ export default function renderSsr(opts: RenderToStreamOptions) {
   // `serverData.locale`, not a top-level `opts.locale` -- there is no such top-level option.
   const locale =
     ((opts.serverData as { locale?: string } | undefined)?.locale as
-      Locale | undefined) ?? DEFAULT_LOCALE;
+      | Locale
+      | undefined) ?? DEFAULT_LOCALE;
   const { lang, dir } = LOCALE_HTML_ATTRS[locale];
 
   return renderToStream(<Root />, {

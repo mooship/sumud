@@ -5,8 +5,8 @@ import { Container } from "~/components/ui/container";
 import { PageHeader } from "~/components/ui/page-header";
 import { localizedHead } from "~/content/i18n";
 import { getLocaleFromPathname } from "~/lib/locale";
-import { loadPagefindUI, SEARCH_MOUNT_ID } from "./pagefind";
 import * as styles from "./index.css";
+import { loadPagefindUI, SEARCH_MOUNT_ID } from "./pagefind";
 
 const COPY = {
   en: {

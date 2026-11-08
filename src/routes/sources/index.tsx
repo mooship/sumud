@@ -3,7 +3,7 @@ import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { PageHeader } from "~/components/ui/page-header";
-import { UI_STRINGS, localizedHead } from "~/content/i18n";
+import { localizedHead, UI_STRINGS } from "~/content/i18n";
 import { SOURCE_SECTIONS } from "~/content/sources";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./index.css";
@@ -39,8 +39,7 @@ const COPY = {
     correctionPre:
       "إذا كان هناك شيء غير دقيق أو قديم أو منسوب خطأً في هذا الموقع، يرجى ",
     correctionLink: "فتح تذكرة على GitHub",
-    correctionPost:
-      ". أرفق الصفحة والمقطع ومصدرًا للتصويب حتى يمكن التحقق منه.",
+    correctionPost: ". أرفق الصفحة والمقطع ومصدرًا للتصويب حتى يمكن التحقق منه.",
     headTitle: "المصادر",
     headDescription:
       "الكتب والأرشيفات وسجلات الأمم المتحدة ومنظمات حقوق الإنسان التي يعتمد عليها هذا المشروع، وكيفية الإبلاغ عن تصويب.",

@@ -1,8 +1,8 @@
 import { component$ } from "@builder.io/qwik";
 import {
+  type DocumentMeta,
   useDocumentHead,
   useLocation,
-  type DocumentMeta,
 } from "@builder.io/qwik-city";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "~/content/site";
 import {

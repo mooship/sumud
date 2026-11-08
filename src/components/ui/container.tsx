@@ -1,4 +1,4 @@
-import { component$, Slot, type PropsOf } from "@builder.io/qwik";
+import { component$, type PropsOf, Slot } from "@builder.io/qwik";
 import clsx from "clsx";
 import { container } from "./container.css";
 

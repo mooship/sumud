@@ -91,7 +91,7 @@ test("primary link has readable contrast in both colour schemes, including hover
       if (isHovered) await link.hover();
       else await page.mouse.move(0, 0);
       const contrast = await link.evaluate((el) => {
-        // eslint-disable-next-line unicorn/consistent-function-scoping -- Runs in the browser, not the test process.
+        // Defined inside evaluate because this callback runs in the browser, not the test process.
         const luminance = (colour: string) => {
           const rgb = colour.match(/\d+/g)!.slice(0, 3).map(Number);
           const linear = rgb.map((channel) => {

@@ -30,6 +30,6 @@ export const HeadSeeder = component$<SeedableHead>((props) => {
   useTask$(() => {
     Object.assign(head, props);
   });
-  // eslint-disable-next-line unicorn/no-useless-undefined -- component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
+  // biome-ignore lint/complexity/noUselessUndefined: component$ must return JSXOutput; a bare `return;` types as `void`, which TS rejects here.
   return undefined;
 });
