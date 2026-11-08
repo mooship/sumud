@@ -13,15 +13,12 @@ jobs:
   check:
     name: Lint, typecheck, test & build
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [24, 26]
     steps:
       - uses: actions/checkout@v7
 
       - uses: actions/setup-node@v7
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: 24
           cache: npm
           # tools/lint is a separate package (Qwik's ESLint rules need TypeScript 6; the site uses 7).
           cache-dependency-path: |
@@ -50,7 +47,7 @@ jobs:
         if: always()
         uses: actions/upload-artifact@v7
         with:
-          name: coverage-report-node-${{ matrix.node-version }}
+          name: coverage-report-node-24
           path: coverage/
           retention-days: 14
 

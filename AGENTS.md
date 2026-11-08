@@ -100,9 +100,8 @@ Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ### Dependencies and lockfiles
 
-Node 24 and 26 are supported, with 24.22.1 as the floor (`engines.node` is the only engines entry).
-The `Lint, typecheck, test & build` job runs on a Node 24 and 26 matrix; Playwright and Lighthouse
-run on Node 24. CI runs `npm install --global npm@11` before every `npm ci`, but Cloudflare Workers
+Node 24 is the tested version, with 24.22.1 as the floor and newer allowed (`engines.node` is the only
+engines entry). Every CI job runs on Node 24. CI runs `npm install --global npm@11` before every `npm ci`, but Cloudflare Workers
 Builds runs npm 10.9.2 and cannot be changed from this repo: a `packageManager` field or a bare
 `24` in `.node-version` broke its preview builds, so neither exists here. Every lockfile therefore
 has to install under both npm 10 and npm 11.
