@@ -9,6 +9,10 @@ updates:
       time: "06:00"
       timezone: "Africa/Johannesburg"
     open-pull-requests-limit: 2
+    # Qwik 1.20 peers on vite below 8, so a vite major bump fails npm ci. Drop this once Qwik supports vite 8.
+    ignore:
+      - dependency-name: "vite"
+        update-types: ["version-update:semver-major"]
     groups:
       npm-critical:
         patterns:
