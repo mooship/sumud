@@ -3,6 +3,11 @@
   "version": "0.0.0",
   "private": true,
   "type": "module",
+  "engines": {
+    "node": ">=24.22.1",
+    "npm": ">=11.0.0"
+  },
+  "packageManager": "npm@11.19.1",
   "description": "Qwik's ESLint rules, kept apart from the site. Their TypeScript parser supports TypeScript below 6.1 only, so this package pins TypeScript 6 while the site compiles with TypeScript 7.",
   "devDependencies": {
     "@typescript-eslint/parser": "^8.72.1",

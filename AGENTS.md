@@ -98,6 +98,32 @@ production-only build error.
 
 Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for every commit, with the subject format `<type>[optional scope][!]: <description>`. Use a recognised type such as `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `build`, `ci` or `chore`. Mark breaking changes with `!` and explain them in the body or a `BREAKING CHANGE:` footer.
 
+### Dependencies and lockfiles
+
+Node 24 and 26 are supported, with 24.22.1 as the floor (`engines.node`; `.node-version` says
+`24`). npm is 11 everywhere: `engines.npm` is `>=11.0.0` and `packageManager` pins `npm@11.19.1`,
+the only setting Workers Builds reads to choose its npm (it otherwise stays on 10). CI runs
+`npm install --global npm@11` before every `npm ci`, because Node 26 can ship a different npm
+major. The `Lint, typecheck, test & build` job runs on a Node 24 and 26 matrix; Playwright and
+Lighthouse use `.node-version`.
+
+- There are two lockfiles, the root one and `tools/lint/package-lock.json`. `tools/lint` takes the
+  same `engines` and `packageManager` but keeps its own `typescript` at `^6.0.3`.
+- After a `package.json` change run a real `npm install` (not `--package-lock-only`, which keeps
+  stale nested entries when a range or override changes) and commit it with the lockfile in the
+  same commit. If `npm ls` then shows `invalid`, delete the stale nested entries from the lockfile
+  and install again; never hand-edit versions.
+- Verify with a real `npm ci --ignore-scripts` in a throwaway clone, not `--dry-run`, which has
+  passed a lockfile that failed a real install. Do the same in `tools/lint`.
+- A lockfile that npm 10 accepts and npm 11 rejects, or the reverse, is an environment mismatch,
+  not a problem with the change. Dependabot owns its lockfile changes: push a corrected one to its
+  branch only when a real `npm ci` under npm 11 fails.
+- Prerelease pins are exact, because a caret on a prerelease resolves to nightly builds, and a
+  prerelease does not satisfy a plain peer range such as `>=2.9`.
+- Run the project's binaries with `npm run` or `npx --no-install <tool>`; a plain `npx` can fetch
+  an unrelated package of the same name.
+- Do not install in a working tree someone else is using.
+
 ### Code comments
 
 Comment only a non-obvious why: a constraint, a workaround, or a reason someone might otherwise
@@ -141,9 +167,8 @@ when the reason for a setting isn't obvious (`biome.jsonc`, `wrangler.jsonc`, th
   in CI.
 - Layout, styling, RTL, navigation, search or headers: also `npm run test.e2e`, and look at the
   page in both locales.
-- Dependencies: regenerate the lockfile with npm 10 (`npx -y npm@10 install --package-lock-only
-  --ignore-scripts`, in `tools/lint` too if that changed) and check that `npm ci` passes there,
-  because CI and Workers Builds run npm 10.
+- Dependencies: follow "Dependencies and lockfiles" above: a real `npm install` under npm 11 (in
+  `tools/lint` too if that changed), then a real `npm ci --ignore-scripts` in a clean clone.
 - Prose or content data only: `npm run check`, plus reading the change against the writing and
   sourcing rules above.
 - CI (including Lighthouse and the Workers Builds check) is green before merging.
