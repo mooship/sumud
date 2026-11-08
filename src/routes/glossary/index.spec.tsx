@@ -1,10 +1,10 @@
-import { describe, expect, it } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
 import {
-  QwikCityMockProvider,
   type DocumentHeadProps,
   type DocumentHeadValue,
+  QwikCityMockProvider,
 } from "@builder.io/qwik-city";
+import { describe, expect, it } from "vitest";
 import { GLOSSARY_CATEGORIES } from "~/content/glossary";
 import GlossaryIndex, { head } from "./index";
 

@@ -1,13 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { HISTORY_CHAPTERS } from "./history-chapters";
-import { NAV_ITEMS } from "./nav";
 import {
   buildAtomFeed,
   buildRssFeed,
   escapeXml,
-  getFeedItems,
   type FeedItem,
+  getFeedItems,
 } from "./feed";
+import { HISTORY_CHAPTERS } from "./history-chapters";
+import { NAV_ITEMS } from "./nav";
 import { SITE_URL } from "./site";
 
 describe("getFeedItems", () => {

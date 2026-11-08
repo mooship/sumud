@@ -1,12 +1,12 @@
 import { describe, expect, it } from "vitest";
 import { localizedPathname } from "~/lib/locale";
-import { NAV_ITEMS } from "./nav";
 import {
   LANGUAGE_OFFER,
   LOCALE_AUTONYMS,
-  UI_STRINGS,
   localizedNavItems,
+  UI_STRINGS,
 } from "./i18n";
+import { NAV_ITEMS } from "./nav";
 
 describe("UI_STRINGS", () => {
   it("defines every key for both locales with non-empty values", () => {

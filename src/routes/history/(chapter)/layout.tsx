@@ -1,17 +1,17 @@
 import { component$, Slot } from "@builder.io/qwik";
 import { Link, useDocumentHead, useLocation } from "@builder.io/qwik-city";
-import { Container } from "~/components/ui/container";
-import { Prose } from "~/components/ui/prose";
 import { JsonLd } from "~/components/seo/json-ld";
+import { Container } from "~/components/ui/container";
 import { ArrowRight } from "~/components/ui/icons";
+import { Prose } from "~/components/ui/prose";
 import { HISTORY_CHAPTERS } from "~/content/history-chapters";
 import { UI_STRINGS } from "~/content/i18n";
 import { NAV_ITEMS } from "~/content/nav";
 import { SITE_NAME, SITE_URL } from "~/content/site";
 import { formatDate } from "~/lib/format-date";
 import {
-  LOCALE_HTML_ATTRS,
   getLocaleFromPathname,
+  LOCALE_HTML_ATTRS,
   localizedPathname,
 } from "~/lib/locale";
 import * as styles from "./layout.css";

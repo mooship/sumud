@@ -1,5 +1,5 @@
-import { describe, expect, it, vi } from "vitest";
 import type { RequestEvent } from "@builder.io/qwik-city";
+import { describe, expect, it, vi } from "vitest";
 import { onGet } from "./index";
 
 describe("routes/rss.xml onGet", () => {

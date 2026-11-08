@@ -1,8 +1,8 @@
 import { component$ } from "@builder.io/qwik";
 import type { DocumentHead } from "@builder.io/qwik-city";
 import { useLocation } from "@builder.io/qwik-city";
-import { Container } from "~/components/ui/container";
 import { JsonLd } from "~/components/seo/json-ld";
+import { Container } from "~/components/ui/container";
 import { PageHeader } from "~/components/ui/page-header";
 import { GLOSSARY_CATEGORIES } from "~/content/glossary";
 import { localizedHead } from "~/content/i18n";

@@ -2,8 +2,8 @@ import { component$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import { LOCALE_AUTONYMS } from "~/content/i18n";
 import {
-  LOCALE_STORAGE_KEY,
   getLocaleFromPathname,
+  LOCALE_STORAGE_KEY,
   localizedPathname,
   otherLocale,
 } from "~/lib/locale";

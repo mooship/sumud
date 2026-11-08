@@ -68,5 +68,5 @@ Where these differ from the instructions above, these win.
   Arabic (right to left) under `/ar/`.
 - Start from `e2e/seed.spec.ts`.
 - Take copy from `src/content` rather than writing the strings out, unless the test is about the wording itself.
-- `generator_write_test` writes a file of its own: put it in `e2e/`, then run `npx prettier --write` and
-  `npx eslint --fix` on it.
+- `generator_write_test` writes a file of its own: put it in `e2e/`, then run `npx biome check --write`
+  on it.

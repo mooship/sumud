@@ -1,14 +1,14 @@
 #!/usr/bin/env node
+import { readFile, writeFile } from "node:fs/promises";
+import path from "node:path";
+import { fileURLToPath } from "node:url";
+import pngToIco from "png-to-ico";
 /**
  * Generates the PWA/manifest icon PNGs, favicon.ico, and the social share
  * (OG) image from hand-authored SVG. Run: node scripts/generate-images.mjs
  * Re-run after editing public/favicon.svg or the OG markup below.
  */
 import sharp from "sharp";
-import pngToIco from "png-to-ico";
-import { readFile, writeFile } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
-import path from "node:path";
 
 const rootDir = fileURLToPath(new URL("..", import.meta.url));
 const publicDir = path.join(rootDir, "public");

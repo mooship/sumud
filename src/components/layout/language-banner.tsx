@@ -2,16 +2,16 @@ import { component$, useSignal, useVisibleTask$ } from "@builder.io/qwik";
 import { useLocation } from "@builder.io/qwik-city";
 import { LANGUAGE_OFFER } from "~/content/i18n";
 import {
+  getLocaleFromPathname,
   LOCALE_BANNER_DISMISSED_KEY,
   LOCALE_HTML_ATTRS,
   LOCALE_STORAGE_KEY,
-  getLocaleFromPathname,
-  localizedPathname,
   type Locale,
+  localizedPathname,
 } from "~/lib/locale";
 import { getLocalStorage, safeSetItem } from "~/lib/safe-storage";
-import { shouldOfferLocale } from "./language-banner-logic";
 import * as styles from "./language-banner.css";
+import { shouldOfferLocale } from "./language-banner-logic";
 
 /**
  * First-visit suggestion, not an auto-redirect: research on language-based redirects (and

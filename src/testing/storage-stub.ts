@@ -10,9 +10,7 @@ export function stubStorage(initial: Record<string, string> = {}): {
 } {
   const store = new Map(Object.entries(initial));
   const storage: Storage = {
-    getItem: (key) =>
-      // eslint-disable-next-line unicorn/no-null -- the real Storage interface requires `null`, not `undefined`, for a missing key.
-      store.has(key) ? store.get(key)! : null,
+    getItem: (key) => (store.has(key) ? store.get(key)! : null),
     setItem: (key, value) => {
       store.set(key, value);
     },
@@ -22,7 +20,6 @@ export function stubStorage(initial: Record<string, string> = {}): {
     clear: () => {
       store.clear();
     },
-    // eslint-disable-next-line unicorn/no-null -- see above.
     key: () => null,
     get length() {
       return store.size;

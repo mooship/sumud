@@ -2,7 +2,7 @@ import { component$ } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
 import { Container } from "~/components/ui/container";
 import { ExternalLink } from "~/components/ui/icons";
-import { UI_STRINGS, localizedNavItems } from "~/content/i18n";
+import { localizedNavItems, UI_STRINGS } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
 import * as styles from "./footer.css";
 

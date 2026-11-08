@@ -10,6 +10,6 @@ const fetch = createQwikCity({ render, qwikCityPlan });
 export { fetch };
 
 declare global {
-  // eslint-disable-next-line @typescript-eslint/no-empty-object-type -- declaration merging with Qwik City's global platform type
+  // Declaration merging with Qwik City's global platform type.
   interface QwikCityPlatform extends PlatformCloudflarePages {}
 }

@@ -2,24 +2,110 @@
 
 Guidance for anyone, human or AI, working in this repository. `CLAUDE.md` imports this file; put shared rules here.
 
-## What this is
-
 Sumud tells the story of Palestine and its people, before 1947 and after, at
 sumud.timothybrits.co.za. It's a content site first, a tech demo second: most of the value is in
 the prose (`src/routes/**/*.mdx`) and the content data (`src/content/*.ts`), not the framework
-plumbing. Stack: Qwik + Qwik City (SSG), TypeScript, vanilla-extract, Vitest, deployed as static
-output plus a thin Cloudflare Pages Worker.
+plumbing. Stack: Qwik + Qwik City (SSG), TypeScript 7, vanilla-extract, Vitest, Biome, deployed
+as static output on an assets-only Cloudflare Worker.
 
-## Safety
+## Commands
 
-- **Never deploy to production (`wrangler deploy`) without explicit permission from the user.**
-  Always ask first and wait for confirmation.
+```bash
+npm run dev            # Vite dev server (SSR mode)
+npm run build          # client + server builds, `tsc --incremental --noEmit`, Pagefind index
+npm run typecheck      # tsc --noEmit (TypeScript 7, the native compiler)
+npm test               # vitest run
+npm run test.coverage  # vitest run --coverage (istanbul provider, see below); CI-enforced
+npm run test.e2e       # Playwright against the built site (`npm run preview` on port 4174); runs in CI
+npm run lint           # Biome check (lint, formatting, import order) + Qwik's ESLint rules
+npm run lint:fix       # the same, applying safe fixes
+npm run format         # Biome format --write
+npm run check          # lint + typecheck + test + build; run this before considering anything done
+npm run icons          # after adding an icon name to scripts/generate-icons.mjs
+node scripts/generate-images.mjs  # after editing public/favicon.svg or its brand colours
+```
 
-## Commit messages
+Biome (`biome.jsonc`) does all formatting and nearly all linting. Its formatter settings match the
+Prettier defaults the code was written with (two spaces, double quotes, trailing commas, 80
+columns). The Markdown and YAML formatters are off, and `.mdx` prose is never formatted. Imports
+are sorted by Biome's `organizeImports` assist, so `npm run lint` fails on an unsorted import
+block; `npm run lint:fix` sorts it. The generated icon files come out of `npm run icons`
+unformatted, so run `npm run lint:fix` (or let the commit hook do it) afterwards.
+
+Qwik's own rules (`valid-lexical-scope`, `use-method-usage`, `no-react-props`, `loader-location`
+and the rest of `eslint-plugin-qwik`'s recommended set) still run in ESLint, from `tools/lint`.
+That package has its own `package.json`, lockfile and TypeScript 6, because the plugin needs
+`@typescript-eslint/parser`, which supports TypeScript below 6.1 only, while the site compiles with
+TypeScript 7. `valid-lexical-scope` is type-aware: it flags a `$()` closure that captures a class
+instance or a plain function, which Biome's syntactic Qwik rules miss, as they also miss a hook
+called inside an `if`. Biome's `qwik` domain is switched off so the two don't report the same
+thing twice. `scripts/ensure-lint.mjs` installs `tools/lint` on first use, so `npm run lint` and the
+commit hook work on a fresh clone. The root `eslint.config.js` only re-exports
+`tools/lint/eslint.config.js` so editors find it, and the root tsconfig must stay readable by
+TypeScript 6 for the same reason.
+
+Coverage uses the `istanbul` provider, not the default `v8` one: `v8`'s coverage remapping can't
+correctly attribute code inside a `component$()`/`$()` closure back to its source line once
+Qwik's optimizer has rewritten it (everything reports 0%, even when a passing test genuinely
+renders and exercises it), while `istanbul` instruments the source directly and doesn't have this
+problem. Thresholds in `vitest.config.ts` are 100% for branches/lines and 99% for
+statements/functions. The one known gap is `header.tsx`'s mobile-nav-close `onClick$`, which a
+simulated click can't reach (`Link`'s own click-preload handler runs first and throws on this
+minimal test DOM's unresolved `elm.href`, so ours never fires). `coverage.exclude` in
+`vitest.config.ts` also carries the framework entry files (`entry.dev.tsx`, `entry.preview.tsx`,
+`entry.ssr.tsx`, `entry.cloudflare-pages.tsx`, `root.tsx`, `routes/layout.tsx`): Qwik City loads
+these through its own internal module resolution rather than a plain import, so even a directly
+rendered, passing unit test (confirmed for `routes/layout.tsx`) still reports 0%. They're only
+reachable end-to-end, via a real dev/preview server request.
+
+Pre-commit vs. CI aren't the same checks. `lefthook.yml` runs two jobs on staged files at commit
+time: `format` (`biome format --write`) and then `lint` (`biome check --write` plus Qwik's ESLint
+rules with `--fix`), both `stage_fixed`, so their fixes get included in the commit automatically.
+It never runs unit tests, coverage, typecheck or build. CI (`.github/workflows/ci.yml`) runs the
+fuller sequence on every push/PR: `lint:ci` (`biome ci` plus the Qwik rules), typecheck,
+`test.coverage` (coverage thresholds are only enforced here), build, and a separate Playwright job.
+`.github/workflows/lighthouse.yml` builds the site and runs Lighthouse CI against `wrangler dev`.
+A commit can pass the local hook and still fail CI on typecheck, coverage thresholds, or a
+production-only build error.
+
+## Engineering principles
+
+- Test first. For logic and for bug fixes, write the failing spec, watch it fail for the reason
+  you expect, make it pass, then tidy up. Unit specs cover content data invariants
+  (`src/content/*.spec.ts`), pure helpers (`src/lib/`, `language-banner-logic.ts`, `pagefind.ts`),
+  feed handlers and every route component through `createDOM()`. Layout, RTL behaviour, contrast,
+  search and CSP are covered by the Playwright suite and Lighthouse, and prose by reading it. Never
+  weaken or skip a test to get green; fix the code or say why the test is wrong.
+- The site grows at known seams: a new entry in a `src/content/*.ts` list, a new route directory
+  (with its `/ar/` mirror), a line in `NAV_ITEMS` or `HISTORY_CHAPTERS`, a token in
+  `src/styles/theme.css.ts`, a name in the `ICONS` map. A change that needs edits to unrelated
+  components is a sign the seam is in the wrong place. Keep each module to one reason to change:
+  route components read data and render it, and the `onRequest` and `onGet` handlers in layouts
+  and feeds stay thin. Components lean on the exported content types and the `locale.ts` helpers
+  rather than on each other's internals.
+- One source for each fact. Copy lives in the content files with its Arabic beside it, and design
+  values live in the theme tokens. Locale rules belong to `src/lib/locale.ts`, and the RSS and
+  Atom feeds are both built from `src/content/feed.ts`. Where two places must agree, a spec checks
+  them (`nav.spec.ts` against the route files). Don't merge two pieces of code only because they
+  look alike.
+- Keep it simple. Plain functions and plain data arrays are the norm here; add no options, props or
+  abstraction layers for a second use case that doesn't exist yet.
+- Stay on the task. Don't refactor code the task doesn't touch; mention a nearby problem instead.
+
+## Conventions
+
+### Commit messages
 
 Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/) for every commit, with the subject format `<type>[optional scope][!]: <description>`. Use a recognised type such as `feat`, `fix`, `docs`, `test`, `refactor`, `perf`, `build`, `ci` or `chore`. Mark breaking changes with `!` and explain them in the body or a `BREAKING CHANGE:` footer.
 
-## Before touching historical/factual content
+### Code comments
+
+Comment only a non-obvious why: a constraint, a workaround, or a reason someone might otherwise
+undo the code. Keep it short and next to the thing it explains. Config files may carry a comment
+when the reason for a setting isn't obvious (`biome.jsonc`, `wrangler.jsonc`, the workflows). A
+`biome-ignore` needs its reason after the colon.
+
+### Before touching historical/factual content
 
 - Prose must read as written by a person. No listicle cadence, no "in conclusion", no hedging
   filler. No em dashes, and no `--` standing in for one: use a comma, colon, full stop or
@@ -46,6 +132,31 @@ Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
   rather than extrapolating from training data; the situation changes fast and the existing
   "present day" chapter (`src/routes/history/(chapter)/gaza-and-the-present/index.mdx`) is
   deliberately dated by its own last-verified facts.
+
+## Definition of done
+
+- Any code change: `npm run check` passes (lint, typecheck, unit tests, build), and the working tree
+  is clean after the build.
+- Logic, a component or content data: also `npm run test.coverage`, since its thresholds only run
+  in CI.
+- Layout, styling, RTL, navigation, search or headers: also `npm run test.e2e`, and look at the
+  page in both locales.
+- Dependencies: regenerate the lockfile with npm 10 (`npx -y npm@10 install --package-lock-only
+  --ignore-scripts`, in `tools/lint` too if that changed) and check that `npm ci` passes there,
+  because CI and Workers Builds run npm 10.
+- Prose or content data only: `npm run check`, plus reading the change against the writing and
+  sourcing rules above.
+- CI (including Lighthouse and the Workers Builds check) is green before merging.
+
+If you skipped any of these, say which and why.
+
+## Safety
+
+- A merge or push to `main` deploys to production through Workers Builds. Pull requests get a
+  Workers Builds check; only `main` deploys to production.
+- **Never run `wrangler deploy` by hand without explicit permission from the user.** Always ask
+  first and wait for confirmation.
+- Never commit credentials. `.env*` and `.dev.vars` are gitignored for that reason.
 
 ## Adding or changing a page
 
@@ -210,9 +321,10 @@ observability (logs + traces, `head_sampling_rate: 1`). There is no Smart Placem
 Workers Cache (`cache.enabled` would count every static asset request as a billed Worker
 request).
 `build.command` (`npm run build`) is what `wrangler dev`/Workers Builds uses to
-(re)build the site (see the gotcha above). There is no automated deploy step in
-`.github/workflows/ci.yml`; deploying is a manual `wrangler deploy`, which needs a local
-`wrangler login`.
+(re)build the site (see the gotcha above). Cloudflare Workers Builds is connected to the GitHub repository: every push to `main`
+builds and deploys production, and pull requests get a "Workers Builds: sumud" check. The GitHub
+workflows never deploy. A manual `wrangler deploy` needs a local `wrangler login` and the
+user's permission (see Safety).
 
 ## Design tokens, icons and brand assets
 
@@ -234,39 +346,3 @@ color-scheme: dark)": { vars: {...} } } })` block at the bottom of the same file
   `public/favicon.svg` or after changing a brand colour that the script also hardcodes (`BG`,
   `OLIVE`, `OLIVE_MID`, `TERRACOTTA`, `INK`, `INK_MUTED`). These aren't imported from
   `theme.css.ts` since the script runs outside Vite/vanilla-extract.
-
-## Commands
-
-```bash
-npm run check          # lint + typecheck + test + build; run this before considering anything done
-npm run test.coverage  # vitest run --coverage (istanbul provider, see below); CI-enforced, not pre-commit
-npm run test.e2e       # Playwright against the built site (npm run preview on port 4174); not in CI yet
-npm run icons          # after adding an icon name to scripts/generate-icons.mjs
-node scripts/generate-images.mjs  # after editing public/favicon.svg or its brand colours
-```
-
-Coverage uses the `istanbul` provider, not the default `v8` one: `v8`'s coverage remapping can't
-correctly attribute code inside a `component$()`/`$()` closure back to its source line once
-Qwik's optimizer has rewritten it (everything reports 0%, even when a passing test genuinely
-renders and exercises it), while `istanbul` instruments the source directly and doesn't have this
-problem. Thresholds in `vitest.config.ts` are 100% for branches/lines and 99% for
-statements/functions. The one known gap is `header.tsx`'s mobile-nav-close `onClick$`, which a
-simulated click can't reach (`Link`'s own click-preload handler runs first and throws on this
-minimal test DOM's unresolved `elm.href`, so ours never fires). `coverage.exclude` in
-`vitest.config.ts` also carries the framework entry files (`entry.dev.tsx`, `entry.preview.tsx`,
-`entry.ssr.tsx`, `entry.cloudflare-pages.tsx`, `root.tsx`, `routes/layout.tsx`): Qwik City loads
-these through its own internal module resolution rather than a plain import, so even a directly
-rendered, passing unit test (confirmed for `routes/layout.tsx`) still reports 0%. They're only
-reachable end-to-end, via a real dev/preview server request.
-
-There is no separate "format" CI check currently wired up beyond `npm run fmt.check`; run `npm run fmt`
-before committing if you've hand-edited anything Prettier would reflow.
-
-Pre-commit vs. CI aren't the same checks. `lefthook.yml` runs on staged files at commit time:
-`eslint --fix` and `prettier --write` (both `stage_fixed`, so their fixes get included in the
-commit automatically). It runs no unit tests, coverage, typecheck or build. Unit tests run separately and in CI. CI
-(`.github/workflows/ci.yml`) runs the fuller sequence on every push/PR: lint, typecheck,
-`test.coverage` (coverage thresholds are only enforced here), then build. A commit can pass the
-local hook and still fail CI on typecheck, coverage thresholds, or a production-only build error.
-Run `npm run check` (and `npm run test.coverage` if you touched anything coverage-sensitive) before
-treating something as done, don't rely on the hook alone.

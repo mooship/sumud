@@ -4,9 +4,9 @@
  * Run: node scripts/generate-icons.mjs
  * Add new icons by adding their lucide-static file name (without .svg) to ICONS below.
  */
-import { readFile, writeFile, mkdir } from "node:fs/promises";
-import { fileURLToPath } from "node:url";
+import { mkdir, readFile, writeFile } from "node:fs/promises";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 
 const ICONS = {
   Menu: "menu",

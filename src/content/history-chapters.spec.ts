@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, expect, it } from "vitest";
 import { HISTORY_CHAPTERS } from "./history-chapters";
 
 const here = path.dirname(fileURLToPath(import.meta.url));
@@ -75,7 +75,7 @@ describe("HISTORY_CHAPTERS", () => {
   it("is ordered chronologically by the start year in each period", () => {
     const startYears = HISTORY_CHAPTERS.map((c) => {
       const match = c.period.match(/\d{4}/);
-      return match ? Number(match[0]) : NaN;
+      return match ? Number(match[0]) : Number.NaN;
     });
     for (let i = 1; i < startYears.length; i++) {
       expect(startYears[i]).toBeGreaterThanOrEqual(startYears[i - 1]);

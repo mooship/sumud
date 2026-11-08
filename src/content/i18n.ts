@@ -1,6 +1,6 @@
 import type { DocumentHeadValue } from "@builder.io/qwik-city";
-import { localizedPathname, type Locale } from "~/lib/locale";
 import { NAV_ITEMS } from "~/content/nav";
+import { type Locale, localizedPathname } from "~/lib/locale";
 
 /** Chrome strings (nav, footer, chapter navigation) that appear on every page, in both
  *  locales. Long-form prose lives in each page's own MDX/route file instead -- it can't be

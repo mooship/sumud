@@ -1,9 +1,9 @@
-import { describe, expect, it, vi } from "vitest";
 import { Window } from "happy-dom";
+import { describe, expect, it, vi } from "vitest";
 import {
   loadPagefindUI,
-  SEARCH_MOUNT_ID,
   type PagefindWindow,
+  SEARCH_MOUNT_ID,
 } from "./pagefind";
 
 function createTestDoc() {

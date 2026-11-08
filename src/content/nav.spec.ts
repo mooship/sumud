@@ -1,7 +1,7 @@
-import { describe, expect, it } from "vitest";
 import { existsSync } from "node:fs";
-import { fileURLToPath } from "node:url";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
+import { describe, expect, it } from "vitest";
 import { NAV_ITEMS } from "./nav";
 
 const here = path.dirname(fileURLToPath(import.meta.url));

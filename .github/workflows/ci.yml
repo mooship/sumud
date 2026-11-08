@@ -20,12 +20,19 @@ jobs:
         with:
           node-version: 22
           cache: npm
+          # tools/lint is a separate package (Qwik's ESLint rules need TypeScript 6; the site uses 7).
+          cache-dependency-path: |
+            package-lock.json
+            tools/lint/package-lock.json
 
       - name: Install dependencies
         run: npm ci
 
+      - name: Install lint tools
+        run: npm ci --prefix tools/lint
+
       - name: Lint
-        run: npm run lint
+        run: npm run lint:ci
 
       - name: Typecheck
         run: npm run typecheck

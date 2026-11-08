@@ -1,5 +1,5 @@
-import { describe, expect, it } from "vitest";
 import { createDOM } from "@builder.io/qwik/testing";
+import { describe, expect, it } from "vitest";
 import { ArrowRight } from "./arrow-right";
 import { ArrowUpRight } from "./arrow-up-right";
 import { BookOpen } from "./book-open";

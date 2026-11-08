@@ -1,12 +1,12 @@
 import { component$, useSignal } from "@builder.io/qwik";
 import { Link, useLocation } from "@builder.io/qwik-city";
-import { Menu, X } from "~/components/ui/icons";
 import { Container } from "~/components/ui/container";
-import { UI_STRINGS, localizedNavItems } from "~/content/i18n";
+import { Menu, X } from "~/components/ui/icons";
+import { localizedNavItems, UI_STRINGS } from "~/content/i18n";
 import { getLocaleFromPathname, localizedPathname } from "~/lib/locale";
+import * as styles from "./header.css";
 import { LanguageBanner } from "./language-banner";
 import { LanguageSwitcher } from "./language-switcher";
-import * as styles from "./header.css";
 
 export const Header = component$(() => {
   const loc = useLocation();

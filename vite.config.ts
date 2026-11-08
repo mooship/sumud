@@ -2,12 +2,12 @@
  * This is the base config for vite.
  * When building, the adapter config is used which loads this file and extends it.
  */
-import { defineConfig, type UserConfig } from "vite";
+import { fileURLToPath } from "node:url";
 import { qwikVite } from "@builder.io/qwik/optimizer";
 import { qwikCity } from "@builder.io/qwik-city/vite";
 import { vanillaExtractPlugin } from "@vanilla-extract/vite-plugin";
 import { FontaineTransform } from "fontaine";
-import tsconfigPaths from "vite-tsconfig-paths";
+import { defineConfig, type UserConfig } from "vite";
 import pkg from "./package.json";
 
 type PkgDep = Record<string, string>;
@@ -16,7 +16,7 @@ const { dependencies = {}, devDependencies = {} } = pkg as any as {
   devDependencies: PkgDep;
   [key: string]: unknown;
 };
-// eslint-disable-next-line unicorn/no-top-level-side-effects -- a one-time module-load guard; the check doesn't depend on `mode`/`command`, so running it from inside defineConfig would repeat it on every internal config resolution instead of once per process.
+// Runs once at module load: the check doesn't depend on `mode`/`command`, and inside defineConfig it would repeat on every internal config resolution.
 errorOnDuplicatesPkgDeps(devDependencies, dependencies);
 
 /**
@@ -33,7 +33,6 @@ export default defineConfig(({ mode }): UserConfig => {
         },
       }),
       qwikVite(),
-      tsconfigPaths({ root: "." }),
       vanillaExtractPlugin({
         identifiers: mode === "production" ? "short" : "debug",
       }),
@@ -64,6 +63,9 @@ export default defineConfig(({ mode }): UserConfig => {
         },
       }),
     ],
+    resolve: {
+      alias: { "~": fileURLToPath(new URL("./src", import.meta.url)) },
+    },
     optimizeDeps: {
       exclude: [],
     },
