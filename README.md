@@ -16,7 +16,7 @@ Qwik + Qwik City, TypeScript, vanilla-extract, Vitest, deployed to Cloudflare Wo
 
 ## Getting started
 
-Requires Node 22+ and npm.
+Requires Node 24.22.1 or newer (24 and 26 are supported) and npm.
 
 ```bash
 npm install
