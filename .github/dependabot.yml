@@ -1,43 +1,30 @@
 version: 2
 updates:
-  # Security/crypto-relevant deps get a faster, separate weekly PR: the
-  # Cloudflare deploy tool, the framework, and the build tool.
+  # One entry per ecosystem and directory: GitHub rejects the whole file otherwise, and Dependabot keeps using the last valid copy.
   - package-ecosystem: "npm"
     directory: "/"
     schedule:
       interval: "weekly"
       day: "saturday"
-      time: "09:00"
+      time: "06:00"
       timezone: "Africa/Johannesburg"
+    open-pull-requests-limit: 2
     groups:
       npm-critical:
         patterns:
-          - "*"
-    allow:
-      - dependency-name: "wrangler"
-      - dependency-name: "vite"
-      - dependency-name: "@builder.io/qwik"
-      - dependency-name: "@builder.io/qwik-city"
-  - package-ecosystem: "npm"
-    directory: "/"
-    schedule:
-      interval: "monthly"
-      time: "09:00"
-      timezone: "Africa/Johannesburg"
-    groups:
+          - "wrangler"
+          - "vite"
+          - "@builder.io/qwik"
+          - "@builder.io/qwik-city"
       npm:
         patterns:
           - "*"
-    ignore:
-      - dependency-name: "wrangler"
-      - dependency-name: "vite"
-      - dependency-name: "@builder.io/qwik"
-      - dependency-name: "@builder.io/qwik-city"
   - package-ecosystem: "github-actions"
     directory: "/"
     schedule:
-      interval: "monthly"
-      time: "09:00"
+      interval: "weekly"
+      day: "sunday"
+      time: "18:00"
       timezone: "Africa/Johannesburg"
     groups:
       github-actions:
