@@ -100,30 +100,31 @@ Use [Conventional Commits 1.0.0](https://www.conventionalcommits.org/en/v1.0.0/)
 
 ### Dependencies and lockfiles
 
-Node 24 and 26 are supported, with 24.22.1 as the floor (`engines.node`; `.node-version` says
-`24`). npm is 11 everywhere: `engines.npm` is `>=11.0.0` and `packageManager` pins `npm@11.19.1`,
-the only setting Workers Builds reads to choose its npm (it otherwise stays on 10). CI runs
-`npm install --global npm@11` before every `npm ci`, because Node 26 can ship a different npm
-major. The `Lint, typecheck, test & build` job runs on a Node 24 and 26 matrix; Playwright and
-Lighthouse use `.node-version`.
+Node 24 and 26 are supported, with 24.22.1 as the floor (`engines.node` is the only engines entry).
+The `Lint, typecheck, test & build` job runs on a Node 24 and 26 matrix; Playwright and Lighthouse
+run on Node 24. CI runs `npm install --global npm@11` before every `npm ci`, but Cloudflare Workers
+Builds runs npm 10.9.2 and cannot be changed from this repo: a `packageManager` field or a bare
+`24` in `.node-version` broke its preview builds, so neither exists here. Every lockfile therefore
+has to install under both npm 10 and npm 11.
 
-- There are two lockfiles, the root one and `tools/lint/package-lock.json`. `tools/lint` takes the
-  same `engines` and `packageManager` but keeps its own `typescript` at `^6.0.3`.
+- There are two lockfiles, the root one and `tools/lint/package-lock.json`. `tools/lint` has the same
+  `engines` entry but keeps its own `typescript` at `^6.0.3`.
 - After a `package.json` change run a real `npm install` (not `--package-lock-only`, which keeps
   stale nested entries when a range or override changes) and commit it with the lockfile in the
   same commit. If `npm ls` then shows `invalid`, delete the stale nested entries from the lockfile
   and install again; never hand-edit versions.
-- Verify with a real `npm ci --ignore-scripts` in a throwaway clone, not `--dry-run`, which has
-  passed a lockfile that failed a real install. Do the same in `tools/lint`.
-- A lockfile that npm 10 accepts and npm 11 rejects, or the reverse, is an environment mismatch,
-  not a problem with the change. Dependabot owns its lockfile changes: push a corrected one to its
-  branch only when a real `npm ci` under npm 11 fails.
+- Verify with a real `npm ci --ignore-scripts` under npm 10 and under npm 11 in a throwaway clone,
+  not `--dry-run`, which has passed a lockfile that failed a real install. Do the same in
+  `tools/lint`.
+- npm 11 drops nested entries when it updates an existing lockfile, which is what Dependabot does,
+  and npm 10 then fails with `Missing: ... from lock file`. If a lockfile passes 11 but not 10,
+  regenerate it with npm 10 (`npx -y npm@10 install`); npm 11 accepts that result too. Push the
+  fix to Dependabot's branch only when a real `npm ci` fails.
 - Prerelease pins are exact, because a caret on a prerelease resolves to nightly builds, and a
   prerelease does not satisfy a plain peer range such as `>=2.9`.
 - Run the project's binaries with `npm run` or `npx --no-install <tool>`; a plain `npx` can fetch
   an unrelated package of the same name.
 - Do not install in a working tree someone else is using.
-
 ### Code comments
 
 Comment only a non-obvious why: a constraint, a workaround, or a reason someone might otherwise
@@ -167,8 +168,8 @@ when the reason for a setting isn't obvious (`biome.jsonc`, `wrangler.jsonc`, th
   in CI.
 - Layout, styling, RTL, navigation, search or headers: also `npm run test.e2e`, and look at the
   page in both locales.
-- Dependencies: follow "Dependencies and lockfiles" above: a real `npm install` under npm 11 (in
-  `tools/lint` too if that changed), then a real `npm ci --ignore-scripts` in a clean clone.
+- Dependencies: follow "Dependencies and lockfiles" above: a real `npm install`, then a real
+  `npm ci --ignore-scripts` under npm 10 and npm 11 in a clean clone (in `tools/lint` too if it changed).
 - Prose or content data only: `npm run check`, plus reading the change against the writing and
   sourcing rules above.
 - CI (including Lighthouse and the Workers Builds check) is green before merging.

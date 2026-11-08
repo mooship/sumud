@@ -16,8 +16,7 @@ Qwik + Qwik City, TypeScript, vanilla-extract, Vitest, deployed to Cloudflare Wo
 
 ## Getting started
 
-Requires Node 24.22.1 or newer (24 and 26 are supported; `.node-version` says 24) and npm 11 or
-newer. `packageManager` pins npm 11.19.1 for Corepack and Cloudflare.
+Requires Node 24.22.1 or newer (24 and 26 are supported) and npm.
 
 ```bash
 npm install
